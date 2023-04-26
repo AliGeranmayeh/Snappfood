@@ -17,6 +17,58 @@
 
 
     <link href="styles/admin/navbar.css" rel="stylesheet">
+
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+    background: #e0f2f1;
+  }
+.sidebar{
+    float: left;
+    width: 15%;
+    height: 100%;
+    background: #00897b;
+}
+
+
+.sidebar header{
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    background: #00695c;
+}
+.sidebar ul a{
+    text-decoration: none;
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 60px;
+    color: white;
+    padding-left:10px;
+    transition: 0.4s;
+
+}
+ul li:hover a{
+    padding-left: 20px;
+}
+.sidebar ul {
+    padding:0;
+}
+main{
+    float: right;
+    width: 85%;
+    height: 100%;
+    background: #e0f2f1;
+    color: black;
+}
+    </style>
 </head>
 <body>
     <div id="app">
