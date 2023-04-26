@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends Controller
 {
@@ -28,6 +29,13 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected function authenticated(Request $request, $user) {
+        if ($user->email == 'admin@admin.com') {
+            return redirect('/admin');
+        } else {
+            return redirect('/');
+        }
+   }
     /**
      * Create a new controller instance.
      *
