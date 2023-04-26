@@ -129,23 +129,26 @@
         </div> --}}
 
     <div class="container">
-        @error('email')
-            <div class="alert alert-danger my-3" role="alert">
-                <strong>{{ $message }}</strong>
-            </div>
-        @enderror
-        @error('password')
-            <div class="alert alert-danger my-3" role="alert">
-                <strong>{{ $message }}</strong>
-            </div>
-        @enderror
+
         <div class="login-box">
             <h2>Login</h2>
-            <form>
+            <div class="my-2">
+                @error('email')
+                    <div class="alert alert-danger my-3" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
+                @error('password')
+                    <div class="alert alert-danger my-3" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
+            </div>
+            <form method="post">
                 @csrf
                 <div class="user-box">
-                    <input type="email" class="@error('email') is-invalid @enderror"  placeholder="Email"
-                         name="email" required>
+                    <input type="email" class="@error('email') is-invalid @enderror" placeholder="Email" name="email"
+                        required>
                     <label>Email</label>
                 </div>
                 <div class="user-box">
@@ -157,7 +160,7 @@
                     <button type="submit" class="btn btn-outline-light">LOGIN</button>
                     <small class="mx-3 text-light">Don't have an account <a href="register">register here</a></small>
                 </div>
-                    
+
 
             </form>
         </div>
