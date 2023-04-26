@@ -20,7 +20,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md  navbar-dark shadow-sm">
+        <nav class="navbar navbar-expand-md  navbar-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="https://svgsilh.com/svg/2085075.svg" alt="logo" style="width:50px;height:50px">
