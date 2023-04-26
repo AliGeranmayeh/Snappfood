@@ -6,7 +6,7 @@
   <div class="row justify-content-md-center my-5 " style="height: 33%">
     <div class="col col-lg-10 bg-white p-3">
       <p>users </p>
-      <a href="#" class="btn btn-primary">More</a>
+      <a href="{{route('users')}}" class="btn btn-primary">More</a>
     </div>
 
   </div>

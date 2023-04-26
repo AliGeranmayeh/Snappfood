@@ -7,14 +7,16 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <title>{{ __('SnappFood') }}</title>
+    @yield('header')
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="styles/admin/admin-panel.css">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+
+    <link href="styles/admin/navbar.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -27,7 +29,7 @@
             </a>
             </header>
             <ul>
-                <li><a href="#"> <img src="https://www.svgrepo.com/download/3278/users.svg" alt="users-logo" style="width:20px;height:20px"> <span class="mx-1">Users</span></a></li>
+                <li><a href="{{route('users')}}"> <img src="https://www.svgrepo.com/download/3278/users.svg" alt="users-logo" style="width:20px;height:20px"> <span class="mx-1">Users</span></a></li>
                 <li><a href="#"> <img src="https://icons.veryicon.com/png/o/miscellaneous/imperial-reservation/food-fair-western-food.png" alt="restaurants-logo" style="width:20px;height:20px"> <span class="mx-1">Restaurants</span></a></li>
                 <li><a href="#"> <img src="https://svgsilh.com/svg/303194.svg" alt="restaurant-categories-logo" style="width:20px;height:20px"> <span class="mx-1">Restaurant Categories</span></a></li>
                 <li><a href="#"> <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/favorite-food-3144240-2616918.png" alt="food-categorie-logo" style="width:20px;height:20px"> <span class="mx-1">Food Categories</span></a></li>
