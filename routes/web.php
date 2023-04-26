@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/admin', function () {
-    return view('admin.admin-panel');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin.admin-panel');
+    });
+    
 });
 
 Auth::routes();
