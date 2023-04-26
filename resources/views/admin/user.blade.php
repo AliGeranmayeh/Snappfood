@@ -1,8 +1,8 @@
 @extends('layouts.admin-nav')
 
 @section('content')
-    <div class="container">
-        <div class="page rounded-3 bg-white p-3" style="width: 70%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+    <div class="container" >
+        <div class="page rounded-3 bg-white p-3" style="margin:auto; width: 70%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
             <div  style="display: flex;justify-content: center;">
                 <img class="rounded-circle" style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRX8dynXybfS6wigDf4NaxHGniwpxaLSZrVlqoo9ktj_JFaY4j8AnWkmgd51XSoOC_52o&usqp=CAU" alt="user-profile">
 

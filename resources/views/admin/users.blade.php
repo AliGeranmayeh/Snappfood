@@ -19,7 +19,7 @@
         }
 
         .text {
-            padding: 0 20px 20px;
+            padding: 0 10px 10px;
         }
     </style>
 @endsection
@@ -31,7 +31,8 @@
                 <article class="rounded">
                     <img class="rounded-top"
                         src="https://media.npr.org/assets/img/2014/08/07/monkey-selfie_custom-7117031c832fc3607ee5b26b9d5b03d10a1deaca-s1100-c50.jpg"
-                        alt="user-photo">
+                        alt="user-photo"
+                        style="box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;">
                     <div class="text">
                         <h3 style="margin:10% 0"><b>{{ $user->name }}</b></h3>
                         <div>
@@ -41,6 +42,7 @@
                         <a href="user/{{$user->id}}" class="btn btn-primary">More</a>
                     </div>
                 </article>
+                
             @endif
         @endforeach
     </div>
