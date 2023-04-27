@@ -9,5 +9,7 @@ class FoodCategory extends Model
 {
     use HasFactory;
     
-    protected $fiilable = ['name'];
+    protected $fillable = ['name'];
+
+    public $timestamps = false
 }
