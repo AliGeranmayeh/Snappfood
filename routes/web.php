@@ -32,5 +32,6 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class, 'index'])->name('restaurant-profile');
+Route::post('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class, 'post'])->name('post-restaurant-profile');
 
 
