@@ -14,7 +14,7 @@ class RestaurantCategory extends Model
 
     public $timestamps = false;
 
-    public function post(): BelongsTo
+    public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
     }
