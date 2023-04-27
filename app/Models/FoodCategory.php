@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class FoodCategory extends Model
 {
@@ -12,4 +14,9 @@ class FoodCategory extends Model
     protected $fillable = ['name'];
 
     public $timestamps = false;
+
+    public function foods(): HasMany
+    {
+        return $this->hasMany(Food::class);
+    }
 }
