@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Food;
 use App\Models\Restaurant;
+use App\Http\Requests\FoodRequest;
 
 class AddFoodController extends Controller
 {
@@ -24,7 +25,7 @@ class AddFoodController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create(FoodRequest $request)
     {
         $request->validated();
         Food::create([
