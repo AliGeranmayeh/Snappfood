@@ -22,10 +22,13 @@ Route::prefix('admin')->group(function () {
     });
     Route::get('/users', [App\Http\Controllers\Admin\UsersController::class, 'index'])->name('users');
     Route::get('/user/{id}', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('user');
+    Route::get('/food_categories', [App\Http\Controllers\Admin\FoodCategoryController::class, 'index'])->name('food-category');
+    Route::post('/food_categories', [App\Http\Controllers\Admin\FoodCategoryController::class, 'post'])->name('post-food-category');
 });
 
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class, 'index'])->name('restaurant-profile');
+
 
