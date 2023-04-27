@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(table: 'users', indexName: 'id')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('type_id')->constrained(table: 'resaurant_categories', indexName: 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('type_id')->constrained('restaurant_categories', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->text('address');
             $table->bigInteger('phone');
             $table->bigInteger('account');
