@@ -31,5 +31,5 @@ Route::get('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestau
 Route::post('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestaurantProfileController::class , 'update'])->name('update-restaurant-profile');
 Route::get('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'index'])->name('get-owner-discount');
 Route::post('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'post'])->name('post-owner-discount');
-Route::get('/food', [App\Http\Controllers\Restaurant\DiscountController::class , 'index'])->name('get-add-food-page');
-Route::post('/food', [App\Http\Controllers\Restaurant\DiscountController::class , 'create'])->name('create-food');
+Route::get('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'index'])->name('get-add-food-page');
+Route::post('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'create'])->name('create-food');
