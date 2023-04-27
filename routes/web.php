@@ -32,6 +32,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class, 'index'])->name('restaurant-profile');
-Route::post('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class, 'post'])->name('post-restaurant-profile');
-
+Route::post('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class, 'create'])->name('post-restaurant-profile');
+Route::get('/editRestaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class, 'index'])->name('edit-restaurant-profile');
+Route::post('/editRestaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class, 'post'])->name('post-restaurant-profile');
 
