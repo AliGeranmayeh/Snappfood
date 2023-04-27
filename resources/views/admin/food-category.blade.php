@@ -32,7 +32,7 @@
                 style="margin:auto; width: 80%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                 <h3 class="text-center">Edit Food Category</h3>
                 <div class="my-5">
-                    <form>
+                    <form method="post">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Food Category Name</label>
@@ -47,7 +47,7 @@
                 style="margin:auto; width: 80%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                 <h3 class="text-center">Add New Food Category</h3>
                 <div class="my-5">
-                    <form>
+                    <form method="post">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Food Category Name</label>
