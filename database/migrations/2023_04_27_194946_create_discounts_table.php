@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-            $table->int('percentage');
+            $table->integer('percentage');
             $table->timestamps();
         });
     }
