@@ -98,7 +98,7 @@
                             src="https://icons.veryicon.com/png/o/miscellaneous/imperial-reservation/food-fair-western-food.png"
                             alt="restaurants-logo" style="width:20px;height:20px"> <span
                             class="mx-1">Restaurants</span></a></li>
-                <li><a href="#"> <img src="https://svgsilh.com/svg/303194.svg" alt="restaurant-categories-logo"
+                <li><a href="{{route('restaurant-category')}}"> <img src="https://svgsilh.com/svg/303194.svg" alt="restaurant-categories-logo"
                             style="width:20px;height:20px"> <span class="mx-1">Restaurant Categories</span></a></li>
                 <li><a href="{{route('food-category')}}"> <img
                             src="https://cdn.iconscout.com/icon/premium/png-256-thumb/favorite-food-3144240-2616918.png"

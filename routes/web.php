@@ -24,6 +24,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/user/{id}', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('user');
     Route::get('/food_categories', [App\Http\Controllers\Admin\FoodCategoryController::class, 'index'])->name('food-category');
     Route::post('/food_categories', [App\Http\Controllers\Admin\FoodCategoryController::class, 'post'])->name('post-food-category');
+    Route::get('/restaurant_categories', [App\Http\Controllers\Admin\RestaurantCategoryController::class, 'index'])->name('restaurant-category');
+    Route::post('/restaurant_categories', [App\Http\Controllers\Admin\RestaurantCategoryController::class, 'post'])->name('post-restaurant-category');
 });
 
 Auth::routes();
