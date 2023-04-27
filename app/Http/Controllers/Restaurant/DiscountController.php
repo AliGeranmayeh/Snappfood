@@ -13,8 +13,9 @@ class DiscountController extends Controller
 {
     public function index()
     {
-        $admin_user_id = User::where('role','admin')->get()->id;
-        $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id);
+        $admin_user_id = User::where('role','admin')->first()->id;
+        
+        $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
         return view('restaurant_owner.discount' , [
             'discounts' => $discounts,
             'error' => null
@@ -38,9 +39,9 @@ class DiscountController extends Controller
     public function deleteDiscount($data)
     {
         Discount::destroy($data->delete);
-        $admin_user_id = User::where('role','admin')->get()->id;
-        $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id);
-        return view('admin.discount' , [
+        $admin_user_id = User::where('role','admin')->first()->id;
+        $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
+        return view('restaurant_owner.discount' , [
             'discounts' => $discounts,
             'error' => 'Delete was successful'
         ]);
@@ -57,8 +58,8 @@ class DiscountController extends Controller
             ]);
             return redirect()->route('get-owner-discount');
         }
-        $admin_user_id = User::where('role','admin')->get()->id;
-        $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id);
+        $admin_user_id = User::where('role','admin')->first()->id;
+        $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
         return view('restaurant_owner.discount' , [
             'discounts' => $discounts,
             'error' => "Percentage can't be 0"

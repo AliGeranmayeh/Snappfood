@@ -19,7 +19,7 @@
                 @if (count($discounts) == 0)
                     <h4 class="text-center">There is no discount for your restaurant...</h4>
                 @endif
-                <table class="table">
+                <table class="table table-borderless">
                     <tbody>
                         @foreach ($discounts as $key => $discount)
                             <tr>
@@ -34,7 +34,7 @@
                                 <td>{{ $discount->percentage }}%</td>
                                 <td class="d-flex flex-row-reverse">
                                     @if ($discount->user_id == Auth::user()->id)
-                                        <form action="" method="post" class="d-inline p-2">
+                                        <form action="" method="post" class="d-inline px-2">
                                             @csrf
                                             <button name="delete" value="{{ $discount->id }}" type="submit"
                                                 class="btn btn-danger">Delete</button>
