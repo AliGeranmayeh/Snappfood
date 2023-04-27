@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Food extends Model
 {
@@ -18,4 +19,9 @@ class Food extends Model
         'type_id',
         'restaurant_id'
     ];
+
+    public function restaurant(): BelongsTo
+    {
+        return $this->belongsTo(RestaurantCategory::class);
+    }
 }
