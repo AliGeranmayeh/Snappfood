@@ -26,14 +26,14 @@
 
 <body>
     <div id="app">
-        <input type="checkbox" id="active">
-        <label for="active" class="menu-btn"><span></span></label>
-        <label for="active" class="close"></label>
-        <nav class="wrapper">
+        <input type="checkbox" id="active" style="z-index: 1000">
+        <label for="active" class="menu-btn" style="z-index: 1000"><span></span></label>
+        <label for="active" class="close" style="z-index: 1000"></label>
+        <nav class="wrapper" style="z-index: 100">
             <ul>
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li><a href="#">Add Food</a></li>
-                <li><a href="#">Add Discount</a></li>
+                <li><a href="{{route('get-owner-discount')}}">Add Discount</a></li>
                 <li><a href="{{route('restaurant-profile')}}">Restaurant Profile</a></li>
                 <li><a href="#">User Profile</a></li>
                 <li><a href="{{ route('logout') }}"
