@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Http\Requests\DiscountRequest;
 
 class Food extends Model
 {
@@ -29,5 +30,10 @@ class Food extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(FoodCategory::class);
+    }
+
+    public function discount(): BelongsTo
+    {
+        return $this->belongsTo(Discount::class);
     }
 }
