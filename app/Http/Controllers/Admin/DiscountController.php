@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Discount;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\DiscountRequest;
 
 class DiscountController extends Controller
 {
@@ -18,7 +19,7 @@ class DiscountController extends Controller
         ]);
     }
 
-    public function post(Request $request)
+    public function post(DiscountRequest $request)
     {
         
         if ($request->has('delete')) {
@@ -35,21 +36,29 @@ class DiscountController extends Controller
     public function deleteDiscount($data)
     {
         Discount::destroy($data->delete);
-        $restaurant_categories = Discount::all();
-        return view('admin.restaurant-category' , [
-            'restaurant_categories' => $restaurant_categories,
+        $discounts = Discount::all();
+        return view('admin.discount' , [
+            'discounts' => $discounts,
             'error' => 'Delete was successful'
         ]);
     }
     
     public function createDiscount($data)
     {
-        $data->validated();
-        Discount::create([
-            'name' => $data->name,
-            'percentage' => $data->percentage,
-            'user_id' => Auth::user()->id
+        if ($data->percentage!= 0) {
+            $data->validated();
+            Discount::create([
+                'name' => $data->name,
+                'percentage' => $data->percentage,
+                'user_id' => Auth::user()->id
+            ]);
+            return redirect()->route('get-discount');
+        }
+        $discounts = Discount::all();
+        return view('admin.discount' , [
+            'discounts' => $discounts,
+            'error' => "Percentage can't be 0"
         ]);
-        return redirect()->route('get-discount');
+        
     }
 }
