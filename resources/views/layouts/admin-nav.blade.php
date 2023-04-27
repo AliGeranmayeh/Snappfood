@@ -104,7 +104,7 @@
                             src="https://cdn.iconscout.com/icon/premium/png-256-thumb/favorite-food-3144240-2616918.png"
                             alt="food-categorie-logo" style="width:20px;height:20px"> <span class="mx-1">Food
                             Categories</span></a></li>
-                <li><a href="#"> <img src="https://cdn-icons-png.flaticon.com/512/600/600260.png"
+                <li><a href="{{route('get-discount')}}"> <img src="https://cdn-icons-png.flaticon.com/512/600/600260.png"
                             alt="discounts-logo" style="width:20px;height:20px"> <span
                             class="mx-1">Discounts</span></a></li>
                 <li><a href="#"> <img src="https://cdn.onlinewebfonts.com/svg/img_395479.png" alt="comments-logo"
