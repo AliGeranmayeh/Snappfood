@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,4 +27,5 @@ Route::prefix('admin')->group(function () {
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class, 'index'])->name('restaurant-profile');
 

@@ -34,7 +34,7 @@
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li><a href="#">Add Food</a></li>
                 <li><a href="#">Add Discount</a></li>
-                <li><a href="#">Resturant Profile</a></li>
+                <li><a href="{{route('restaurant-profile')}}">Restaurant Profile</a></li>
                 <li><a href="#">User Profile</a></li>
                 <li><a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
