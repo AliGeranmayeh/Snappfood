@@ -24,9 +24,9 @@ class Restaurant extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function type(): HasOne
+    public function type(): BelongsTo
     {
-        return $this->hasOne(RestaurantCategory::class);
+        return $this->belongsTo(RestaurantCategory::class);
     }
 
     public function foods(): HasMany
