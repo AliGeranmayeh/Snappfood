@@ -3,12 +3,12 @@
     <div class="container">
         @if ($errors->any())
             @foreach ($errors->all() as $error)
-                <div class="alert alert-danger text-center" role="alert" style="margin:auto; width: 80%;">
+                <div class="alert alert-danger text-center my-3" role="alert" style="margin:auto; width: 50%;">
                     <strong>{{ $error }}</strong>
                 </div>
             @endforeach
         @elseif ($error != null)
-            <div style="margin:auto; width: 80%;" class="alert alert-danger text-center" role="alert">
+            <div style="margin:auto; width: 50%;" class="alert alert-danger text-center my-3" role="alert">
                 <strong>{{ $error }}</strong>
             </div>
         @endif
@@ -22,21 +22,39 @@
                 <table class="table">
                     <tbody>
                         @foreach ($discounts as $key => $discount)
-                            <tr>
-                                <th scope="row">
-                                    @php $row_number = $key; @endphp
-                                    {{ $row_number++ }}
-                                </th>
-                                <td>{{ $dicunt->name }}</td>
-                                <td>{{ $dicunt->percentage }}%</td>
-                                <td class="d-flex flex-row-reverse">
-                                    <form action="" method="post" class="d-inline p-2">
-                                        @csrf
-                                        <button name="delete" value="{{ $discount->id }}" type="submit"
-                                            class="btn btn-danger">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
+                            @if ($discount->user_id == Auth::user()->id)
+                                <tr class="table-info">
+                                    <th scope="row">
+                                        @php $row_number = $key;$row_number+=1; @endphp
+                                        {{ $row_number }}
+                                    </th>
+                                    <td>{{ $discount->name }}</td>
+                                    <td>{{ $discount->percentage }}%</td>
+                                    <td class="d-flex flex-row-reverse">
+                                        <form action="" method="post" class="d-inline p-2">
+                                            @csrf
+                                            <button name="delete" value="{{ $discount->id }}" type="submit"
+                                                class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <th scope="row">
+                                        @php $row_number = $key;$row_number+=1; @endphp
+                                        {{ $row_number}}
+                                    </th>
+                                    <td>{{ $discount->name }}</td>
+                                    <td>{{ $discount->percentage }}%</td>
+                                    <td class="d-flex flex-row-reverse">
+                                        <form action="" method="post" class="d-inline p-2">
+                                            @csrf
+                                            <button name="delete" value="{{ $discount->id }}" type="submit"
+                                                class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
