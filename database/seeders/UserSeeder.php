@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'phone_number' => rand(10000000000,99999999999),
+            'role' => 'admin',
             'password' => Hash::make('admin'), // password
             'remember_token' => Str::random(10),
         ]);
