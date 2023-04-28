@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Food;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('restaurant_owner.home');
+        $restaurant_id =User::find(Auth::user()->id)->restaurant->id ;
+        $foods = Food::where('restaurant_id',$restaurant_id)->get();
+        return view('restaurant_owner.home',[
+            'foods' =>$foods
+        ]);
     }
 }
