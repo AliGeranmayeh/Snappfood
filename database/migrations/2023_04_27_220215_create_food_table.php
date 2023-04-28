@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('restaurant_id')->constrained('restaurants', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('type_id')->constrained('food_categories', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('discount_id')->nullable()->constrained('discounts', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->float('discount')->default(0);
             $table->string('image')->nullable();
             $table->text('materials')->nullable();
             $table->bigInteger('price');

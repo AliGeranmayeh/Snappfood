@@ -39,7 +39,12 @@
                             @if ($food->materials)
                             <p>Materials: {{ $food->materials }}</p>
                             @endif
+                            @if ($food->discount_id)
+                            <p>Price: <span style="text-decoration: line-through;"> {{ $food->price}}</span> -> with {{$food->discount*100}}% off <span>{{$food->price - ($food->price*$food->discount)}}</span></p>
+                            @else
                             <p>Price: {{ $food->price }}</p>
+                            @endif
+                            
                             
                         </div>
                         {{-- <a href="user/{{$user->id}}" class="btn btn-primary">More</a> --}}
