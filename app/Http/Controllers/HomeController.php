@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Discount;
 
 class HomeController extends Controller
 {
@@ -28,8 +29,10 @@ class HomeController extends Controller
     {
         $restaurant_id =User::find(Auth::user()->id)->restaurant->id ;
         $foods = Food::where('restaurant_id',$restaurant_id)->get();
+        $food_party_id = Discount::where('name' , 'Food Party')->first()->id;
         return view('restaurant_owner.home',[
-            'foods' =>$foods
+            'foods' =>$foods,
+            'food_party_id' => $food_party_id
         ]);
     }
 }

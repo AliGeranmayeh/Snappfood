@@ -28,11 +28,16 @@
 @section('content')
     <div class="container grid">
         @foreach ($foods as $food)
-                <article class="rounded " style="background-color: white">
+        @if ($food->discount_id == $food_party_id)
+        <article class="rounded p-3 mb-2 bg-secondary text-white">
+            @else
+            <article class="rounded " style="background-color: white">
+        @endif
+                
                     <img class="rounded-top"
                         src="{{asset($food->image)}}"
                         alt="user-photo"
-                        style="box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;">
+                        style="box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;width:100%">
                     <div class="text ">
                         <h3 style="margin:10% 0"><b>{{ $food->name }}</b></h3>
                         <div>
@@ -44,8 +49,10 @@
                             @else
                             <p>Price: {{ $food->price }}</p>
                             @endif
-                            
-                            
+                            <form action="" method="post">
+                                <button class="btn btn-danger" type="submit" value="{{$food->id}}">Delete</button>
+                                <a  href="{{route('get-edit-food')}}" class="btn btn-warning mx-2">Edit</a>
+                            </form>
                         </div>
                         {{-- <a href="user/{{$user->id}}" class="btn btn-primary">More</a> --}}
                         
