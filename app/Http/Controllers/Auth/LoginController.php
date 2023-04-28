@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
@@ -30,9 +31,12 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     protected function authenticated(Request $request, $user) {
-        if ($user->email == 'admin@admin.com') {
+        if ($user->role == 'admin') {
             return redirect('/admin');
         } else {
+            if (!Gate::allows('complete-restaurant-profile')) {
+                return redirect()->route('restaurant-profile');
+            }
             return redirect('/');
         }
    }
