@@ -31,11 +31,12 @@
         <label for="active" class="close" style="z-index: 1000"></label>
         <nav class="wrapper" style="z-index: 100">
             <ul>
-                <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="{{route('get-add-food-page')}}">Add Food</a></li>
-                <li><a href="{{route('get-owner-discount')}}">Add Discount</a></li>
-                <li><a href="{{route('restaurant-profile')}}">Restaurant Profile</a></li>
-                <li><a href="#">User Profile</a></li>
+                @can('complete-restaurant-profile')
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('get-add-food-page') }}">Add Food</a></li>
+                    <li><a href="{{ route('get-owner-discount') }}">Add Discount</a></li>
+                @endcan
+                <li><a href="{{ route('restaurant-profile') }}">Restaurant Profile</a></li>
                 <li><a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">Logout</a>
