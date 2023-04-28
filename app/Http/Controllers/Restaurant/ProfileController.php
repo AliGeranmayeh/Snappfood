@@ -14,9 +14,12 @@ class ProfileController extends Controller
 {
     public function index()
     {
+        $restaurant_category = ''; 
         $restaurant_categories = RestaurantCategory::all();
         $restaurant = User::find(Auth::user()->id)->restaurant;
-        $restaurant_category = RestaurantCategory::find($restaurant->type_id)->name;
+        if ($restaurant != null) {
+            $restaurant_category = RestaurantCategory::find($restaurant->type_id)->name;
+        }
         return view('restaurant_owner.profile',[
             'restaurant' => $restaurant,
             'category' => $restaurant_category,

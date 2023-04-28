@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\RestaurantCategory;
 use App\Http\Requests\CreateRestaurantRequest;
 use App\Models\Restaurant;
+use Illuminate\Support\Facades\Gate;
 
 class EditRestaurantProfileController extends Controller
 {
     public function index()
     {
+        if (!Gate::allows('complete-restaurant-profile')) {
+            abort(403);
+        }
         $restaurant_categories = RestaurantCategory::all();
         $restaurant = User::find(Auth::user()->id)->restaurant;  
         $restaurant_category_id = RestaurantCategory::find($restaurant->type_id)->id;

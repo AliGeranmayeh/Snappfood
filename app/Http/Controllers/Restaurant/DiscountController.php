@@ -8,11 +8,15 @@ use App\Models\Discount;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DiscountRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class DiscountController extends Controller
 {
     public function index()
     {
+        if (!Gate::allows('complete-restaurant-profile')) {
+            abort(403);
+        }
         $admin_user_id = User::where('role','admin')->first()->id;
         
         $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();

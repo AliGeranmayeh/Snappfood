@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Discount;
 use App\Http\Requests\FoodRequest;
 use App\Models\FoodCategory;
+use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('complete-restaurant-profile')) {
+            abort(403);
+        }
         $food_categories = FoodCategory::all();
         $restaurant_id = User::find(Auth::user()->id)->restaurant->id;
         $foods = Food::where('restaurant_id', $restaurant_id)->get();

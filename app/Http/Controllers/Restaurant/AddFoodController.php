@@ -11,11 +11,15 @@ use App\Models\User;
 use App\Models\Food;
 use App\Models\Restaurant;
 use App\Http\Requests\FoodRequest;
+use Illuminate\Support\Facades\Gate;
 
 class AddFoodController extends Controller
 {
     public function index()
     {
+        if (!Gate::allows('complete-restaurant-profile')) {
+            abort(403);
+        }
         $food_categories = FoodCategory::all();
         $admin_user_id = User::where('role','admin')->first()->id;
         $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();

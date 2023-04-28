@@ -11,11 +11,15 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\FoodRequest;
 use App\Models\Restaurant;
+use Illuminate\Support\Facades\Gate;
 
 class EditFoodController extends Controller
 {
     public function index($id)
     {
+        if (!Gate::allows('complete-restaurant-profile')) {
+            abort(403);
+        }
         $food = Food::find($id);
         $food_categories = FoodCategory::all();
         $admin_user_id = User::where('role','admin')->first()->id;
