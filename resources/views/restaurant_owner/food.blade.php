@@ -5,8 +5,8 @@
     <div class="container">
         @if ($errors->any())
             @foreach ($errors->all() as $error)
-                <div class="alert alert-danger text-center" role="alert" style="margin:auto; width: 80%;">
-                    <p>{{ $error }}</p>
+                <div class="alert alert-danger text-center my-2" role="alert" style="margin:auto; width: 80%;">
+                    {{ $error }}
                 </div>
             @endforeach
         @endif
@@ -41,11 +41,11 @@
                         @endforeach
                     </select>
 
-                    <select class="form-select " name="type" style="margin-top: 3%" required>
-                        <option value="0" selected>Select Discount</option>
+                    <select class="form-select " name="discount" style="margin-top: 3%" required>
+                        <option value="null" selected>Select Discount</option>
                         @foreach ($discounts as $discount)
                             <option value="{{ $discount->id }}">
-                                {{ $discount->percentage }}%
+                                {{$discount->name}}&nbsp;with&nbsp;{{ $discount->percentage }}%&nbsp;off
                             </option>
                         @endforeach
                     </select>
