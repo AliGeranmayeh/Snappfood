@@ -33,3 +33,5 @@ Route::get('/discount', [App\Http\Controllers\Restaurant\DiscountController::cla
 Route::post('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'post'])->name('post-owner-discount');
 Route::get('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'index'])->name('get-add-food-page');
 Route::post('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'create'])->name('create-food');
+Route::get('/edit_food', [App\Http\Controllers\Restaurant\EditFoodController::class , 'index'])->name('get-edit-food');
+Route::post('/edit_food', [App\Http\Controllers\Restaurant\EditFoodController::class , 'update'])->name('edit-food');
