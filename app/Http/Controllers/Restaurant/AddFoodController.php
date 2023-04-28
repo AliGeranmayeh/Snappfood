@@ -32,7 +32,7 @@ class AddFoodController extends Controller
         $discount_id =null;
         $discount_percent = 0;
         if($request->has('image')){
-            $new_image_name = time().'-'.$request->name.'.'.$request->image->exetention();
+            $new_image_name = time().'-'.$request->name.'.'.$request->image->extension();
             $request->image->move(public_path('images'),$new_image_name);
             $image_path = 'images/'.$new_image_name;
         }
