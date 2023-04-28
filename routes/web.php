@@ -25,6 +25,7 @@ Route::prefix('admin')->group(function () {
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class , 'index'])->name('home');
+Route::post('/', [App\Http\Controllers\HomeController::class , 'post'])->name('post-home');
 Route::get('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class , 'index'])->name('restaurant-profile');
 Route::post('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class , 'create'])->name('post-restaurant-profile');
 Route::get('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestaurantProfileController::class , 'index'])->name('edit-restaurant-profile');
@@ -33,5 +34,5 @@ Route::get('/discount', [App\Http\Controllers\Restaurant\DiscountController::cla
 Route::post('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'post'])->name('post-owner-discount');
 Route::get('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'index'])->name('get-add-food-page');
 Route::post('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'create'])->name('create-food');
-Route::get('/edit_food', [App\Http\Controllers\Restaurant\EditFoodController::class , 'index'])->name('get-edit-food');
-Route::post('/edit_food', [App\Http\Controllers\Restaurant\EditFoodController::class , 'update'])->name('edit-food');
+Route::get('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'index'])->name('get-edit-food');
+Route::post('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'update'])->name('edit-food');
