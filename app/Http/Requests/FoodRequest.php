@@ -25,8 +25,7 @@ class FoodRequest extends FormRequest
             'name' => 'required|string',
             'image' => 'mimes:png,jpg,jpeg',
             'price' => 'required|numeric',
-            'materials' => 'string',
-            'type_id' => 'required|numeric',
+            'type' => 'required|numeric',
         ];
     }
 }
