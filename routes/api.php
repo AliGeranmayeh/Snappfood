@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware(['api'])->group(function ($router) {
+    Route::post('/register' , [AuthController::class, 'register'])->name('shopper-login');
+    Route::post('/login' , [AuthController::class, 'login'])->name('shopper-login');
 });
