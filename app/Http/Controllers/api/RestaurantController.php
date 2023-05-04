@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\api\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
+use App\Http\Requests\FilterRestaurantsRequest;
+use App\Models\User;
 
 class RestaurantController extends Controller
 {
@@ -21,5 +23,23 @@ class RestaurantController extends Controller
         return response()->json([
             "message" => $restaurant,
             ], 200);
+    }
+
+    public function search(FilterRestaurantsRequest $request)
+    {
+        // $query = Restaurant::query();
+        // Restaurant::when(!$request->has('type') , function ($q) {
+        //      return response()->json([
+        //         'message' => $q->all()
+        //     ],200);
+        // });
+        if (!$request->has('type')) {
+            return response()->json([
+                'message' => Restaurant::all()
+            ],200);
+        }
+        return response()->json([
+            'message' => Restaurant::where('type_id',$request->type)->get()
+        ],200);
     }
 }

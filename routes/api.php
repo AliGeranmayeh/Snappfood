@@ -31,3 +31,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
 Route::post('/login' , [AuthController::class, 'login'])->name('shopper-login');
 Route::get('/restaurants/{restaurant_id}' , [RestaurantController::class, 'index']);
+Route::patch('/restaurants' , [RestaurantController::class, 'search']);
