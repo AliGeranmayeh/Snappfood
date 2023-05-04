@@ -26,6 +26,7 @@ class UserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'unique:users','regex:/(09)[0-9]{9}/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required' , 'in:admin,shopper,owner']
         ];
     }
 }
