@@ -55,7 +55,6 @@ class ShopperAddressController extends Controller
         if ($request->status == 'set') {
             Address::where('user_id', Auth::user()->id)->where('status', 'set')->update(['status' => 'unset']);
         }
-        // dd($request->validated());
         Address::where('id', $address_id)->update($request->validated());
         return response()->json([
             "message" => 'current address updated successfully'], 200);
