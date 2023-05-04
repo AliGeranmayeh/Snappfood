@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\NewController;
 use App\Http\Controllers\api\ShopperAddressController;
+use App\Http\Controllers\api\RestaurantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
 Route::post('/login' , [AuthController::class, 'login'])->name('shopper-login');
+Route::get('/restaurants/{restaurant_id}' , [RestaurantController::class, 'index']);
