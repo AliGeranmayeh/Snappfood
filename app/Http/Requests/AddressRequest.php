@@ -26,6 +26,7 @@ class AddressRequest extends FormRequest
             'address' => 'required|string',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
+            'status' => 'required|in:set,unset'
         ];
     }
 }
