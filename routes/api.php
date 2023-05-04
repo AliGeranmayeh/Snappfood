@@ -21,7 +21,7 @@ use App\Http\Controllers\api\ShopperAddressController;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout' , [AuthController::class, 'logout'])->name('shopper-logout');
     Route::post('/addresses' , [ShopperAddressController::class, 'add'])->name('add-address');
-
+    Route::get('/add-address' , [ShopperAddressController::class, 'get'])->name('get-user-addresses');
 });
 
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
