@@ -22,6 +22,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout' , [AuthController::class, 'logout'])->name('shopper-logout');
     Route::post('/addresses' , [ShopperAddressController::class, 'add'])->name('add-address');
     Route::get('/addresses' , [ShopperAddressController::class, 'get'])->name('get-user-addresses');
+    Route::post('/addresses/{address_id}' , [ShopperAddressController::class, 'update'])->name('update-address');
 });
 
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
