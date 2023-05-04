@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('latitude');
             $table->string('longitude');
+            $table->string('status')->default('unset');
             $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
