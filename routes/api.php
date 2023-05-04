@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\NewController;
+use App\Http\Controllers\api\ShopperAddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ use App\Http\Controllers\api\NewController;
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout' , [AuthController::class, 'logout'])->name('shopper-logout');
+    Route::post('/add-address' , [ShopperAddressController::class, 'add'])->name('add-address');
+
 });
 
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
