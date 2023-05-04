@@ -34,6 +34,6 @@ class ShopperAddressController extends Controller
     public function get()
     {
         return response()->json([
-            "message" => Address::where('user_id',Auth::user()->id)], 200);
+            "message" => Address::where('user_id',Auth::user()->id)->get()], 200);
     }
 }
