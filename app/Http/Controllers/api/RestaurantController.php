@@ -10,7 +10,13 @@ class RestaurantController extends Controller
 {
     public function index($restaurant_id)
     {
+
         $restaurant = Restaurant::find($restaurant_id);
+        if (!$restaurant) {
+            return response()->json([
+                "message" => "Restaurant doesn't exist",
+                ], 404);
+        }
         $restaurant_type = $restaurant->type;
         return response()->json([
             "message" => $restaurant,
