@@ -55,6 +55,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Discount::class);
     }
 
+    public function addresse(): HasMany
+    {
+        return $this->hasMany(Address::class);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
