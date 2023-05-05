@@ -22,7 +22,8 @@ class Restaurant extends Model
 
     protected $hidden = [
         'user_id',
-        'type_id'
+        'type_id',
+
     ];
     public function user(): BelongsTo
     {

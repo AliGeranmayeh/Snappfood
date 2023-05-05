@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\JWTAuth;
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
 
 class AuthController extends Controller
 {
@@ -24,13 +25,13 @@ class AuthController extends Controller
             $request->validated(),
             ['password' => Hash::make($request->password)]
         ));
-
+ 
         $token = $user->createToken('myAppToken')->plainTextToken;
     
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
-            'user' => $user,
+            'user' => new UserResource($user),
             'authorisation' => [
                 'token' => $token,
             ]

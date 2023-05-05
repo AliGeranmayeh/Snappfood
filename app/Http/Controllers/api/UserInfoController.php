@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateUserInfoRequest;
+use App\Http\Resources\UserResource;
 
 class UserInfoController extends Controller
 {
     public function index()
     {
         return response()->json([
-            'message' => User::find(Auth::user()->id)
+            'message' =>new UserResource(User::find(Auth::user()->id))
         ],200);
     }
 
