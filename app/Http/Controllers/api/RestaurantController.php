@@ -45,8 +45,15 @@ class RestaurantController extends Controller
 
     public function foods($restaurant_id)
     {
+
+        $restaurant =Restaurant::find($restaurant_id);
+        if (!$restaurant) {
+            return response()->json([
+                'message' => 'There is no restaurant with this id'
+            ]);
+        }
         return response()->json([
-            'message' => Restaurant::find($restaurant_id)->foods
+            'message' => $restaurant->foods
         ]);
     }
 }
