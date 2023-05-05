@@ -42,4 +42,11 @@ class RestaurantController extends Controller
             'message' => Restaurant::where('type_id',$request->type)->get()
         ],200);
     }
+
+    public function foods($restaurant_id)
+    {
+        return response()->json([
+            'message' => Restaurant::find($restaurant_id)->foods
+        ]);
+    }
 }
