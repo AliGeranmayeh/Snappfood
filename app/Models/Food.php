@@ -22,6 +22,11 @@ class Food extends Model
         'restaurant_id'
     ];
 
+    protected $hidden = [
+        'discount_id',
+        'type_id',
+        'restaurant_id' 
+    ];
     public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
