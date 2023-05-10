@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('restaurant_id')->constrained('restaurants', 'id')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('food_id')->constrained('food', 'id')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('food_name');
-            $table->bigInteger('count');
-            $table->bigInteger('price');
+            $table->text('foods');
+            $table->bigInteger('total_price');
             $table->boolean('payment_status')->default(0);
             $table->timestamps();
         });
