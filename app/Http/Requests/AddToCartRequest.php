@@ -22,7 +22,7 @@ class AddToCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id'=> 'required|numeric',
+            'food_id'=> 'required|numeric',
             'count' => 'required|numeric'
         ];
     }
