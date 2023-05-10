@@ -28,27 +28,32 @@ class CartController extends Controller
             'name' => $food->name,
             'price' => $food->price,
             'discount' => $food->discount,
-            'count' => $request->count
+            'count' => (int) $request->count
             ]];
         if (count(Auth::user()->carts) != 0) {
             foreach (Auth::user()->carts as $cart) {
                 $total_price = $cart->total_price + (($food->price -($food->price* $food->discount)) * $request->count);
                 if ($food->restaurant->id == $cart->restaurant_id && $cart->payment_status == 0) {
                     $cart_foods = json_decode($cart->foods,true);
-                    foreach ($cart_foods as $key=> $cart_food) {
-                        dd($foods[0]['id'],$cart_food['id']);
-                        if ($cart_food['id'] == $foods[0]['id']) {
-                            $cart_foods[$key]['count'] += $foods[0]['count'];
-                            $this->addToCartTableHandler($cart->id,$cart_foods,$total_price);
+                    foreach ($cart_foods as $key => $cart_food) {
+   
+                        switch ($cart_food['id'] ==$foods[0]["id"]) {
+                            case true:
+                                $cart_foods[$key]['count'] += $foods[0]['count'];
+                                return $this->addToCartTableHandler($cart->id,$cart_foods,$total_price);
+                            
+                            default:
+                                break;
                         }
                     }
                     $cart_foods[] = $foods;
-                    $this->addToCartTableHandler($cart->id,$cart_foods,$total_price);
+                    return $this->addToCartTableHandler($cart->id,$cart_foods,$total_price);
                 }
             }
         }
+        dd("yyyy");
         $total_price=($food->price -($food->price* $food->discount)) * $request->count;
-        $this->createNewCart(Auth::user()->id,$food->restaurant->id,json_encode($foods, JSON_PRETTY_PRINT),$total_price);
+        return $this->createNewCart(Auth::user()->id,$food->restaurant->id,json_encode($foods, JSON_PRETTY_PRINT),$total_price);
     }
     public function addToCartTableHandler($cart_id,$foods,$total_price)
     {
