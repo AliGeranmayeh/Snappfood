@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user_info' , [UserInfoController::class, 'index'])->name('get-user-info');
     Route::patch('/user_info' , [UserInfoController::class, 'update'])->name('update-user-info');
     Route::get('/carts' , [CartController::class , 'index'])->name('show-user-carts');
+    Route::get('/carts/add' , [CartController::class , 'add'])->name('add-cart');
 });
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
 Route::post('/login' , [AuthController::class, 'login'])->name('shopper-login');
