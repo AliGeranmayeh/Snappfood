@@ -12,9 +12,13 @@ class Cart extends Model
 
     protected $fillable = [
         'user_id',
-        'products',
-        'total_price',
-        'payment_status'
+        'restaurant_id',
+        'food_id',
+        'food_name',
+        'price',
+        'payment_status',
+        'food_name',
+        'count'
     ];
 
     public function user(): BelongsTo
