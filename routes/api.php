@@ -7,6 +7,7 @@ use App\Http\Controllers\api\NewController;
 use App\Http\Controllers\api\ShopperAddressController;
 use App\Http\Controllers\api\RestaurantController;
 use App\Http\Controllers\api\UserInfoController;
+use App\Http\Controllers\cartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('/addresses/{address_id}' , [ShopperAddressController::class, 'update'])->name('update-address');
     Route::get('/user_info' , [UserInfoController::class, 'index'])->name('get-user-info');
     Route::patch('/user_info' , [UserInfoController::class, 'update'])->name('update-user-info');
+    Route::get('/carts' , [cartController::class , 'index'])->name('show-user-carts');
 });
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
 Route::post('/login' , [AuthController::class, 'login'])->name('shopper-login');
