@@ -44,6 +44,6 @@ Auth::routes();
 
 
     #phase3👇👇
-    Route::post('/orders', [OrderController::class , 'index'])->name('show-order-page');
+    Route::get('/orders', [OrderController::class , 'index'])->name('show-order-page');
 
  });
