@@ -72,10 +72,6 @@ class CartController extends Controller
         return $cart;
 
     }
-    public function addToCartErrors($food, $count)
-    {
-       
-    }
     public function updateFoodInCart($food, $count)
     {
         $new_count = $food->food_count +(float)$count;
