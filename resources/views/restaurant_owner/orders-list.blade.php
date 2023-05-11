@@ -24,14 +24,15 @@
 @section('content')
     <form class="my-5" method="post" style="width: 70%;margin:auto">
         @csrf
-        <select class="form-select d-inline" aria-label="Default select example" style="width: 20%" name="food_category_filter">
-            <option value="0" selected>Order Status Filter</option>
-            {{-- @foreach ($food_categories as $food_category)
-                <option value="{{ $food_category->id }}">
-                    {{ $food_category->name }}
-                </option>
-            @endforeach --}}
+        <select class="form-select d-inline" aria-label="Default select example" style="width: 90%;margin:auto" name="order_status_filter">
+            <option value ='0' selected >Order Status Filter</option>
+            <option value="checking"  >cheking</option>
+            <option value="preparing">preparing</option>
+            <option value="sending">sending</option>
+            <option value="delivered">delivered</option>
         </select>
+        <button style="width: 7%;margin:auto" class="btn btn-outline-light mx-3" type="submit" name="filter" >Filter</button>
+
     </form>
     @if (count($orders) == 0)
         <h2 class="text-center text-white">No Order is available...</h2>
@@ -40,9 +41,24 @@
         @foreach ($orders as $order)
             <article class="rounded " style="background-color: white">
                 <div class="text ">
-                    <h3 style="margin:10% 0"><b>{{ $order->cart_id }}</b></h3>
+                    <h5 style="margin:10% 0"><b>status: {{ $order->order_status }}</b></h5>
                     <div>
-                        {{-- <p>Materials: {{ $food->materials }}</p> --}}
+                        <p>Price: {{ $order->cart->total_price }}</p>
+                        <p >foods:
+                            @foreach ($order->cart->foods as $food)
+                                <span class="mx-2">{{ $food->food_name }}</span>
+                            @endforeach
+                        </p>
+                        <form class="my-2" method="post" style="width: 100%;">
+                            @csrf
+                            <select class="form-select d-inline" aria-label="Default select example" style="width: 60%" name="order_statuse">
+                                <option value="checking" @php if($order->order_status=='0'){echo "selected";} @endphp >cheking</option>
+                                <option value="preparing" @php if($order->order_status=='cheking'){echo "selected";} @endphp >preparing</option>
+                                <option value="sending" @php if($order->order_status=='sending'){echo "selected";} @endphp>sending</option>
+                                <option value="delivered" @php if($order->order_status=='delivered'){echo "selected";} @endphp>delivered</option>
+                            </select>
+                            <button class="btn btn-outline-secondary mx-2" type="submit" name="change_status">Change</button>
+                        </form>
                         {{-- <form action="" method="post">
                             @csrf
                             <button name="delete" class="btn btn-danger" type="submit"
