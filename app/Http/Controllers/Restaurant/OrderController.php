@@ -15,4 +15,9 @@ class OrderController extends Controller
             'orders' => Auth::user()->restaurant->orders
         ]);
     }
+
+    public function post(Request $request)
+    {
+        dd($request);
+    }
 }

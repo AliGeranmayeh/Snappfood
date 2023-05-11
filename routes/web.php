@@ -45,5 +45,6 @@ Auth::routes();
 
     #phase3👇👇
     Route::get('/orders', [OrderController::class , 'index'])->name('show-order-page');
+    Route::post('/orders', [OrderController::class , 'post'])->name('filter-order-page');
 
  });
