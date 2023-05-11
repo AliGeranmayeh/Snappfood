@@ -95,7 +95,18 @@ class CartController extends Controller
 
     public function getCartInfo($cart_id)
     {
-        
+        if (!Cart::where('user_id',Auth::user()->id)->where('id',$cart_id)->where('payment_status',0)->first()) {
+            return response()->json(['error' => 'You do not have a active cart with this information'], 404);
+        }
+        $cart = Cart::find($cart_id);
+        $cart_items = CartItem::where('cart_id',$cart_id)->get();
+        return response()->json([
+            'data' => [
+                'cart_info' => $cart,
+                'cart_foods' => $cart_items
+            ]
+        ],200);
+
     }
 
 
