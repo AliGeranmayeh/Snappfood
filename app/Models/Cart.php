@@ -30,5 +30,10 @@ class Cart extends Model
     {
         return $this->hasMany(CartItem::class);
     }
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
 }
 
