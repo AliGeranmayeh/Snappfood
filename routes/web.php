@@ -27,6 +27,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Auth::routes();
  Route::middleware(['auth' ,'owner'])->group(function () {
+    #phase1
     Route::get('/', [App\Http\Controllers\HomeController::class , 'index'])->name('home');
     Route::post('/', [App\Http\Controllers\HomeController::class , 'post'])->name('post-home');
     Route::get('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class , 'index'])->name('restaurant-profile');
@@ -39,4 +40,8 @@ Auth::routes();
     Route::post('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'create'])->name('create-food');
     Route::get('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'index'])->name('get-edit-food');
     Route::post('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'update'])->name('edit-food');
+
+
+    #phase3👇👇
+    
  });

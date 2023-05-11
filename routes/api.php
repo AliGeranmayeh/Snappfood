@@ -21,7 +21,7 @@ use App\Http\Controllers\api\CartController;
 |
 */
 
-
+#phase2
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout' , [AuthController::class, 'logout'])->name('shopper-logout');
     Route::post('/addresses' , [ShopperAddressController::class, 'add'])->name('add-address');
@@ -29,11 +29,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('/addresses/{address_id}' , [ShopperAddressController::class, 'update'])->name('update-address');
     Route::get('/user_info' , [UserInfoController::class, 'index'])->name('get-user-info');
     Route::patch('/user_info' , [UserInfoController::class, 'update'])->name('update-user-info');
+    #phase3👇👇
     Route::get('/carts' , [CartController::class , 'index'])->name('show-user-carts');
     Route::get('/carts/{cart_id}' , [CartController::class , 'getCartInfo'])->name('show-user-cart');
     Route::get('/carts/{cart_id}/pay' , [CartController::class , 'peyForCart'])->name('pay-for-cart');
     Route::post('/cart/add' , [CartController::class , 'add'])->name('add-cart');
     Route::patch('/cart/add' , [CartController::class , 'update'])->name('update-cart');
+    #phase3👆👆
 });
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
 Route::post('/login' , [AuthController::class, 'login'])->name('shopper-login');
