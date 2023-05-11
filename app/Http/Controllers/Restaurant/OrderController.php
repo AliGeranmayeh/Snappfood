@@ -19,5 +19,22 @@ class OrderController extends Controller
     public function post(Request $request)
     {
         dd($request);
+        if ($request->has('filter')) {
+            return $this->filterOrderStatus($request->order_status_filter);
+        }
+        if ($request->has('change_status')) {
+            return $this->changeOrderStatus($request->order_statuse);
+        }
+        return redirect()->route('show-order-page');
     }
+
+    public function filterOrderStatus($data)
+    {
+        return view('restaurant_owner.orders-list');
+    }
+    public function changeOrderStatus($data)
+    {
+        return view('restaurant_owner.orders-list');
+    }
+
 }
