@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -18,23 +19,34 @@ class OrderController extends Controller
 
     public function post(Request $request)
     {
-        dd($request);
+        
         if ($request->has('filter')) {
             return $this->filterOrderStatus($request->order_status_filter);
         }
         if ($request->has('change_status')) {
-            return $this->changeOrderStatus($request->order_statuse);
+            return $this->changeOrderStatus($request->order_statuse,$request->change_status);
         }
         return redirect()->route('show-order-page');
     }
 
     public function filterOrderStatus($data)
     {
-        return view('restaurant_owner.orders-list');
+        if ($data != '0') {
+            $orders = Auth::user()->restaurant->orders->where('order_status',$data);
+            return view('restaurant_owner.orders-list',[
+                'orders' => $orders
+            ]);
+        }
+        return redirect()->route('show-order-page');
+        
     }
-    public function changeOrderStatus($data)
+    public function changeOrderStatus($order_status , $order_id)
     {
-        return view('restaurant_owner.orders-list');
+        if ($order_status != null) {
+            Order::where('id',$order_id)->update(['order_status'=>$order_status]); 
+            // Auth::user()->restaurant->orders->where('id',$order_id)->update(['order_status'=>$order_status]);   
+        }
+        return redirect()->route('show-order-page');
     }
 
 }
