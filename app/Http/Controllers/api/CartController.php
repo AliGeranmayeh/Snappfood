@@ -64,7 +64,34 @@ class CartController extends Controller
 
     public function update(AddToCartRequest $request)
     {
-        return true
+        $user_active_carts_id = [];
+        $user_active_carts = Cart::where('user_id',Auth::user()->id)->where('payment_status',0)->get();
+        if (count($user_active_carts)!=0) {
+            foreach ($user_active_carts as $user_active_cart) {
+                $user_active_carts_id[]= $user_active_cart->id;
+            }  
+            foreach ($user_active_carts_id as $user_active_cart_id) {
+                $cart_food = CartItem::where('food_id',$request->food_id)->where('cart_id', $user_active_cart_id)->first();
+                if ($cart_food) {
+                   $final_count = $cart_food->food_count + (float)$request->count;
+                   if ( $final_count > 0) {
+                       $price = $this->updateFoodInCart($cart_food,(float)$request->count);
+                       $cart = Cart::find($user_active_cart_id);
+                       Cart::where('id', $user_active_cart_id)->update(['total_price' => $cart->total_price + $price]);
+                    return response()->json(['message' => 'cart updated successfully',"cart_id" => $cart->id], 200);
+                    }
+                   $price = $this->deleteFoodFromCart($cart_food,(float)$cart_food->food_count);
+                   $cart = Cart::find($user_active_cart_id);
+                   if (count(CartItem::where('cart_id',$user_active_cart_id)->get())==0) {
+                    Cart::where('id', $user_active_cart_id)->delete();
+                    return response()->json(['message' => 'Cart deleted (no food)'], 200);
+                   }
+                   Cart::where('id', $user_active_cart_id)->update(['total_price' => $cart->total_price - $price]);
+                   return response()->json(['message' => 'cart updated successfully',"cart_id" => $cart->id], 200);
+                }
+            }
+        }
+        return response()->json(['error' => 'there is no food with this information in your active carts'], 404);
     }
 
 
@@ -110,5 +137,12 @@ class CartController extends Controller
             'food_count' => (float)$count
         ]);
         return $count * ($food->price - $food->price * $food->discount);
+    }
+
+    public function deleteFoodFromCart($food, $count)
+    {
+        $price = $count * ($food->food_price - $food->food_price * $food->food_discount);
+        CartItem::where('cart_id', $food->cart_id)->where('food_id', $food->food_id)->delete();
+        return $price;
     }
 }
