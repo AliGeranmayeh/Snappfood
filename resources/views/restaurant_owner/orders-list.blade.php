@@ -49,6 +49,7 @@
                                 <span class="mx-2">{{ $food->food_name }}</span>
                             @endforeach
                         </p>
+                        @if ($order->order_status != 'delivered')
                         <form class="my-2" method="post" style="width: 100%;">
                             @csrf
                             <select class="form-select d-inline" aria-label="Default select example" style="width: 60%" name="order_statuse">
@@ -59,6 +60,8 @@
                             </select>
                             <button class="btn btn-outline-secondary mx-2" type="submit" name="change_status" value="{{$order->id}}">Change</button>
                         </form>
+                        @endif
+                        
                         {{-- <form action="" method="post">
                             @csrf
                             <button name="delete" class="btn btn-danger" type="submit"

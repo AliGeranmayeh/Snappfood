@@ -12,8 +12,10 @@ class OrderController extends Controller
 {
     public function index()
     { 
+        // dd(Order::where('restaurant_id',Auth::user()->restaurant->id)->wherenot('order_status', 'deliverd')->get());
         return view('restaurant_owner.orders-list',[
-            'orders' => Auth::user()->restaurant->orders
+            
+            'orders' => Order::where('restaurant_id',Auth::user()->restaurant->id)->whereNot('order_status', 'delivered')->get()
         ]);
     }
 
