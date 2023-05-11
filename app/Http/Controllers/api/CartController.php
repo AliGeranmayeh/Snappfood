@@ -61,6 +61,24 @@ class CartController extends Controller
             "cart_id" => $cart->id
         ]);
     }
+
+    public function update(AddToCartRequest $request)
+    {
+        return true
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     public function createNewCart($user_id, $restaurant_id, $total_price)
     {
