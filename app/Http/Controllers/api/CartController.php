@@ -9,6 +9,7 @@ use App\Http\Requests\AddToCartRequest;
 use App\Models\Food;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Order;
 class CartController extends Controller
 {
     public function index()
@@ -116,7 +117,14 @@ class CartController extends Controller
         if (!Cart::where('user_id',Auth::user()->id)->where('id',$cart_id)->where('payment_status',0)->first()) {
             return response()->json(['error' => 'You do not have a active cart with this information'], 404);
         }
+        $cart = Cart::find($cart_id);
+        Order::create([
+            'restaurant_id' => $cart->restaurant_id,
+            'cart_id' => $cart_id,
+            'order_status' => 'checking'
+        ]);
         Cart::where('id',$cart_id)->update(['payment_status'=>1]);
+
         return response()->json([
             'message' => 'You payed for your cart'
         ],200);
