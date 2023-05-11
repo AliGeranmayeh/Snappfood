@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Cart extends Model
 {
@@ -31,9 +32,13 @@ class Cart extends Model
         return $this->hasMany(CartItem::class);
     }
 
-    public function order(): BelongsTo
+    // public function order(): BelongsTo
+    // {
+    //     return $this->belongsTo(Order::class);
+    // }
+    public function order(): HasOne
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasOne(Order::class);
     }
 }
 

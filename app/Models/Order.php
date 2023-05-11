@@ -22,9 +22,13 @@ class Order extends Model
         return $this->belongsTo(Restaurant::class);
     }
 
-    public function cart(): HasOne
+    public function cart(): BelongsTo
     {
-        return $this->hasOne(Cart::class);
+        return $this->belongsTo(Cart::class);
     }
+    // public function cart(): HasOne
+    // {
+    //     return $this->hasOne(Cart::class);
+    // }
 
 }
