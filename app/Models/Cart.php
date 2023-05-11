@@ -17,6 +17,10 @@ class Cart extends Model
         'total_price',
         'payment_status',
     ];
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
 
     public function user(): BelongsTo
     {

@@ -18,7 +18,11 @@ class CartItem extends Model
         'food_count',
         'cart_id'
         ];
-
+        protected $hidden = [
+            'created_at',
+            'updated_at',
+            'cart_id'
+        ];
         public function item(): BelongsTo
     {
         return $this->belongsTo(Cart::class);
