@@ -11,7 +11,11 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'reataurant_id',
+        'cart_id',
+        'order_status'
+    ];
 
     public function restaurant(): BelongsTo
     {
