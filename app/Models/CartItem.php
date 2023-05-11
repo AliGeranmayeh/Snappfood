@@ -10,14 +10,14 @@ class CartItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = $foods = [[
+    protected $fillable = [
         'food_id',
         'food_name',
         'food_price' ,
         'food_discount' ,
         'food_count',
         'cart_id'
-        ]];
+        ];
 
         public function item(): BelongsTo
     {
