@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cart_id')->constrained('carts', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('restaurant_id')->constrained('restaurants', 'id')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('oder_status')->default('checking');/*checking->preparing->sending->delivered */
+            $table->string('order_status')->default('checking');/*checking->preparing->sending->delivered */
             $table->timestamps();
         });
     }
