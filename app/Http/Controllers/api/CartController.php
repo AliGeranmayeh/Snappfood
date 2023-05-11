@@ -13,9 +13,13 @@ class CartController extends Controller
 {
     public function index()
     {
-        
+        $carts = [];
+        foreach (Auth::user()->carts as $key=> $cart) {
+            $carts[$key]['cart_info'][] = $cart;
+            $carts[$key]['cart_foods'][] = CartItem::where('cart_id',$cart->id)->get();
+        }
         return response()->json([
-            'carts' => Auth::user()->carts
+            'carts' => $carts
         ], 200);
     }
 
