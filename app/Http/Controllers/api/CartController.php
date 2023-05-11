@@ -15,8 +15,10 @@ class CartController extends Controller
     {
         $carts = [];
         foreach (Auth::user()->carts as $key=> $cart) {
-            $carts[$key]['cart_info'][] = $cart;
-            $carts[$key]['cart_foods'][] = CartItem::where('cart_id',$cart->id)->get();
+            if ($cart->payment_status==0) {
+                $carts[$key]['cart_info'][] = $cart;
+                $carts[$key]['cart_foods'][] = CartItem::where('cart_id',$cart->id)->get();
+            }
         }
         return response()->json([
             'carts' => $carts
@@ -106,9 +108,19 @@ class CartController extends Controller
                 'cart_foods' => $cart_items
             ]
         ],200);
-
     }
 
+
+    public function peyForCart($cart_id)
+    {
+        if (!Cart::where('user_id',Auth::user()->id)->where('id',$cart_id)->where('payment_status',0)->first()) {
+            return response()->json(['error' => 'You do not have a active cart with this information'], 404);
+        }
+        Cart::where('id',$cart_id)->update(['payment_status'=>1]);
+        return response()->json([
+            'message' => 'You payed for your cart'
+        ],200);
+    }
 
 
 
