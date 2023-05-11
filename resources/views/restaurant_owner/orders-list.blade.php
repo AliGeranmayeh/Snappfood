@@ -57,7 +57,7 @@
                                 <option value="sending" @php if($order->order_status=='sending'){echo "selected";} @endphp>sending</option>
                                 <option value="delivered" @php if($order->order_status=='delivered'){echo "selected";} @endphp>delivered</option>
                             </select>
-                            <button class="btn btn-outline-secondary mx-2" type="submit" name="change_status">Change</button>
+                            <button class="btn btn-outline-secondary mx-2" type="submit" name="change_status" value="{{$order->id}}">Change</button>
                         </form>
                         {{-- <form action="" method="post">
                             @csrf
