@@ -4,45 +4,41 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Restaurant extends Model
+class Cart extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'phone',
-        'name',
-        'account',
         'user_id',
-        'type_id'
+        'restaurant_id',
+        'total_price',
+        'payment_status',
     ];
-
     protected $hidden = [
-        'user_id',
-        'type_id',
-
+        'created_at',
+        'updated_at'
     ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(RestaurantCategory::class);
-    }
-
     public function foods(): HasMany
     {
-        return $this->hasMany(Food::class);
+        return $this->hasMany(CartItem::class);
     }
 
-    public function orders(): HasMany
+    // public function order(): BelongsTo
+    // {
+    //     return $this->belongsTo(Order::class);
+    // }
+    public function order(): HasOne
     {
-        return $this->hasMany(Order::class);
+        return $this->hasOne(Order::class);
     }
 }
 
