@@ -26,8 +26,8 @@
                     <p style="padding:0 3%">{{$comment['comment']}}</p>
                      <form action="" method="post" class="d-flex justify-content-center">
                             @csrf
-                            <button name="delete" type="button" class="btn btn-danger m-1  w-25" value="{{$comment['id']}}"> Delete</button>
-                            <button name="confirm" type="button" class="btn btn-success m-1 w-25" value="{{$comment['id']}}">Confirm</button>
+                            <button name="delete" type="button" class="btn btn-danger m-1  w-25"><a href="check_comments/delete/{{$comment['id']}}">Delete</a></button>
+                            <button name="confirm" type="button" class="btn btn-success m-1 w-25"><a href="check_comments/confirm/{{$comment['id']}}">Confirm</a></button>
                      </form>
                     </div>
                 </div>

@@ -26,4 +26,14 @@ class CommentController extends Controller
             'comments' => $comments
         ]);
     }
+
+    public function deleteComment($comment_id)
+    {
+        return redirect()->route('get-not-confirmed-comments');
+    }
+
+    public function confirmComment($comment_id)
+    {
+        return redirect()->route('get-not-confirmed-comments');
+    }
 }

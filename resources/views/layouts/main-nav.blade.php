@@ -36,6 +36,7 @@
                     <li><a href="{{ route('get-add-food-page') }}">Add Food</a></li>
                     <li><a href="{{ route('get-owner-discount') }}">Add Discount</a></li>
                     <li><a href="{{ route('show-order-page') }}">Orders</a></li>
+                    <li><a href="{{ route('get-not-confirmed-comments') }}">Unconfirmed Comments</a></li>
                 @endcan
                 <li><a href="{{ route('restaurant-profile') }}">Restaurant Profile</a></li>
                 <li><a href="{{ route('logout') }}"
