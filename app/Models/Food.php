@@ -37,10 +37,10 @@ class Food extends Model
         return $this->belongsTo(FoodCategory::class);
     }
 
-    public function comments()
-    {
-        return $this->belongsToMany(Comment::class, 'comment_food');
-    }
+    // public function comments()
+    // {
+    //     return $this->belongsToMany(Comment::class, 'comment_food');
+    // }
 
     public function discount(): BelongsTo
     {

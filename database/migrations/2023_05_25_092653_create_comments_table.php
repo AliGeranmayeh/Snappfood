@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->text('comment');
-            $table->boolean('confirmation');
-            $table->boolean('delete_request');
+            $table->bigInteger('parent_id')->nullable();
+            $table->boolean('status'); //0=> waiting for confirmatio, 1=> confirmed, 2=> delete request
             $table->timestamps();
         });
     }
