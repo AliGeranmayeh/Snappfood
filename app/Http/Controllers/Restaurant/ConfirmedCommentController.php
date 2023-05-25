@@ -31,7 +31,7 @@ class ConfirmedCommentController extends Controller
                 ];
             }
         }
-        return view('restaurant_owner.not_confirmed_comments' , [
+        return view('restaurant_owner.comments' , [
             'confirmed_comments' =>array_reverse($confirmed_comments) ,
             'delete_request_comments' =>array_reverse($delete_request_comments)
         ]);

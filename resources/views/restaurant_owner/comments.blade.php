@@ -14,11 +14,21 @@
 
 @section('content')
     
-    @if (count($comments) == 0)
-        <h2 class="text-center text-white">No not  confirmed comments is available...</h2>
+    @if (count($delete_request_comments) == 0 && count($confirmed_comments) == 0)
+        <h2 class="text-center text-white">No comments is available...</h2>
     @endif
     <div class="container grid my-5">
-        @foreach ($comments as $comment)
+        @foreach ($delete_request_comments as $comment)
+        <article class="rounded my-3 border border-danger" style="background-color: white">
+            <div  class="text">
+                <h5 ><b>User: {{$comment['user']}}</b></h5>
+                <div>
+                <p style="padding:0 3%">{{$comment['comment']}}</p>
+                </div>
+            </div>
+        </article>
+    @endforeach
+        @foreach ($confirmed_comments as $comment)
             <article class="rounded my-3" style="background-color: white">
                 <div  class="text">
                     <h5 ><b>User: {{$comment['user']}}</b></h5>
@@ -26,8 +36,7 @@
                     <p style="padding:0 3%">{{$comment['comment']}}</p>
                      <form action="" method="post" class="d-flex justify-content-center">
                             @csrf
-                            <button name="delete" type="button" class="btn btn-danger m-1  w-25 "><a class="text-white" style="text-decoration: none" href="check_comments/delete/{{$comment['id']}}">Delete</a></button>
-                            <button name="confirm" type="button" class="btn btn-success m-1 w-25"><a class="text-white" style="text-decoration: none" href="check_comments/confirm/{{$comment['id']}}">Confirm</a></button>
+                            <button name="delete" type="button" class="btn btn-danger m-1  w-25 "><a class="text-white" style="text-decoration: none" href="comments/delete_request/{{$comment['id']}}">Delete Request</a></button>
                      </form>
                     </div>
                 </div>
