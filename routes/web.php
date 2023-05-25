@@ -55,6 +55,8 @@ Auth::routes();
     Route::get('/check_comments/delete/{comment_id}', [CommentController::class , 'deleteComment'])->name('delete-not-confirmed-comment');
     Route::get('/check_comments/confirm/{comment_id}', [CommentController::class , 'confirmComment'])->name('confirm-comments');
     Route::get('/comments', [ConfirmedCommentController::class , 'index'])->name('get-confirmed-comments');
+    Route::post('/comments', [ConfirmedCommentController::class , 'selectComment'])->name('select-comment-reply');
+    Route::put('/comments', [ConfirmedCommentController::class , 'replyComment'])->name('add-reply');
     Route::get('/comments/delete_request/{comment_id}', [ConfirmedCommentController::class , 'deleteRequest'])->name('request-to-delete-confirmed-comment');
     #phase4👆👆
  });
