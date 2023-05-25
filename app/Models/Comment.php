@@ -38,4 +38,9 @@ class Comment extends Model
     {
         return $this->belongsToMany(Food::class, 'comment_food');
     }
+
+    public function replies()
+    {
+        return $this->belongsToMany(Reply::class);
+    }
 }
