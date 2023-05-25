@@ -18,7 +18,8 @@ class Comment extends Model
         'order_id',
         'comment',
         'confirmation',
-        'delete_request'
+        'delete_request',
+        'parent_id'
     ];
 
     public function order(): BelongsTo
@@ -35,10 +36,10 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function foods()
-    {
-        return $this->belongsToMany(Food::class, 'comment_food');
-    }
+    // public function foods()
+    // {
+    //     return $this->belongsToMany(Food::class, 'comment_food');
+    // }
 
     public function replies(): HasMany
     {
