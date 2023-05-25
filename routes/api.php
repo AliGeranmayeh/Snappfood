@@ -8,6 +8,8 @@ use App\Http\Controllers\api\ShopperAddressController;
 use App\Http\Controllers\api\RestaurantController;
 use App\Http\Controllers\api\UserInfoController;
 use App\Http\Controllers\api\CartController;
+use App\Http\Controllers\api\CommentController;
+
 
 
 /*
@@ -36,6 +38,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/cart/add' , [CartController::class , 'add'])->name('add-cart');
     Route::patch('/cart/add' , [CartController::class , 'update'])->name('update-cart');
     #phase3👆👆
+    #pasee4👇👇
+    Route::get('/comments' , [CommentController::class , 'index'])->name('show-user-comments');
+
+    #pasee4👆👆
 });
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
 Route::post('/login' , [AuthController::class, 'login'])->name('shopper-login');
