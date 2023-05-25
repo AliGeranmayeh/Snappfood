@@ -46,7 +46,7 @@
                         <p>Price: {{ $order->cart->total_price }}</p>
                         <p >foods:
                             @foreach ($order->cart->foods as $food)
-                                <span class="mx-2">{{ $food->food_name }}</span>
+                                <span class="mx-2">{{ $food->food_name }}->{{ $food->food_count }}</span>
                             @endforeach
                         </p>
                         @if ($order->order_status != 'delivered')

@@ -22,7 +22,7 @@ class CartController extends Controller
             }
         }
         return response()->json([
-            'carts' => $carts
+            'carts' => array_values($carts)
         ], 200);
     }
 
