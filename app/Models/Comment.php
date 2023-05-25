@@ -33,4 +33,9 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function foods()
+    {
+        return $this->belongsToMany(Food::class, 'comment_food');
+    }
 }
