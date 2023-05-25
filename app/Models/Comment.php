@@ -17,8 +17,7 @@ class Comment extends Model
         'restaurant_id',
         'order_id',
         'comment',
-        'confirmation',
-        'delete_request',
+        'status',
         'parent_id',
         'cart_id'
     ];
