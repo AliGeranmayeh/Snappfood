@@ -40,5 +40,11 @@ class Cart extends Model
     {
         return $this->hasOne(Order::class);
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
 }
 
