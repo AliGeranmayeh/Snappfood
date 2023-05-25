@@ -15,11 +15,11 @@
 @section('content')
     
     @if (count($delete_request_comments) == 0 && count($confirmed_comments) == 0)
-        <h2 class="text-center text-white">No comments is available...</h2>
+        <h2 class="text-center text-white">No comment is available...</h2>
     @endif
     <div class="container grid my-5">
         @foreach ($delete_request_comments as $comment)
-        <article class="rounded my-3 border border-danger" style="background-color: white">
+        <article class="rounded my-3 border border-3 border-danger" style="background-color: #ffdde2;">
             <div  class="text">
                 <h5 ><b>User: {{$comment['user']}}</b></h5>
                 <div>
@@ -28,6 +28,7 @@
             </div>
         </article>
     @endforeach
+    <div style="width:100%;margin:6%"></div>
         @foreach ($confirmed_comments as $comment)
             <article class="rounded my-3" style="background-color: white">
                 <div  class="text">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
 
 class ConfirmedCommentController extends Controller
 {
@@ -39,6 +40,7 @@ class ConfirmedCommentController extends Controller
 
     public function deleteRequest($comment_id)
     {
-        
+        Comment::where('id',$comment_id)->update(['status' => 2]);
+        return redirect()->route('get-confirmed-comments');
     }
 }
