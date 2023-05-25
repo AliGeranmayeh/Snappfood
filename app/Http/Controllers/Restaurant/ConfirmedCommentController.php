@@ -36,4 +36,9 @@ class ConfirmedCommentController extends Controller
             'delete_request_comments' =>array_reverse($delete_request_comments)
         ]);
     }
+
+    public function deleteRequest($comment_id)
+    {
+        
+    }
 }
