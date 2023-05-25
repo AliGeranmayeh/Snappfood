@@ -32,4 +32,9 @@ class Order extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
 }
