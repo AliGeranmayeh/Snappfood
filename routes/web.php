@@ -58,5 +58,7 @@ Auth::routes();
     Route::post('/comments/reply/{comment_id}', [ConfirmedCommentController::class , 'replyComment'])->name('add-reply');
     Route::get('/comments/reply/{comment_id}', [ConfirmedCommentController::class , 'selectComment'])->name('select-comment-reply');
     Route::get('/comments/delete_request/{comment_id}', [ConfirmedCommentController::class , 'deleteRequest'])->name('request-to-delete-confirmed-comment');
+    Route::get('/comments/filter/filter={filter_id}', [ConfirmedCommentController::class , 'filterComments'])->name('filter-comments');
+
     #phase4👆👆
  });

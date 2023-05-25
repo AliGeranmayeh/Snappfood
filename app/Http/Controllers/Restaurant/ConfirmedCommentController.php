@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
+use App\Models\CartItem;
+use App\Models\Cart;
 
 class ConfirmedCommentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // dd();
+        if ($request->has('foods_filter')) {
+            return $this->filterComments($request['foods_filter']);
+        }
         $confirmed_comments = [];
         $delete_request_comments = [];
         $db_comments = Auth::user()->restaurant->comments;
@@ -22,7 +28,7 @@ class ConfirmedCommentController extends Controller
                     'id' => $db_comment->id,
                     'user' => User::find($db_comment->user_id)->name,
                     'comment' => $db_comment->comment,
-                    'reply' => Comment::where('restaurant_id',Auth::user()->restaurant->id)->where('parent_id',$db_comment->id)->first()
+                    'reply' => Comment::where('restaurant_id', Auth::user()->restaurant->id)->where('parent_id', $db_comment->id)->first()
                 ];
             }
             elseif ($db_comment->status == 2) {
@@ -33,26 +39,27 @@ class ConfirmedCommentController extends Controller
                 ];
             }
         }
-        
-        return view('restaurant_owner.comments' , [
-            'confirmed_comments' =>array_reverse($confirmed_comments) ,
-            'delete_request_comments' =>array_reverse($delete_request_comments),
+
+        return view('restaurant_owner.comments', [
+            'confirmed_comments' => array_reverse($confirmed_comments),
+            'delete_request_comments' => array_reverse($delete_request_comments),
+            'restaurant_foods' => Auth::user()->restaurant->foods,
             'replied_comment' => ''
         ]);
     }
 
     public function deleteRequest($comment_id)
     {
-        Comment::where('id',$comment_id)->update(['status' => 2]);
+        Comment::where('id', $comment_id)->update(['status' => 2]);
         return redirect()->route('get-confirmed-comments');
     }
 
     public function selectComment($comment_id)
     {
-        
+
         $confirmed_comments = [];
         $delete_request_comments = [];
-        $replied_comment  = [];
+        $replied_comment = [];
         $db_comments = Auth::user()->restaurant->comments;
 
         foreach ($db_comments as $db_comment) {
@@ -61,7 +68,7 @@ class ConfirmedCommentController extends Controller
                     'id' => $db_comment->id,
                     'user' => User::find($db_comment->user_id)->name,
                     'comment' => $db_comment->comment,
-                    'reply' => Comment::where('restaurant_id',Auth::user()->restaurant->id)->where('parent_id',$db_comment->id)->first()
+                    'reply' => Comment::where('restaurant_id', Auth::user()->restaurant->id)->where('parent_id', $db_comment->id)->first()
                 ];
             }
             elseif ($db_comment->status == 2) {
@@ -72,29 +79,70 @@ class ConfirmedCommentController extends Controller
                 ];
             }
         }
-        $replied_comment  = Comment::find($comment_id);
+        $replied_comment = Comment::find($comment_id);
         // dd($replied_comment);
-        return view('restaurant_owner.comments' , [
-            'confirmed_comments' =>array_reverse($confirmed_comments) ,
-            'delete_request_comments' =>array_reverse($delete_request_comments),
+        return view('restaurant_owner.comments', [
+            'confirmed_comments' => array_reverse($confirmed_comments),
+            'delete_request_comments' => array_reverse($delete_request_comments),
+            'restaurant_foods' => Auth::user()->restaurant->foods,
             'replied_comment' => $replied_comment
         ]);
     }
 
-    public function replyComment($comment_id ,Request $request)
+    public function replyComment($comment_id, Request $request)
     {
         $replied_comment = Comment::find($comment_id);
         if ($request->reply != null) {
             $comment = Comment::create([
-                'user_id'=>Auth::user()->id,
-                'restaurant_id'=> Auth::user()->restaurant->id,
-                'order_id'=>$replied_comment->order_id,
-                'cart_id'=>$replied_comment->cart_id,
-                'comment' =>$request->reply,
+                'user_id' => Auth::user()->id,
+                'restaurant_id' => Auth::user()->restaurant->id,
+                'order_id' => $replied_comment->order_id,
+                'cart_id' => $replied_comment->cart_id,
+                'comment' => $request->reply,
                 'parent_id' => $replied_comment->id,
                 'status' => 1 //confirmed
-               ]);
+            ]);
         }
-        return redirect()->route('get-confirmed-comments');        
+        return redirect()->route('get-confirmed-comments');
+    }
+
+    public function filterComments($filter_id)
+    {
+        // dd($filter_id);
+        $food_id =9;
+        $confirmed_comments = [];
+        $delete_request_comments = [];
+        $cart_items = CartItem::where('food_id', $filter_id)->get();
+        
+        
+        foreach ($cart_items as $cart_item) {
+            $cart = Cart::find($cart_item->cart_id);
+            $carts[] = $cart;
+            foreach ($cart->comments as $comment) {
+                if ($comment->status == 1 && $comment->parent_id == null) {
+                    $confirmed_comments[] = [
+                        'id' => $comment->id,
+                        'user' => User::find($comment->user_id)->name,
+                        'comment' => $comment->comment,
+                        'reply' => Comment::where('restaurant_id', Auth::user()->restaurant->id)->where('parent_id', $comment->id)->first()
+                    ];
+                }
+                elseif ($comment->status == 2) {
+                    $delete_request_comments[] = [
+                        'id' => $comment->id,
+                        'user' => User::find($comment->user_id)->name,
+                        'comment' => $comment->comment
+                    ];
+                }
+            }
+
+        }
+        // dd($carts,$cart_items,$delete_request_comments);
+        return view('restaurant_owner.comments', [
+            'confirmed_comments' => array_reverse($confirmed_comments),
+            'delete_request_comments' => array_reverse($delete_request_comments),
+            'restaurant_foods' => Auth::user()->restaurant->foods,
+            'replied_comment' => ''
+        ]);
     }
 }

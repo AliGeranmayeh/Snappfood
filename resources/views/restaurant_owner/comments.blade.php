@@ -27,6 +27,18 @@
 @endsection
 
 @section('content')
+
+<form class="my-5" style="width: 70%;margin:auto">
+    @csrf
+    <select class="form-select d-inline" aria-label="Default select example" style="width: 80%;margin:auto" name="foods_filter">
+        <option value ='0' selected >Foods Filter</option>
+        @foreach ($restaurant_foods as $restaurant_food)
+        <option value ="{{$restaurant_food->id}}">{{$restaurant_food->name}}</option>
+        @endforeach
+    </select>
+    <button style="width: 7%;margin:auto" class="btn btn-outline-light mx-3" type="submit" >Filter</button>
+
+</form>
     @if (count($delete_request_comments) == 0 && count($confirmed_comments) == 0)
         <h2 class="text-center text-white">No comment is available...</h2>
     @endif
