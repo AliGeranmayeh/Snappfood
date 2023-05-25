@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     #phase3👆👆
     #pasee4👇👇
     Route::get('/comments' , [CommentController::class , 'index'])->name('show-user-comments');
+    Route::post('/{order_id}/comment' , [CommentController::class , 'addComment'])->name('add-comment');
 
     #pasee4👆👆
 });
