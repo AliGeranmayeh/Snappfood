@@ -19,7 +19,8 @@ class Comment extends Model
         'comment',
         'confirmation',
         'delete_request',
-        'parent_id'
+        'parent_id',
+        'cart_id'
     ];
 
     public function order(): BelongsTo
