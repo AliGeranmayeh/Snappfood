@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Restaurant\OrderController;
 use App\Http\Controllers\Restaurant\CommentController;
+use App\Http\Controllers\Restaurant\ConfirmedCommentController;
 
 
 /* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider and all of them will | be assigned to the "web" middleware group. Make something great! | */
@@ -53,5 +54,7 @@ Auth::routes();
     Route::get('/check_comments', [CommentController::class , 'index'])->name('get-not-confirmed-comments');
     Route::get('/check_comments/delete/{comment_id}', [CommentController::class , 'deleteComment'])->name('delete-not-confirmed-comment');
     Route::get('/check_comments/confirm/{comment_id}', [CommentController::class , 'confirmComment'])->name('confirm-comments');
+    Route::get('/comments', [ConfirmedCommentController::class , 'index'])->name('get-confirmed-comments');
+
     #phase4👆👆
  });
