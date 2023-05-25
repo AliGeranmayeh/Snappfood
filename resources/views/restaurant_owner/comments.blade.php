@@ -23,7 +23,6 @@
             align-items: center;
             justify-content: center
         }
-
     </style>
 @endsection
 
@@ -50,13 +49,19 @@
                         <h5><b>User: {{ $comment['user'] }}</b></h5>
                         <div>
                             <p style="padding:0 3%">{{ $comment['comment'] }}</p>
-                            <form action="" method="post" class="d-flex justify-content-center">
+                            @if ( $comment['reply'] != null)
+                            <h5 style="color: rgb(48, 173, 69); padding:0 5%"><b>answer: {{ $comment['reply']->comment}}</b></h5>
+                            @else
+                            <div class="d-flex justify-content-center">
                                 @csrf
                                 <button name="delete" type="button" class="btn btn-danger m-1  w-25 "><a
                                         class="text-white" style="text-decoration: none"
                                         href="comments/delete_request/{{ $comment['id'] }}">Delete Request</a></button>
-                                <button type="submit" name="reply"class="btn btn-info m-1  w-25" value="{{ $comment['id'] }}">Reply</button>
-                            </form>
+                                <button name="reply" type="button" class="btn btn-info m-1  w-25 "><a class="text-white"
+                                        style="text-decoration: none"
+                                        href="comments/reply/{{$comment['id']}}">Reply</a></button>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </article>
@@ -64,29 +69,28 @@
         </div>
         <div class="reply-form " style="padding: 50% 0">
             <div class="reply rounded p-2" style="background-color: rgb(243, 243, 243);width:90%">
-                @if ($replied_comment != null)
-                <p class="text-secondary py-3">Replied Comment: {{$replied_comment->comment}}</p>
-                <form action="" method="put">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="reply" class="form-label">Reply</label>
-                        <textarea class="form-control" id="reply" rows="3" name="reply"></textarea>
-                        <button name="reply" type="submit" class="btn btn-primary my-2" 
-                        value="{{$replied_comment->id}}">Reply</button>
-                    </div>
-                </form>
+                @if ($replied_comment != '')
+                    <p class="text-secondary py-3">Replied Comment: {{$replied_comment->comment}}</p>
+                    <form action="" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="reply" class="form-label">Reply</label>
+                            <textarea class="form-control" id="reply" rows="3" name="reply"></textarea>
+                            <button name="reply_btn" type="submit" class="btn btn-primary my-2"
+                                value="{{$replied_comment->id}}">Reply</button>
+                        </div>
+                    </form>
                 @else
-                <form action="" method="put">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="reply" class="form-label">Reply</label>
-                        <textarea class="form-control" id="reply" rows="3" name="reply"></textarea>
-                        <button name="reply" type="submit" class="btn btn-primary my-2" 
-                        value="null">Reply</button>
-                    </div>
-                </form>
+                    <form action="" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="reply" class="form-label">Reply</label>
+                            <textarea class="form-control" id="reply" rows="3" name="reply"></textarea>
+                            <button name="reply" type="submit" class="btn btn-primary my-2" value="null">Reply</button>
+                        </div>
+                    </form>
                 @endif
-                
+
 
             </div>
         </div>
