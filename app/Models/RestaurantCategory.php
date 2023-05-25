@@ -20,4 +20,9 @@ class RestaurantCategory extends Model
     {
         return $this->hasMany(Restaurant::class);
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
