@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Restaurant\OrderController;
+use App\Http\Controllers\Restaurant\CommentController;
 
 
 /* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider and all of them will | be assigned to the "web" middleware group. Make something great! | */
@@ -46,5 +47,9 @@ Auth::routes();
     #phase3👇👇
     Route::get('/orders', [OrderController::class , 'index'])->name('show-order-page');
     Route::post('/orders', [OrderController::class , 'post'])->name('filter-order-page');
+    #phase3👆👆
 
+    #phase4👇👇
+    Route::get('/check_comments', [CommentController::class , 'index'])->name('get-not-confirmed-comments');
+    #phase4👆👆
  });
