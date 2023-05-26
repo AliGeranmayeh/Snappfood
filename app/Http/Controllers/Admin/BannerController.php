@@ -18,4 +18,22 @@ class BannerController extends Controller
             'error' => null
         ]);
     }
+
+    public function post(Request $request)
+    {
+        if ($request->has('update')) {
+            return $this->updateBanners($request);
+        }
+        elseif ($request->has('edit')) {
+            return $this->editBanners($request);   
+        }
+        elseif ($request->has('delete')) {
+            return $this->deleteBanners($request);
+        }
+        elseif ($request->has('create')) {
+            return $this->createBanners($request);
+        }
+
+        return redirect()->route('get-banners');
+    }
 }
