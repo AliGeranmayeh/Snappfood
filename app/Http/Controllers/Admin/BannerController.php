@@ -61,4 +61,28 @@ class BannerController extends Controller
             'error' => 'Delete was successful'
         ]);
     }
+
+    public function editBanner($data)
+    {
+        $banners = Banner::all();
+        $banner = Banner::find($data->edit);
+        return view('admin.banners' , [
+            'banners' => $banners,
+            'text' => $banner->text,
+            'id' => $banner->id,
+            'error' => null
+        ]);
+    }
+
+    public function updateBanner($data)
+    {
+        Banner::where('id',$data->update)->update(['text' => $data->text]);
+        $banners = Banner::all();
+        return view('admin.banners' , [
+            'banners' => $banners,
+            'text' => null,
+            'id' => null,
+            'error' => 'Update was successful'
+        ]);
+    }
 }
