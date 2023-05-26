@@ -9,6 +9,11 @@ use App\Models\Order;
 use App\Http\Requests\AddCommentRequest;
 use App\Models\Comment;
 use App\Models\CommentFood;
+use App\Models\CartItem;
+use App\Models\Cart;
+use Illuminate\Foundation\Auth\User;
+use App\Models\Food;
+use App\Http\Resources\getCommentResource;
 
 class CommentController extends Controller
 {
@@ -57,5 +62,34 @@ class CommentController extends Controller
         'message' => "your comment sent for restaurant owner"
     ],200);
 
+    }
+
+    public function foodComments($food_id)
+    {
+        if (!Food::find($food_id)) {
+            return response()->json([
+                'error' => "food didn't found"
+            ],404);
+        }
+        $comments = [];
+        $cart_items = CartItem::where('food_id',$food_id)->get();
+        
+        foreach ($cart_items as  $cart_item) {
+            $food_comments = Cart::find($cart_item->cart_id)->comments;
+            foreach ($food_comments as $food_comment) {
+                if ( $food_comment->parent_id == null) {
+                    $comments[] = [
+                        'id' => $food_comment->id,
+                        'user' => User::find($food_comment->user_id)->name,
+                        'comment' => $food_comment->comment,
+                        'reply' => new getCommentResource( Comment::where('parent_id', $food_comment->id)->first())
+                    ];
+                }
+            }
+        }
+
+        return response()->json([
+            'data' => $comments
+        ],200);
     }
 }

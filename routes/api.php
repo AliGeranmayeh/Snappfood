@@ -41,7 +41,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     #pasee4👇👇
     Route::get('/comments' , [CommentController::class , 'index'])->name('show-user-comments');
     Route::post('/{order_id}/comment' , [CommentController::class , 'addComment'])->name('add-comment');
-
+    Route::get('/comments/food/{food_id}' , [CommentController::class , 'foodComments'])->name('show-food-comments');
     #pasee4👆👆
 });
 Route::post('/register' , [AuthController::class, 'register'])->name('shopper-register');
