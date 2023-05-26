@@ -112,7 +112,7 @@ class CommentController extends Controller
                     'id' => $restaurant_comment->id,
                     'user' => User::find($restaurant_comment->user_id)->name,
                     'comment' => $restaurant_comment->comment,
-                    'reply' => new getCommentResource(Comment::where('parent_id', $restaurant_comment->id)->first())
+                    'reply' =>(Comment::where('parent_id', $restaurant_comment->id)->first())? new getCommentResource(Comment::where('parent_id', $restaurant_comment->id)->first()):null
                 ];
             }
         }
