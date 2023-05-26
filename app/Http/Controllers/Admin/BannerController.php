@@ -50,4 +50,15 @@ class BannerController extends Controller
             'error' => 'A new banner created'
         ]);
     }
+    public function deleteBanner($data)
+    {
+        Banner::destroy($data->delete);
+        $banners = Banner::all();
+        return view('admin.banners' , [
+            'banners' => $banners,
+            'text' => null,
+            'id' => null,
+            'error' => 'Delete was successful'
+        ]);
+    }
 }
