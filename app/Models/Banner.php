@@ -10,5 +10,5 @@ class Banner extends Model
 {
     use HasFactory;
 
-    protected $fillabe = ['user_id','text']; 
+    protected $fillable = ['text']; 
 }

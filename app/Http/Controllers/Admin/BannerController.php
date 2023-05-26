@@ -22,18 +22,32 @@ class BannerController extends Controller
     public function post(Request $request)
     {
         if ($request->has('update')) {
-            return $this->updateBanners($request);
+            return $this->updateBanner($request);
         }
         elseif ($request->has('edit')) {
-            return $this->editBanners($request);   
+            return $this->editBanner($request);   
         }
         elseif ($request->has('delete')) {
-            return $this->deleteBanners($request);
+            return $this->deleteBanner($request);
         }
         elseif ($request->has('create')) {
-            return $this->createBanners($request);
+            return $this->createBanner($request);
         }
 
         return redirect()->route('get-banners');
+    }
+
+    public function createBanner($data)
+    {
+        Banner::create([
+            'text' => $data->text
+        ]);
+        $banners = Banner::all();
+        return view('admin.banners' , [
+            'banners' => $banners,
+            'text' => null,
+            'id' => null,
+            'error' => 'A new banner created'
+        ]);
     }
 }

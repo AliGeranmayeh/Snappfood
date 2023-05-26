@@ -15,23 +15,22 @@
                 @endif
                 <table class="table">
                     <tbody>
-                        @foreach ($banners as $key => $banners)
+                        @foreach ($banners as $key => $banner)
                             <tr>
                                 <th scope="row">
                                     @php $row_number = $key; @endphp
                                     {{ $row_number++ }}
                                 </th>
-                                <td>{{ $banner->user_id }}</td>
                                 <td>{{ $banner->text }}</td>
                                 <td class="d-flex flex-row-reverse">
                                     <form action="" method="post" class="d-inline p-2">
                                         @csrf
-                                        <button name="delete" value="{{$banner->user_id }}" type="submit"
+                                        <button name="delete" value="{{$banner->id }}" type="submit"
                                             class="btn btn-danger">Delete</button>
                                     </form>
                                     <form action="" method="post" class="d-inline p-2">
                                         @csrf
-                                        <button name="edit" value="{{ $banner->user_id }}" type="submit"
+                                        <button name="edit" value="{{ $banner->id }}" type="submit"
                                             class="btn btn-warning">Edit</button>
                                     </form>
                                 </td>
@@ -49,7 +48,7 @@
                     <form method="post">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Banner Text</label>
+                            <label for="text" class="form-label">Banner Text</label>
                             <input value="{{ $text }}" type="text" class="form-control " id="text"
                                 name="text">
                         </div>
@@ -66,8 +65,8 @@
                     <form method="post">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Banner Text</label>
-                            <input type="text" class="form-control " id="name" name="name" required>
+                            <label for="text" class="form-label">Banner Text</label>
+                            <input type="text" class="form-control " id="text" name="text" required>
                         </div>
                         <button name="create" type="submit" class="btn btn-primary my-2">Create</button>
                     </form>
