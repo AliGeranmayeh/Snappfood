@@ -12,10 +12,10 @@
                     <h5 style="color: rgb(48, 173, 69); padding:0 5%"><b>answer: {{ $comment['reply']->comment}}</b></h5>
                     @else
                     <div class="d-flex justify-content-center">
-                        <a href="comments/confirm_delete/{{ $comment['id'] }}" name="delete" class="btn btn-success m-1  w-25">
+                        <a href="{{route('confirm-delete-comment',[$comment['id']])}}" name="confirm" class="btn btn-success m-1  w-25" value ='1'>
                             Confirm Delete 
                         </a>
-                        <a href="comments/decline_delete/{{ $comment['id'] }}" name="delete" class="btn btn-danger m-1  w-25">
+                        <a href="{{route('decline-delete-comment',[$comment['id']])}}" name="decline" class="btn btn-danger m-1  w-25" value ='1'>
                             Decline Delete 
                         </a>
                     </div>
