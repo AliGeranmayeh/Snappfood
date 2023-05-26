@@ -41,7 +41,7 @@
                 </table>
             </div>
         </div>
-        @if ($name != null)
+        @if ($text != null)
             <div class="page rounded-3 bg-white py-3 px-4 my-5"
                 style="margin:auto; width: 50%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                 <h3 class="text-center">Edit Banner</h3>
