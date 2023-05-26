@@ -24,7 +24,12 @@
 @section('content')
     <form class="my-5" method="post" style="width: 70%;margin:auto">
         @csrf
-        <select class="form-select d-inline" aria-label="Default select example" style="width: 90%;margin:auto" name="order_status_filter">
+        <select class="form-select d-inline mx-2" aria-label="Default select example" style="width: 14%;margin:auto" name="order_time_filter">
+            <option value ='0' selected >Date Filter</option>
+            <option value="week"  >Last Week</option>
+            <option value="month">Last Month</option>
+        </select>
+        <select class="form-select d-inline" aria-label="Default select example" style="width: 74%;margin:auto" name="order_status_filter">
             <option value ='0' selected >Order Status Filter</option>
             <option value="checking"  >cheking</option>
             <option value="preparing">preparing</option>
@@ -32,8 +37,8 @@
             <option value="delivered">delivered</option>
         </select>
         <button style="width: 7%;margin:auto" class="btn btn-outline-light mx-3" type="submit" name="filter" >Filter</button>
-
     </form>
+    <article  class="rounded my-3 text-center py-1" style="background-color: white;margin:auto; width:10%">Total Income: {{$total_income}} T</article>
     @if (count($orders) == 0)
         <h2 class="text-center text-white">No Order is available...</h2>
     @endif

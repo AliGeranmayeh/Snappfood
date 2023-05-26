@@ -17,9 +17,17 @@ class OrderController extends Controller
     public function index()
     { 
         // dd(Order::where('restaurant_id',Auth::user()->restaurant->id)->wherenot('order_status', 'deliverd')->get());
+        $total_income = 0;
+        $orders =  Order::where('restaurant_id',Auth::user()->restaurant->id)->whereNot('order_status', 'delivered')->get();
+        $all_orders =Order::where('restaurant_id',Auth::user()->restaurant->id)->get();
+        // dd($all_orders[0]->cart->total_price);
+        foreach ($all_orders as $order) {
+            $total_income += $order->cart->total_price;
+        }
+        
         return view('restaurant_owner.orders-list',[
-            
-            'orders' => Order::where('restaurant_id',Auth::user()->restaurant->id)->whereNot('order_status', 'delivered')->get()
+            'total_income' => $total_income,
+            'orders' => $orders
         ]);
     }
 
@@ -27,7 +35,7 @@ class OrderController extends Controller
     {
         
         if ($request->has('filter')) {
-            return $this->filterOrderStatus($request->order_status_filter);
+            return $this->filterOrderStatus($request->order_status_filter,$request->order_time_filter);
         }
         if ($request->has('change_status')) {
             return $this->changeOrderStatus($request->order_statuse,$request->change_status);
@@ -35,11 +43,36 @@ class OrderController extends Controller
         return redirect()->route('show-order-page');
     }
 
-    public function filterOrderStatus($data)
+    public function filterOrderStatus($order_status = 0,$order_time = 0)
     {
-        if ($data != '0') {
-            $orders = Auth::user()->restaurant->orders->where('order_status',$data);
+        $total_income = 0;
+        $all_orders =Order::where('restaurant_id',Auth::user()->restaurant->id)->get();
+        foreach ($all_orders as $order) {
+            $total_income += $order->cart->total_price;
+        }
+        if ($order_status != '0' && $order_time != '0') {
+            return redirect()->route('show-order-page');
+        }
+        elseif ($order_status != '0') {
+            
+            $orders = Auth::user()->restaurant->orders->where('order_status',$order_status);
+            
             return view('restaurant_owner.orders-list',[
+                'total_income'=>$total_income,
+                'orders' => $orders
+            ]);
+        }
+        elseif ($order_time != '0') {
+            
+            if($order_time == 'week'){
+                $orders = Auth::user()->restaurant->orders->where('created_at','>=', date('Y-m-d', strtotime("-1 week")));
+            }
+            if($order_time == 'month'){
+                $orders = Auth::user()->restaurant->orders->where('created_at','>=', date('Y-m-d', strtotime("-1 month")));
+            }
+            
+            return view('restaurant_owner.orders-list',[
+                'total_income'=> $total_income,
                 'orders' => $orders
             ]);
         }

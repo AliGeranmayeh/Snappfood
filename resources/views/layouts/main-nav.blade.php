@@ -12,7 +12,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/main_navbar.css">
+    <link rel="stylesheet" href="{{asset('styles/main_navbar.css')}}">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     @yield('css-link')
     <!-- Fonts -->

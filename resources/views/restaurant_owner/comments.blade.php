@@ -68,10 +68,10 @@
                                 @csrf
                                 <button name="delete" type="button" class="btn btn-danger m-1  w-25 "><a
                                         class="text-white" style="text-decoration: none"
-                                        href="comments/delete_request/{{ $comment['id'] }}">Delete Request</a></button>
+                                        href="{{route('request-to-delete-confirmed-comment',['comment_id'=> $comment['id']])}}">Delete Request</a></button>
                                 <button name="reply" type="button" class="btn btn-info m-1  w-25 "><a class="text-white"
                                         style="text-decoration: none"
-                                        href="comments/reply/{{$comment['id']}}">Reply</a></button>
+                                        href="{{route('select-comment-reply',['comment_id'=>$comment['id']])}}">Reply</a></button>
                             </div>
                             @endif
                         </div>
