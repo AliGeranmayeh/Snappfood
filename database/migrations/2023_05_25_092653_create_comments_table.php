@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('parent_id')->nullable();
             $table->integer('status'); //0=> waiting for confirmatio, 1=> confirmed, 2=> delete request
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
