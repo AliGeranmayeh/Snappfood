@@ -108,8 +108,10 @@ class ConfirmedCommentController extends Controller
 
     public function filterComments($filter_id)
     {
-        // dd($filter_id);
-        $food_id =9;
+        if ($filter_id ==0) {
+            return redirect()->route('get-confirmed-comments');
+        }
+
         $confirmed_comments = [];
         $delete_request_comments = [];
         $cart_items = CartItem::where('food_id', $filter_id)->get();
