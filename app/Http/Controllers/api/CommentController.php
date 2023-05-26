@@ -72,23 +72,25 @@ class CommentController extends Controller
                 'error' => "food didn't found"
             ], 404);
         }
+        
         $comments = [];
         $cart_items = CartItem::where('food_id', $food_id)->get();
 
         foreach ($cart_items as $cart_item) {
             $food_comments = Cart::find($cart_item->cart_id)->comments;
+
             foreach ($food_comments as $food_comment) {
                 if ($food_comment->parent_id == null && $food_comment->status != 0) {
                     $comments[] = [
-                        'id' => $food_comment->id,
+                        'id' =>$food_comment->id,
                         'user' => User::find($food_comment->user_id)->name,
-                        'comment' => $food_comment->comment,
-                        'reply' => new getCommentResource(Comment::where('parent_id', $food_comment->id)->first())
+                        'comment' =>$food_comment->comment,
+                        'reply' => (Comment::where('parent_id', $food_comment->id)->first()!=null)?new getCommentResource(Comment::where('parent_id', $food_comment->id)->first()):null
                     ];
                 }
             }
         }
-
+        
         return response()->json([
             'comments' => $comments
         ], 200);
