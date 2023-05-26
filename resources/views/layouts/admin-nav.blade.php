@@ -107,7 +107,7 @@
                 <li><a href="{{route('get-discount')}}"> <img src="https://cdn-icons-png.flaticon.com/512/600/600260.png"
                             alt="discounts-logo" style="width:20px;height:20px"> <span
                             class="mx-1">Discounts</span></a></li>
-                <li><a href="comments"> <img src="https://cdn.onlinewebfonts.com/svg/img_395479.png" alt="comments-logo"
+                <li><a href="{{route('get-adminside-comments')}}"> <img src="https://cdn.onlinewebfonts.com/svg/img_395479.png" alt="comments-logo"
                             style="width:20px;height:20px"> <span class="mx-1">Comments</span></a></li>
                 <li><a href="#"> <img src="https://static.thenounproject.com/png/4914083-200.png"
                             alt="banner-logo" style="width:20px;height:20px;"> <span class="mx-1">Banners</span></a>

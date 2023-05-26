@@ -26,7 +26,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/discount', [App\Http\Controllers\Admin\DiscountController::class , 'index'])->name('get-discount');
             Route::post('/discount', [App\Http\Controllers\Admin\DiscountController::class , 'post'])->name('post-discount');
             #phase4👇👇
-            Route::get('/comments', [\App\Http\Controllers\Admin\CommentController::class , 'index'])->name('get-requested-comments');
+            Route::get('/comments', [\App\Http\Controllers\Admin\CommentController::class , 'index'])->name('get-adminside-comments');
             Route::get('/comments/confirm_delete/{$comment_id}', [\App\Http\Controllers\Admin\CommentController::class , 'confirmDelete'])->name('get-confirmed-comments');
             Route::get('/comments/decline_delete/{$comment_id}', [\App\Http\Controllers\Admin\CommentController::class , 'declineDelete'])->name('get-confirmed-comments');
 

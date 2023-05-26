@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container my-5">
-    @foreach ($confirmed_comments as $comment)
-        <article class="rounded my-3" style="background-color: white">
+    @foreach ($comments as $comment)
+        <article class="rounded my-3 p-3" style="background-color: white;width:70%;margin:auto">
             <div class="text">
-                <h5><b>User: {{ $comment['user'] }}</b></h5>
+                <h5><b>User: {{ $comment['user']->name }}</b></h5>
                 <div>
                     <p style="padding:0 3%">{{ $comment['comment'] }}</p>
                     @if ( $comment['reply'] != null)
