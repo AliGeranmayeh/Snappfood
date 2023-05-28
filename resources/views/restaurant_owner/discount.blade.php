@@ -12,6 +12,24 @@
                 <strong>{{ $error }}</strong>
             </div>
         @endif
+        <div class="page rounded-3 bg-white py-3 px-4 my-5"
+            style="margin:auto; width: 50%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+            <h3 class="text-center">Add New Discount</h3>
+            <div class="my-3">
+                <form method="post">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Discount Name</label>
+                        <input type="text" class="form-control " id="name" name="name" required placeholder="Preferred Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="percentage" class="form-label">Discount Percentage</label>
+                        <input type="text" class="form-control " id="percentage" name="percentage" required placeholder="1 to 99">
+                    </div>
+                    <button name="create" type="submit" class="btn btn-primary ">Create</button>
+                </form>
+            </div>
+        </div>
         <div class="page rounded-3 bg-white p-3 "
             style="margin:auto; width: 50%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
             <h3 class="text-center">Existed Discounts </h3>
@@ -45,25 +63,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-        </div>
-
-        <div class="page rounded-3 bg-white py-3 px-4 my-5"
-            style="margin:auto; width: 50%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-            <h3 class="text-center">Add New Discount</h3>
-            <div class="my-5">
-                <form method="post">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Discount Name</label>
-                        <input type="text" class="form-control " id="name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="percentage" class="form-label">Discount Percentage</label>
-                        <input type="text" class="form-control " id="percentage" name="percentage" required>
-                    </div>
-                    <button name="create" type="submit" class="btn btn-primary my-2">Create</button>
-                </form>
             </div>
         </div>
 
