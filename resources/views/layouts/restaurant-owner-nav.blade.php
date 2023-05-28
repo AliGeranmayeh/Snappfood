@@ -28,9 +28,9 @@
         }
 
         html,
-        body {
-            height: 100%;
-            background: #e0f2f1;
+        body,main {
+            height: 100% ;
+            background: #d0e3ff;
         }
 
         .sidebar {
@@ -39,7 +39,7 @@
             float: left;
             width: 15%;
             height: 100vh;
-            background: #00897b;
+            background: #00478f;
         }
 
 
@@ -48,7 +48,7 @@
             color: white;
             text-align: center;
             line-height: 70px;
-            background: #00695c;
+            background: linear-gradient(to top,#00478f, #003f7e ,#003366);;
         }
 
         .sidebar ul a {
@@ -122,7 +122,7 @@
                 </form>
             </ul>
         </nav>
-        <main class="py-4">
+        <main >
             @yield('content')
         </main>
     </div>
