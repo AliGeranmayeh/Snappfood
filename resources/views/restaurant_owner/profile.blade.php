@@ -37,7 +37,7 @@
                     </p>
                     <p style="display: flex;justify-content: center;border-color:#005cb8 !important     "
                         class="rounded-pill border border-success border-2 mx-5 ">
-                        <strong>Restaurant Account Number:</strong>&nbsp;{{$restaurant->account}}
+                        <strong>Restaurant Bank Account:</strong>&nbsp;{{$restaurant->account}}
                     </p>
                     <div  style="display: flex;justify-content: center;">
                         <a style="width: 90%" href="{{route('edit-restaurant-profile')}}" class="btn btn-primary"> Update Your

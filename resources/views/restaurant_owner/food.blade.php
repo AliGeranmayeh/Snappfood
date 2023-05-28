@@ -10,10 +10,10 @@
                 </div>
             @endforeach
         @endif
-        <div class="page rounded-3 bg-white py-3 px-5 my-5"
+        <div class="page rounded-3 bg-white py-3 px-5 "
             style="margin:auto; width: 80%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
             <h3 class="text-center">Add New Food</h3>
-            <div class="my-5">
+            <div class="my-2">
                 <form method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
