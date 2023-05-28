@@ -16,31 +16,31 @@
         @endif
         @if ($restaurant != null)
             <div class="page rounded-3 bg-white p-3 "
-                style="margin:auto; width: 80%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                style="margin:10% auto; width: 80%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                 <h3 class="text-center">Restaurant Informations</h3>
                 <div class="my-5">
-                    <p style="display: flex;justify-content: center;"
+                    <p style="display: flex;justify-content: center;border-color:#005cb8 !important     "
                         class="rounded-pill border border-success border-2 mx-5 ">
                         <strong>Restaurant Name:</strong> &nbsp;{{$restaurant->name}}
                     </p>
-                    <p style="display: flex;justify-content: center;"
+                    <p style="display: flex;justify-content: center;border-color:#005cb8 !important     "
                         class="rounded-pill border border-success border-2 mx-5 ">
                         <strong>Restaurant Type:</strong> &nbsp;{{$category}}
                     </p>
-                    <p style="display: flex;justify-content: center;"
+                    <p style="display: flex;justify-content: center;border-color:#005cb8 !important     "
                         class="rounded-pill border border-success border-2 mx-5 ">
                         <strong>Restaurant Address:</strong>&nbsp;{{$restaurant->address}}
                     </p>
-                    <p style="display: flex;justify-content: center;"
-                        class="rounded-pill border border-success border-2 mx-5 ">
+                    <p style="display: flex;justify-content: center;border-color:#005cb8 !important"
+                        class="rounded-pill border border-2 mx-5 " >
                         <strong>Restaurant Number:</strong>&nbsp;{{$restaurant->phone}}
                     </p>
-                    <p style="display: flex;justify-content: center;"
+                    <p style="display: flex;justify-content: center;border-color:#005cb8 !important     "
                         class="rounded-pill border border-success border-2 mx-5 ">
                         <strong>Restaurant Account Number:</strong>&nbsp;{{$restaurant->account}}
                     </p>
                     <div  style="display: flex;justify-content: center;">
-                        <a style="width: 90%" href="{{route('edit-restaurant-profile')}}" class="btn btn-success"> Update Your
+                        <a style="width: 90%" href="{{route('edit-restaurant-profile')}}" class="btn btn-primary"> Update Your
                             Restaurant Profile</a>
                     </div>
 
