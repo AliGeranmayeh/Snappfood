@@ -72,6 +72,4 @@ Auth::routes();
     #phase4👆👆
  });
 
- Route::get('/test', function () {
-     return view('view');
- });
+ 
