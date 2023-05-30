@@ -3,12 +3,7 @@
 
 @section('css-link')
     <style>
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
-            grid-gap: 20px;
-            align-items: stretch;
-        }
+
 
         .grid>article {
             border: 1px solid #ccc;
@@ -29,33 +24,37 @@
             <option value="week"  >Last Week</option>
             <option value="month">Last Month</option>
         </select>
-        <select class="form-select d-inline" aria-label="Default select example" style="width: 74%;margin:auto" name="order_status_filter">
+        <select class="form-select d-inline" aria-label="Default select example" style="width: 70%;margin:auto" name="order_status_filter">
             <option value ='0' selected >Order Status Filter</option>
             <option value="checking"  >cheking</option>
             <option value="preparing">preparing</option>
             <option value="sending">sending</option>
             <option value="delivered">delivered</option>
         </select>
-        <button style="width: 7%;margin:auto" class="btn btn-outline-light mx-3" type="submit" name="filter" >Filter</button>
+        <button style="width: 7%;margin:auto" class="btn btn-outline-primary mx-3" type="submit" name="filter" >Filter</button>
     </form>
-    <div style="margin: auto;width:18%" class="my-5">
+    <div style="margin: auto;width:20%" class="my-5">
         <span  class="rounded my-3 text-center p-1 mx-1" style="background-color: white;margin:auto; width:10%">Total Income: {{$total_income}} T</span>
     <span  class="rounded my-3 text-center p-1 mx-1" style="background-color: white;margin:auto; width:10%">Orders Count: {{count($orders)}} </span>
     </div>
     
     @if (count($orders) == 0)
-        <h2 class="text-center text-white">No Order is available...</h2>
+        <h2 class="text-center">No Order is available...</h2>
     @endif
-    <div class="container grid">
+    <div class="container grid row row-cols-4 gap-3">
         @foreach ($orders as $order)
-            <article class="rounded " style="background-color: white">
+            <article class="rounded " style="background-color: white ">
                 <div class="text ">
-                    <h5 style="margin:10% 0"><b>status: {{ $order->order_status }}</b></h5>
+                    <h5 style="margin:10% 0;font-size: 20px"><b>Status: {{ $order->order_status }}</b></h5>
                     <div>
-                        <p>Price: {{ $order->cart->total_price }}</p>
-                        <p >foods:
+                        <p style="font-size: 18px">Price: {{ $order->cart->total_price }} T</p>
+                        <p style="font-size: 18px">food<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16" >
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                          </svg>Count:
                             @foreach ($order->cart->foods as $food)
-                                <span class="mx-2">{{ $food->food_name }}->{{ $food->food_count }}</span>
+                                <span class="mx-2">{{ $food->food_name }} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16" >
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                  </svg> {{ $food->food_count }}</span>
                             @endforeach
                         </p>
                         @if ($order->order_status != 'delivered')
@@ -70,16 +69,7 @@
                             <button class="btn btn-outline-secondary mx-2" type="submit" name="change_status" value="{{$order->id}}">Change</button>
                         </form>
                         @endif
-                        
-                        {{-- <form action="" method="post">
-                            @csrf
-                            <button name="delete" class="btn btn-danger" type="submit"
-                                value="{{ $order->id }}">Delete</button>
-                            <a href="edit_food/{{ $order->id }}" class="btn btn-warning mx-2">Edit</a>
-                        </form> --}}
                     </div>
-                    {{-- <a href="user/{{$user->id}}" class="btn btn-primary">More</a> --}}
-
                 </div>
             </article>
         @endforeach

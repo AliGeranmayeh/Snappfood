@@ -48,8 +48,8 @@
                                     @endphp
                                     {{ $row_number }}
                                 </th>
-                                <td>{{ $discount->name }}</td>
-                                <td>{{ $discount->percentage }}%</td>
+                                <td style="vertical-align:center;">{{ $discount->name }}</td>
+                                <td style="vertical-align:center;">{{ $discount->percentage }}%</td>
                                 <td class="d-flex flex-row-reverse">
                                     @if ($discount->user_id == Auth::user()->id)
                                         <form action="" method="post" class="d-inline px-2">

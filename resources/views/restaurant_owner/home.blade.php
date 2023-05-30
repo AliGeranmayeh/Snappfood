@@ -37,12 +37,12 @@
             @endforeach
         </select>
         <input class="form-control d-inline mx-2" type="search" placeholder="Search" name="search_field" style="width:70%">
-        <button class="btn btn-outline-light" type="submit" name="search">Search</button>
+        <button class="btn btn-outline-primary" type="submit" name="search">Search</button>
     </form>
     @if (count($foods) == 0)
-        <h2 class="text-center text-white">No food is available...</h2>
+        <h2 class="text-center">No food is available...</h2>
     @endif
-    <div class="container grid-1">
+    <div class="container grid">
         <div class="row row-cols-4 gap-3">
             @foreach ($foods as $food)
                 @if ($food->discount_id == $food_party_id)
@@ -76,14 +76,12 @@
 
                         <form action="" method="post" style="display: flex;justify-content:center">
                             @csrf
-                            <button name="delete" class="btn btn-danger w-50" type="submit" style="font-size: 16px" 
+                            <button name="delete" class="btn btn-danger w-50" type="submit" style="font-size: 16px"
                                 value="{{ $food->id }}">Delete</button>
-                            <a href="{{route('get-edit-food',['id'=>  $food->id])}}" class="btn btn-warning mx-2 w-50 text-white" style="font-size: 16px">Edit</a>
+                            <a href="{{ route('get-edit-food', ['id' => $food->id]) }}"
+                                class="btn btn-warning mx-2 w-50 text-white" style="font-size: 16px">Edit</a>
                         </form>
-
-
                     </div>
-                    {{-- <a href="user/{{$user->id}}" class="btn btn-primary">More</a> --}}
 
                 </div>
                 </article>
