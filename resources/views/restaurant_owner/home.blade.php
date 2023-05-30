@@ -78,7 +78,7 @@
                             @csrf
                             <button name="delete" class="btn btn-danger w-50" type="submit" style="font-size: 16px" 
                                 value="{{ $food->id }}">Delete</button>
-                            <a href="edit_food/{{ $food->id }}" class="btn btn-warning mx-2 w-50 text-white" style="font-size: 16px">Edit</a>
+                            <a href="{{route('get-edit-food',['id'=>  $food->id])}}" class="btn btn-warning mx-2 w-50 text-white" style="font-size: 16px">Edit</a>
                         </form>
 
 

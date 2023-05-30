@@ -17,7 +17,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 
-    <link href="styles/admin/navbar.css" rel="stylesheet">
+    <link href="{{Asset('styles/admin/navbar.css')}}" rel="stylesheet">
 
     <style>
         * {
