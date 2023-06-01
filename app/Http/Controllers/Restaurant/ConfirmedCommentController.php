@@ -63,7 +63,7 @@ class ConfirmedCommentController extends Controller
         $db_comments = Auth::user()->restaurant->comments;
 
         foreach ($db_comments as $db_comment) {
-            if ($db_comment->status == 1) {
+            if ($db_comment->status == 1 && $db_comment->parent_id == null) {
                 $confirmed_comments[] = [
                     'id' => $db_comment->id,
                     'user' => User::find($db_comment->user_id)->name,

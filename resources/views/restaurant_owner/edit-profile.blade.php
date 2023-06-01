@@ -23,7 +23,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="number" class="form-label" style="margin-top: 2%">Restaurant Phone</label>
-                        <input type="tele" class="form-control " id="number" name="phone " placeholder="8 Digits"
+                        <input type="tele" class="form-control " id="number" name="phone" placeholder="8 Digits"
                             value="{{ $restaurant->phone }}">
                     </div>
                     <div class="mb-3">
