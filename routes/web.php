@@ -6,6 +6,7 @@ use App\Http\Controllers\Restaurant\OrderController;
 use App\Http\Controllers\Restaurant\CommentController;
 use App\Http\Controllers\Restaurant\ConfirmedCommentController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\RestaurantsController;
 
 
 /* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider and all of them will | be assigned to the "web" middleware group. Make something great! | */
@@ -14,31 +15,35 @@ use App\Http\Controllers\Admin\BannerController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/', function () {
-                return view('admin.admin-panel');
+            Route::get('/', function () {
+                    return view('admin.admin-panel');
+                }
+                );
+                Route::get('/users', [App\Http\Controllers\Admin\UsersController::class , 'index'])->name('users');
+                Route::get('/user/{id}', [App\Http\Controllers\Admin\UserController::class , 'index'])->name('user');
+                Route::get('/food_categories', [App\Http\Controllers\Admin\FoodCategoryController::class , 'index'])->name('food-category');
+                Route::post('/food_categories', [App\Http\Controllers\Admin\FoodCategoryController::class , 'post'])->name('post-food-category');
+                Route::get('/restaurant_categories', [App\Http\Controllers\Admin\RestaurantCategoryController::class , 'index'])->name('restaurant-category');
+                Route::post('/restaurant_categories', [App\Http\Controllers\Admin\RestaurantCategoryController::class , 'post'])->name('post-restaurant-category');
+                Route::get('/discount', [App\Http\Controllers\Admin\DiscountController::class , 'index'])->name('get-discount');
+                Route::post('/discount', [App\Http\Controllers\Admin\DiscountController::class , 'post'])->name('post-discount');
+                #phase4👇👇
+                Route::get('/comments', [\App\Http\Controllers\Admin\CommentController::class , 'index'])->name('get-adminside-comments');
+                Route::get('/comments/confirm_delete/{comment_id}', [\App\Http\Controllers\Admin\CommentController::class , 'confirmDelete'])->name('confirm-delete-comment');
+                Route::get('/comments/decline_delete/{comment_id}', [\App\Http\Controllers\Admin\CommentController::class , 'declineDelete'])->name('decline-delete-comment');
+                Route::get('/banners', [BannerController::class , 'index'])->name('get-banners');
+                Route::post('/banners', [BannerController::class , 'post'])->name('create-or-update-banners');
+                #phase4👆👆
+                #review-phase👇👇
+                Route::get('/restaurants', [RestaurantsController::class , 'filterComments'])->name('show-restaurant-page');
+                #review-phase👆👆
             }
             );
-            Route::get('/users', [App\Http\Controllers\Admin\UsersController::class , 'index'])->name('users');
-            Route::get('/user/{id}', [App\Http\Controllers\Admin\UserController::class , 'index'])->name('user');
-            Route::get('/food_categories', [App\Http\Controllers\Admin\FoodCategoryController::class , 'index'])->name('food-category');
-            Route::post('/food_categories', [App\Http\Controllers\Admin\FoodCategoryController::class , 'post'])->name('post-food-category');
-            Route::get('/restaurant_categories', [App\Http\Controllers\Admin\RestaurantCategoryController::class , 'index'])->name('restaurant-category');
-            Route::post('/restaurant_categories', [App\Http\Controllers\Admin\RestaurantCategoryController::class , 'post'])->name('post-restaurant-category');
-            Route::get('/discount', [App\Http\Controllers\Admin\DiscountController::class , 'index'])->name('get-discount');
-            Route::post('/discount', [App\Http\Controllers\Admin\DiscountController::class , 'post'])->name('post-discount');
-            #phase4👇👇
-            Route::get('/comments', [\App\Http\Controllers\Admin\CommentController::class , 'index'])->name('get-adminside-comments');
-            Route::get('/comments/confirm_delete/{comment_id}', [\App\Http\Controllers\Admin\CommentController::class , 'confirmDelete'])->name('confirm-delete-comment');
-            Route::get('/comments/decline_delete/{comment_id}', [\App\Http\Controllers\Admin\CommentController::class , 'declineDelete'])->name('decline-delete-comment');
-            Route::get('/banners',[BannerController::class , 'index'])->name('get-banners');
-            Route::post('/banners',[BannerController::class , 'post'])->name('create-or-update-banners');
-
-            #phase4👆👆
-        }); 
+        
 });
 
 Auth::routes();
- Route::middleware(['auth' ,'owner'])->group(function () {
+Route::middleware(['auth', 'owner'])->group(function () {
     #phase1
     Route::get('/', [App\Http\Controllers\HomeController::class , 'index'])->name('home');
     Route::post('/', [App\Http\Controllers\HomeController::class , 'post'])->name('post-home');
@@ -68,8 +73,5 @@ Auth::routes();
     Route::get('/comments/reply/{comment_id}', [ConfirmedCommentController::class , 'selectComment'])->name('select-comment-reply');
     Route::get('/comments/delete_request/{comment_id}', [ConfirmedCommentController::class , 'deleteRequest'])->name('request-to-delete-confirmed-comment');
     Route::get('/comments/filter/filter={filter_id}', [ConfirmedCommentController::class , 'filterComments'])->name('filter-comments');
-
-    #phase4👆👆
- });
-
- 
+#phase4👆👆
+});
