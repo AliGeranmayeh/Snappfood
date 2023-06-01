@@ -1,9 +1,13 @@
 @extends('layouts.admin-nav')
 
 @section('content')
+
+@if (count($comments) == 0 )
+        <h2 class="text-center my-5">No comment is available...</h2>
+    @endif
 <div class="container my-5">
     @foreach ($comments as $comment)
-        <article class="rounded my-3 p-3" style="background-color: white;width:70%;margin:auto">
+        <article class="rounded my-3 p-3" style="background-color: white;width:50%;margin:auto">
             <div class="text">
                 <h5><b>User: {{ $comment['user']->name }}</b></h5>
                 <div>
