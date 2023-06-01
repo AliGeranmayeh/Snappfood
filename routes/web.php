@@ -15,10 +15,7 @@ use App\Http\Controllers\Admin\RestaurantsController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->group(function () {
-            Route::get('/', function () {
-                    return view('admin.admin-panel');
-                }
-                );
+                Route::get('/', [App\Http\Controllers\Admin\HomeController::class , 'index'])->name('admin-main-page');
                 Route::get('/users', [App\Http\Controllers\Admin\UsersController::class , 'index'])->name('users');
                 Route::get('/user/{id}', [App\Http\Controllers\Admin\UserController::class , 'index'])->name('user');
                 Route::get('/food_categories', [App\Http\Controllers\Admin\FoodCategoryController::class , 'index'])->name('food-category');
