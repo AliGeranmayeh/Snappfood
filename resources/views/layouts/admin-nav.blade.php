@@ -48,7 +48,8 @@
             color: white;
             text-align: center;
             line-height: 70px;
-            background: #00695c;
+            background: ;
+            background: linear-gradient(to top, #00897b, #00756a, #00695c);
         }
 
         .sidebar ul a {
