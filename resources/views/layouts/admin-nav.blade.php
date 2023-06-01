@@ -94,7 +94,7 @@
             <ul>
                 <li><a href="{{ route('users') }}"> <img src="https://www.svgrepo.com/download/3278/users.svg"
                             alt="users-logo" style="width:20px;height:20px"> <span class="mx-1">Users</span></a></li>
-                <li><a href="#"> <img
+                <li><a href="{{route('show-restaurant-page')}}"> <img
                             src="https://icons.veryicon.com/png/o/miscellaneous/imperial-reservation/food-fair-western-food.png"
                             alt="restaurants-logo" style="width:20px;height:20px"> <span
                             class="mx-1">Restaurants</span></a></li>

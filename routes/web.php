@@ -35,7 +35,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
                 Route::post('/banners', [BannerController::class , 'post'])->name('create-or-update-banners');
                 #phase4👆👆
                 #review-phase👇👇
-                Route::get('/restaurants', [RestaurantsController::class , 'filterComments'])->name('show-restaurant-page');
+                Route::get('/restaurants', [RestaurantsController::class , 'index'])->name('show-restaurant-page');
                 #review-phase👆👆
             }
             );

@@ -25,20 +25,23 @@
 @endsection
 
 @section('content')
+    @if (count($restaurants) == 0)
+        <h2 class="text-center my-5">No Restaurant is available...</h2>
+    @endif
     <div class="container grid">
-        @foreach ($users as $user)
-            @if ($user->name != 'admin')
-                <article class="rounded">
-                    <div class="text">
-                        <h3 style="margin:10% 0"><b>{{ $user->name }}</b></h3>
-                        <div>
-                            <p>Email: {{ $user->email }}</p>
-                            <p>Phone Number: 0{{ $user->phone_number }}</p>
-                        </div>
+
+        @foreach ($restaurants as $restaurant)
+            <article class="rounded">
+                <div class="text">
+                    <h3 style="margin:10% 0"><b>{{ $restaurant->name }}</b></h3>
+                    <div>
+                        <p>Owner: {{ $restaurant->user->name }}</p>
+                        <p>Phone Number: {{ $restaurant->phone }}</p>
+                        <p>Account: {{ $restaurant->account }}</p>
+                        <p>Address: {{ $restaurant->address }}</p>
                     </div>
-                </article>
-                
-            @endif
+                </div>
+            </article>
         @endforeach
     </div>
     </div>
