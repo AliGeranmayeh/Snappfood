@@ -6,40 +6,6 @@
                 <strong class="d-flex justify-content-center">{{ $error }}</strong>
             </div>
         @endif
-        <div class="page rounded-3 bg-white p-3 "
-            style="margin:auto; width: 50%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-            <h3 class="text-center">Existed Banners</h3>
-            <div class="my-5">
-                @if (count($banners) == 0)
-                    <h4 class="text-center">There is no banner...</h4>
-                @endif
-                <table class="table">
-                    <tbody>
-                        @foreach ($banners as $key => $banner)
-                            <tr>
-                                <th scope="row">
-                                    @php $row_number = $key; @endphp
-                                    {{ $row_number++ }}
-                                </th>
-                                <td>{{ $banner->text }}</td>
-                                <td class="d-flex flex-row-reverse">
-                                    <form action="" method="post" class="d-inline p-2">
-                                        @csrf
-                                        <button name="delete" value="{{$banner->id }}" type="submit"
-                                            class="btn btn-danger">Delete</button>
-                                    </form>
-                                    <form action="" method="post" class="d-inline p-2">
-                                        @csrf
-                                        <button name="edit" value="{{ $banner->id }}" type="submit"
-                                            class="btn btn-warning">Edit</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
         @if ($text != null)
             <div class="page rounded-3 bg-white py-3 px-4 my-5"
                 style="margin:auto; width: 50%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
@@ -73,5 +39,40 @@
                 </div>
             </div>
         @endif
+        <div class="page rounded-3 bg-white p-3 "
+            style="margin:auto; width: 50%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+            <h3 class="text-center">Existed Banners</h3>
+            <div class="my-5">
+                @if (count($banners) == 0)
+                    <h4 class="text-center">There is no banner...</h4>
+                @endif
+                <table class="table">
+                    <tbody>
+                        @foreach ($banners as $key => $banner)
+                            <tr>
+                                <th scope="row">
+                                    @php $row_number = $key; @endphp
+                                    {{ ++$row_number }}
+                                </th>
+                                <td>{{ $banner->text }}</td>
+                                <td class="d-flex flex-row-reverse">
+                                    <form action="" method="post" class="d-inline p-2">
+                                        @csrf
+                                        <button name="delete" value="{{$banner->id }}" type="submit"
+                                            class="btn btn-danger">Delete</button>
+                                    </form>
+                                    <form action="" method="post" class="d-inline p-2">
+                                        @csrf
+                                        <button name="edit" value="{{ $banner->id }}" type="submit"
+                                            class="btn btn-warning">Edit</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
     </div>
 @endsection
