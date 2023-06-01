@@ -15,15 +15,15 @@
 @section('content')
     
     @if (count($comments) == 0)
-        <h2 class="text-center text-white">No not  confirmed comments is available...</h2>
+        <h2 class="text-center my-5">No not  confirmed comments is available...</h2>
     @endif
-    <div class="container grid my-5">
+    <div class="container grid my-5  d-flex justify-content-center">
         @foreach ($comments as $comment)
-            <article class="rounded my-3" style="background-color: white">
-                <div  class="text">
-                    <h5 ><b>User: {{$comment['user']}}</b></h5>
+            <article class="rounded my-3 w-50 p-2" style="background-color: white">
+                <div  class="mx-2">
+                    <h5 class="mt-2 "><b>User: {{$comment['user']}}</b></h5>
                     <div>
-                    <p style="padding:0 3%">{{$comment['comment']}}</p>
+                    <p style="padding:0 3%;font-size: 16px" >{{$comment['comment']}}</p>
                      <form action="" method="post" class="d-flex justify-content-center">
                             @csrf
                             <button name="delete" type="button" class="btn btn-danger m-1  w-25 "><a class="text-white" style="text-decoration: none" href="check_comments/delete/{{$comment['id']}}">Delete</a></button>
