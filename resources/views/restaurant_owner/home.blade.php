@@ -46,13 +46,13 @@
         <div class="row row-cols-4 gap-3">
             @foreach ($foods as $food)
                 @if ($food->discount_id == $food_party_id)
-                    <article class="rounded  mb-2 bg-secondary text-white">
+                    <article class="rounded  mb-2 bg-secondary text-white  p-0">
                     @else
                         <article class="rounded p-0" style="background-color: white">
                 @endif
 
                 <img class="rounded-top" src="{{ asset($food->image) }}" alt="user-photo"
-                    style="box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;width:100%">
+                    style="width:100%">
                 <div class="p-3">
                     <h3 style="margin:10% 0"><b>Food: {{ $food->name }}</b></h3>
                     <div>
