@@ -16,7 +16,7 @@ class EditRestaurantProfileController extends Controller
     public function index()
     {
         if (!Gate::allows('complete-restaurant-profile')) {
-            abort(403);
+            return redirect()->route('restaurant-profile');
         }
         $restaurant_categories = RestaurantCategory::all();
         $restaurant = User::find(Auth::user()->id)->restaurant;  

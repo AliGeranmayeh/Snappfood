@@ -48,7 +48,7 @@
 
             </div>
         @else
-            <div class="page rounded-3 bg-white py-3 px-5 my-5"
+            <div class="page rounded-3 bg-white pt-4 pb-1 px-5 "
                 style="margin:auto; width: 80%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                 <h3 class="text-center">Add Restaurant Information</h3>
                 <div class="my-5">

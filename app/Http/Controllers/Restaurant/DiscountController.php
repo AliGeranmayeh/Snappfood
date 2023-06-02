@@ -15,7 +15,7 @@ class DiscountController extends Controller
     public function index()
     {
         if (!Gate::allows('complete-restaurant-profile')) {
-            abort(403);
+            return redirect()->route('restaurant-profile');
         }
         $admin_user_id = User::where('role','admin')->first()->id;
         

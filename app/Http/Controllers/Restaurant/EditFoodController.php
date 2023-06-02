@@ -18,7 +18,7 @@ class EditFoodController extends Controller
     public function index($id)
     {
         if (!Gate::allows('complete-restaurant-profile')) {
-            abort(403);
+            return redirect()->route('restaurant-profile');
         }
         $food = Food::find($id);
         $food_categories = FoodCategory::all();

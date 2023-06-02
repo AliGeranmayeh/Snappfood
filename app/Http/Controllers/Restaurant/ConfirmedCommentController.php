@@ -9,12 +9,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\CartItem;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Gate;
 
 class ConfirmedCommentController extends Controller
 {
     public function index(Request $request)
     {
-        // dd();
+        if (!Gate::allows('complete-restaurant-profile')) {
+            return redirect()->route('restaurant-profile');
+        }
         if ($request->has('foods_filter')) {
             return $this->filterComments($request['foods_filter']);
         }

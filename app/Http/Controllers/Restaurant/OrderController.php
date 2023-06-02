@@ -11,11 +11,15 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Cart;
 use App\Models\User;
 use App\Mail\SendMail;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
     public function index()
     { 
+        if (!Gate::allows('complete-restaurant-profile')) {
+            return redirect()->route('restaurant-profile');
+        }
         // dd(Order::where('restaurant_id',Auth::user()->restaurant->id)->wherenot('order_status', 'deliverd')->get());
         $total_income = 0;
         $orders =  Order::where('restaurant_id',Auth::user()->restaurant->id)->whereNot('order_status', 'delivered')->get();
