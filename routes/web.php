@@ -72,3 +72,10 @@ Route::middleware(['auth', 'owner'])->group(function () {
     Route::get('/comments/filter/filter={filter_id}', [ConfirmedCommentController::class , 'filterComments'])->name('filter-comments');
 #phase4👆👆
 });
+
+ #review-phase👇👇
+ Route::fallback(function () {
+    return view('not_found');
+});
+ #review-phase👆👆
+
