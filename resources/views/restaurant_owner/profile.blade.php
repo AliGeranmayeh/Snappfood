@@ -51,7 +51,8 @@
             <div class="page rounded-3 bg-white pt-4 pb-1 px-5 "
                 style="margin:auto; width: 80%;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                 <h3 class="text-center">Add Restaurant Information</h3>
-                <div class="my-5">
+                <h5 class="text-center text-danger">You need to complete this page in order to access to all featurs</h5>
+                <div class="my-4">
                     <form method="post">
                         @csrf
                         <div class="mb-3">
