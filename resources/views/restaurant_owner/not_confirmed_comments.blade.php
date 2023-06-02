@@ -15,7 +15,7 @@
 @section('content')
     
     @if (count($comments) == 0)
-        <h2 class="text-center my-5">No not  confirmed comments is available...</h2>
+        <h2 class="text-center my-5">No pending comments is available...</h2>
     @endif
     <div class="container grid my-5  d-flex justify-content-center">
         @foreach ($comments as $comment)
