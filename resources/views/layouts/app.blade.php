@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-md navbar-dark shadow-sm " style="width: 100%; position: fixed; background: linear-gradient(to right, #5ba4cf ,#055a8c, #055a8c,  #242444) !important; z-index: 9; margin-bottom: 2%">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" style="margin: auto">
-                    <img src="https://svgsilh.com/svg/2085075.svg" alt="logo" style="width:50px;height:50px">
+                    <img src="https://img2.annthegran.com/printart/xlarge/fsl_studio/pgstd1039.webp" alt="logo" style="width:50px;height:50px">
                     <span class="mx-2">Snapp Food</span>
                 </a>
             </div>
