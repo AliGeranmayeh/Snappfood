@@ -16,7 +16,7 @@ class CartController extends Controller
     {
         $carts = [];
         foreach (Auth::user()->carts as $key=> $cart) {
-            if ($cart->payment_status==0) {
+            if ($cart->payment_status==PaymentStatusEnum::UNPAID->value) {
                 $carts[$key]['cart_info'][] = $cart;
                 $carts[$key]['cart_foods'][] = CartItem::where('cart_id',$cart->id)->get();
             }
@@ -44,7 +44,7 @@ class CartController extends Controller
 
         if (count(Auth::user()->carts) != 0) {
             foreach (Auth::user()->carts as $cart) {
-                if ($food->restaurant->id == $cart->restaurant_id && $cart->payment_status == 0) {
+                if ($food->restaurant->id == $cart->restaurant_id && $cart->payment_status == PaymentStatusEnum::UNPAID->value) {
                     $food_in_cart = CartItem::where('cart_id', $cart->id)->where('food_id', $food->id)->first();
                     ($food_in_cart) ? $food_price = $this->updateFoodInCart($food_in_cart, (float)$request->count) : $food_price = $this->addFoodIncart($food, $cart->id,(float) $request->count);
                     Cart::where('id', $cart->id)->update(['total_price' => $cart->total_price + $food_price]);
@@ -68,7 +68,7 @@ class CartController extends Controller
     public function update(AddToCartRequest $request)
     {
         $user_active_carts_id = [];
-        $user_active_carts = Cart::where('user_id',Auth::user()->id)->where('payment_status',0)->get();
+        $user_active_carts = Cart::where('user_id',Auth::user()->id)->where('payment_status',PaymentStatusEnum::UNPAID->value)->get();
         if (count($user_active_carts)!=0) {
             foreach ($user_active_carts as $user_active_cart) {
                 $user_active_carts_id[]= $user_active_cart->id;
@@ -98,7 +98,7 @@ class CartController extends Controller
 
     public function getCartInfo($cart_id)
     {
-        if (!Cart::where('user_id',Auth::user()->id)->where('id',$cart_id)->where('payment_status',0)->first()) {
+        if (!Cart::where('user_id',Auth::user()->id)->where('id',$cart_id)->where('payment_status',PaymentStatusEnum::UNPAID->value)->first()) {
             return response()->json(['error' => 'You do not have a active cart with this information'], 404);
         }
         $cart = Cart::find($cart_id);
@@ -114,7 +114,7 @@ class CartController extends Controller
 
     public function peyForCart($cart_id)
     {
-        if (!Cart::where('user_id',Auth::user()->id)->where('id',$cart_id)->where('payment_status',0)->first()) {
+        if (!Cart::where('user_id',Auth::user()->id)->where('id',$cart_id)->where('payment_status',PaymentStatusEnum::UNPAID->value)->first()) {
             return response()->json(['error' => 'You do not have a active cart with this information'], 404);
         }
         $cart = Cart::find($cart_id);
@@ -123,7 +123,7 @@ class CartController extends Controller
             'cart_id' => $cart_id,
             'order_status' => 'checking'
         ]);
-        Cart::where('id',$cart_id)->update(['payment_status'=>1]);
+        Cart::where('id',$cart_id)->update(['payment_status'=>PaymentStatusEnum::PAID->value]);
 
         return response()->json([
             'message' => 'You payed for your cart'

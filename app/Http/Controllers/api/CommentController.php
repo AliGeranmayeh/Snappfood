@@ -30,7 +30,7 @@ class CommentController extends Controller
     {
         $cart_id = 0;
         $is_user_order_flag = false;
-        $user_orders = Auth::user()->carts->where('payment_status', 1);
+        $user_orders = Auth::user()->carts->where('payment_status', PaymentStatusEnum::PAID->value);
         foreach ($user_orders as $key => $user_order) {
             $order = Order::where('cart_id', $user_order->id)->first();
             if ($order->id == $order_id) {
