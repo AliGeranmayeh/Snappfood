@@ -96,21 +96,21 @@
             <ul>
                 <li><a href="{{ route('users') }}"> <img src="https://www.svgrepo.com/download/3278/users.svg"
                             alt="users-logo" style="width:20px;height:20px"> <span class="mx-1">Users</span></a></li>
-                <li><a href="{{ route('show-restaurant-page') }}"> <img
+                <li><a href="{{ route('admin.restaurants') }}"> <img
                             src="https://icons.veryicon.com/png/o/miscellaneous/imperial-reservation/food-fair-western-food.png"
                             alt="restaurants-logo" style="width:20px;height:20px"> <span
                             class="mx-1">Restaurants</span></a></li>
-                <li><a href="{{ route('restaurant-category') }}"> <img src="https://svgsilh.com/svg/303194.svg"
+                <li><a href="{{ route('restaurants.category') }}"> <img src="https://svgsilh.com/svg/303194.svg"
                             alt="restaurant-categories-logo" style="width:20px;height:20px"> <span
                             class="mx-1">Restaurant Categories</span></a></li>
-                <li><a href="{{ route('food-category') }}"> <img
+                <li><a href="{{ route('foods.category') }}"> <img
                             src="https://cdn.iconscout.com/icon/premium/png-256-thumb/favorite-food-3144240-2616918.png"
                             alt="food-categorie-logo" style="width:20px;height:20px"> <span class="mx-1">Food
                             Categories</span></a></li>
-                <li><a href="{{ route('get-discount') }}"> <img
+                <li><a href="{{ route('discounts.get') }}"> <img
                             src="https://cdn-icons-png.flaticon.com/512/600/600260.png" alt="discounts-logo"
                             style="width:20px;height:20px"> <span class="mx-1">Discounts</span></a></li>
-                <li><a href="{{ route('get-adminside-comments') }}"> <img
+                <li><a href="{{ route('comments.admin') }}"> <img
                             src="https://cdn.onlinewebfonts.com/svg/img_395479.png" alt="comments-logo"
                             style="width:20px;height:20px"> <span class="mx-1">Comments</span></a></li>
                 <li><a href="{{ route('logout') }}"

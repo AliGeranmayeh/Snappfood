@@ -61,7 +61,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-center">
-                            <a href="{{ route('show-restaurant-page') }}" class="btn btn-primary w-25 ">More</a>
+                            <a href="{{ route('admin.restaurants') }}" class="btn btn-primary w-25 ">More</a>
                         </div>
                     @endif
                 </div>
@@ -93,7 +93,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-center">
-                            <a href="{{ route('get-discount') }}" class="btn btn-primary w-50 ">More</a>
+                            <a href="{{ route('discounts.get') }}" class="btn btn-primary w-50 ">More</a>
                         </div>
                     @endif
                 </div>
@@ -121,7 +121,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-center">
-                            <a href="{{ route('food-category') }}" class="btn btn-primary w-50 ">More</a>
+                            <a href="{{ route('foods.category') }}" class="btn btn-primary w-50 ">More</a>
                         </div>
                     @endif
                 </div>
@@ -149,7 +149,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-center">
-                            <a href="{{ route('restaurant-category') }}" class="btn btn-primary w-50 ">More</a>
+                            <a href="{{ route('restaurants.category') }}" class="btn btn-primary w-50 ">More</a>
                         </div>
                     @endif
                 </div>

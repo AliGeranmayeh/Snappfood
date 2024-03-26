@@ -35,7 +35,7 @@ class LoginController extends Controller
             return redirect('/admin');
         } else {
             if (!Gate::allows('complete-restaurant-profile')) {
-                return redirect()->route('restaurant-profile');
+                return redirect()->route('restaurant.profile');
             }
             return redirect('/');
         }

@@ -15,7 +15,7 @@ class CommentController extends Controller
     public function index()
     {
         if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant-profile');
+            return redirect()->route('restaurant.profile');
         }
         $comments = [];
         $db_comments = Auth::user()->restaurant->comments;
@@ -37,12 +37,12 @@ class CommentController extends Controller
     public function deleteComment($comment_id)
     {
         Comment::where('id',$comment_id)->delete();
-        return redirect()->route('get-not-confirmed-comments');
+        return redirect()->route('comments.not.confirmed');
     }
 
     public function confirmComment($comment_id)
     {
         Comment::where('id',$comment_id)->update(['status' => 1]);
-        return redirect()->route('get-not-confirmed-comments');
+        return redirect()->route('comments.not.confirmed');
     }
 }

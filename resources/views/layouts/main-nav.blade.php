@@ -96,31 +96,31 @@
             </header>
             <ul>
                 @can('complete-restaurant-profile')
-                    <li><a href="{{ route('home') }}"> <img
+                    <li><a href="{{ route('owner.home') }}"> <img
                                 src="https://icons-for-free.com/iconfiles/png/512/default+home+house+main+page+icon-1320186211000235547.png"
                                 alt="home-logo" style="width:20px;height:20px"> <span class="mx-1">Home</span></a></li>
-                    <li><a href="{{ route('show-order-page') }}"> <img
+                    <li><a href="{{ route('order.page') }}"> <img
                                 src="https://static.thenounproject.com/png/832921-200.png" alt="orders-logo"
                                 style="width:20px;height:20px"> <span class="mx-1">Orders</span></a></li>
-                    <li><a href="{{ route('get-add-food-page') }}"> <img
+                    <li><a href="{{ route('food.add.page') }}"> <img
                                 src="https://icons.veryicon.com/png/o/miscellaneous/imperial-reservation/food-fair-western-food.png"
                                 alt="foods-logo" style="width:20px;height:20px"> <span class="mx-1">New Food</span></a>
                     </li>
 
-                    <li><a href="{{ route('get-owner-discount') }}"> <img
+                    <li><a href="{{ route('owner.discount.get') }}"> <img
                                 src="https://cdn-icons-png.flaticon.com/512/600/600260.png" alt="discounts-logo"
                                 style="width:20px;height:20px"> <span class="mx-1">Discounts</span></a></li>
                 @endcan
-                <li><a href="{{ route('restaurant-profile') }}"> <img
+                <li><a href="{{ route('restaurant.profile') }}"> <img
                             src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png"
                             alt="profile-logo" style="width:21px;height:21px;"> <span class="mx-1">Restaurant
                             Profile</span></a>
                 </li>
                 @can('complete-restaurant-profile')
-                    <li><a href="{{ route('get-not-confirmed-comments') }}"> <img
+                    <li><a href="{{ route('comments.not.confirmed') }}"> <img
                                 src="https://static.thenounproject.com/png/2864219-200.png" alt="pending-comments-logo"
                                 style="width:25px;height:25px"> <span class="mx-1">Pending Comments</span></a></li>
-                    <li><a href="{{ route('get-confirmed-comments') }}"> <img
+                    <li><a href="{{ route('comments.confirmed.page') }}"> <img
                                 src="https://cdn.onlinewebfonts.com/svg/img_395479.png" alt="comments-logo"
                                 style="width:18px;height:18px"> <span class="mx-1">Comments</span></a></li>
                 @endcan

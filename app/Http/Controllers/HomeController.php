@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function index()
     {
         if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant-profile');
+            return redirect()->route('restaurant.profile');
         }
         $food_categories = FoodCategory::all();
         $restaurant_id = User::find(Auth::user()->id)->restaurant->id;
@@ -75,7 +75,7 @@ class HomeController extends Controller
         }
         Food::destroy($data->delete);
 
-        return redirect()->route('home');
+        return redirect()->route('owner.home');
     }
 
     public function searchFood($data)
@@ -110,7 +110,7 @@ class HomeController extends Controller
             ]);
         }
         else{
-            return redirect()->route('home');
+            return redirect()->route('owner.home');
         }
         
     }

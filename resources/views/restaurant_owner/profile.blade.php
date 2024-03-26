@@ -40,7 +40,7 @@
                         <strong>Restaurant Bank Account:</strong>&nbsp;{{$restaurant->account}}
                     </p>
                     <div  style="display: flex;justify-content: center;">
-                        <a style="width: 90%" href="{{route('edit-restaurant-profile')}}" class="btn btn-primary"> Update Your
+                        <a style="width: 90%" href="{{route('restaurant.profile.edit.get')}}" class="btn btn-primary"> Update Your
                             Restaurant Profile</a>
                     </div>
 

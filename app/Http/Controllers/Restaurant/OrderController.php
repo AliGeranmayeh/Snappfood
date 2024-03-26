@@ -18,7 +18,7 @@ class OrderController extends Controller
     public function index()
     { 
         if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant-profile');
+            return redirect()->route('restaurant.profile');
         }
         // dd(Order::where('restaurant_id',Auth::user()->restaurant->id)->wherenot('order_status', 'deliverd')->get());
         $total_income = 0;
@@ -44,7 +44,7 @@ class OrderController extends Controller
         if ($request->has('change_status')) {
             return $this->changeOrderStatus($request->order_statuse,$request->change_status);
         }
-        return redirect()->route('show-order-page');
+        return redirect()->route('order.page');
     }
 
     public function filterOrderStatus($order_status = 0,$order_time = 0)
@@ -55,7 +55,7 @@ class OrderController extends Controller
             $total_income += $order->cart->total_price;
         }
         if ($order_status != '0' && $order_time != '0') {
-            return redirect()->route('show-order-page');
+            return redirect()->route('order.page');
         }
         elseif ($order_status != '0') {
             
@@ -80,7 +80,7 @@ class OrderController extends Controller
                 'orders' => $orders
             ]);
         }
-        return redirect()->route('show-order-page');
+        return redirect()->route('order.page');
         
     }
     public function changeOrderStatus($order_status , $order_id)
@@ -97,7 +97,7 @@ class OrderController extends Controller
              Mail::to($ordered_email)->send(new SendMail($mail_data));
             // Auth::user()->restaurant->orders->where('id',$order_id)->update(['order_status'=>$order_status]);   
         }
-        return redirect()->route('show-order-page');
+        return redirect()->route('order.page');
     }
 
 }

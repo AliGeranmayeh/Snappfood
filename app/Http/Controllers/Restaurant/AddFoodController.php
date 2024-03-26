@@ -18,7 +18,7 @@ class AddFoodController extends Controller
     public function index()
     {
         if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant-profile');
+            return redirect()->route('restaurant.profile');
         }
         $food_categories = FoodCategory::all();
         $admin_user_id = User::where('role','admin')->first()->id;
@@ -66,6 +66,6 @@ class AddFoodController extends Controller
         //     'type_id' => $request->type,
         //     'restaurant_id' => Restaurant::where('user_id',Auth::user()->id)->first()->id
         // ]);
-        return redirect()->route('home');   
+        return redirect()->route('owner.home');   
     }
 }

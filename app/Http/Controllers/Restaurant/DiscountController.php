@@ -15,7 +15,7 @@ class DiscountController extends Controller
     public function index()
     {
         if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant-profile');
+            return redirect()->route('restaurant.profile');
         }
         $admin_user_id = User::where('role','admin')->first()->id;
         
@@ -36,7 +36,7 @@ class DiscountController extends Controller
             return $this->createDiscount($request);
         }
 
-        return redirect()->route('get-owner-discount');
+        return redirect()->route('owner.discount.get');
     }
 
     
@@ -60,7 +60,7 @@ class DiscountController extends Controller
                 'percentage' => $data->percentage,
                 'user_id' => Auth::user()->id
             ]);
-            return redirect()->route('get-owner-discount');
+            return redirect()->route('owner.discount.get');
         }
         $admin_user_id = User::where('role','admin')->first()->id;
         $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();

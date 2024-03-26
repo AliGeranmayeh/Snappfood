@@ -29,7 +29,7 @@ class DiscountController extends Controller
             return $this->createDiscount($request);
         }
 
-        return redirect()->route('get-discount');
+        return redirect()->route('discounts.get');
     }
 
     
@@ -52,7 +52,7 @@ class DiscountController extends Controller
                 'percentage' => $data->percentage,
                 'user_id' => Auth::user()->id
             ]);
-            return redirect()->route('get-discount');
+            return redirect()->route('discounts.get');
         }
         $discounts = Discount::all();
         return view('admin.discount' , [

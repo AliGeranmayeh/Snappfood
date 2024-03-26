@@ -16,7 +16,7 @@ class EditRestaurantProfileController extends Controller
     public function index()
     {
         if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant-profile');
+            return redirect()->route('restaurant.profile');
         }
         $restaurant_categories = RestaurantCategory::all();
         $restaurant = User::find(Auth::user()->id)->restaurant;  
@@ -41,6 +41,6 @@ class EditRestaurantProfileController extends Controller
                 'address'=> $request->address,
         ]);
 
-        return redirect()->route('restaurant-profile');
+        return redirect()->route('restaurant.profile');
     }
 }

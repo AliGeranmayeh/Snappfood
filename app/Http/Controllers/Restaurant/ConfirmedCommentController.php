@@ -16,7 +16,7 @@ class ConfirmedCommentController extends Controller
     public function index(Request $request)
     {
         if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant-profile');
+            return redirect()->route('restaurant-.rofile');
         }
         if ($request->has('foods_filter')) {
             return $this->filterComments($request['foods_filter']);
@@ -54,7 +54,7 @@ class ConfirmedCommentController extends Controller
     public function deleteRequest($comment_id)
     {
         Comment::where('id', $comment_id)->update(['status' => 2]);
-        return redirect()->route('get-confirmed-comments');
+        return redirect()->route('comments.confirmed.page');
     }
 
     public function selectComment($comment_id)
@@ -106,13 +106,13 @@ class ConfirmedCommentController extends Controller
                 'status' => 1 //confirmed
             ]);
         }
-        return redirect()->route('get-confirmed-comments');
+        return redirect()->route('comments.confirmed.page');
     }
 
     public function filterComments($filter_id)
     {
         if ($filter_id ==0) {
-            return redirect()->route('get-confirmed-comments');
+            return redirect()->route('comments.confirmed.page');
         }
 
         $confirmed_comments = [];

@@ -62,11 +62,11 @@
                                     @if ($replied_comment =='' || $comment['id'] != $replied_comment->id)
                                     <a
                                         class="text-white m-1  w-25" style="text-decoration: none" 
-                                        href="{{ route('request-to-delete-confirmed-comment', ['comment_id' => $comment['id']]) }}"><button name="delete" type="button" class="btn btn-danger  w-100">Delete
+                                        href="{{ route('comments.delete.request', ['comment_id' => $comment['id']]) }}"><button name="delete" type="button" class="btn btn-danger  w-100">Delete
                                         Request</button></a>
                                     @endif
                                     <a class="text-white m-1 w-25" style="text-decoration: none"
-                                            href="{{ route('select-comment-reply', ['comment_id' => $comment['id']]) }}">
+                                            href="{{ route('comments.confirmed.reply.select', ['comment_id' => $comment['id']]) }}">
                                     <button name="reply" type="button" class="btn btn-info w-100">Reply</button></a>
                                 </div>
                             @endif

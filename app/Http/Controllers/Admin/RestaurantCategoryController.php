@@ -34,7 +34,7 @@ class RestaurantCategoryController extends Controller
             return $this->createRestaurantCategory($request);
         }
 
-        return redirect()->route('restaurant-category');
+        return redirect()->route('restaurants.category');
     }
 
     public function updateRestaurantCategory($data)
