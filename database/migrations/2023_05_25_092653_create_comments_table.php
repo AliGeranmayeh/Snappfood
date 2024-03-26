@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('cart_id')->constrained('carts', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->text('comment');
-            $table->bigInteger('parent_id')->nullable();
+            $table->integer('parent_id')->nullable()->unsigned();
             $table->enum('status',['confirm_request' , 'confirmed' , 'delete_request'])->default(CommentStatusEnum::CONFIRM_REQUEST->value);
             $table->timestamps();
             $table->softDeletes();

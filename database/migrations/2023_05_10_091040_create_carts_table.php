@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('restaurant_id')->constrained('restaurants', 'id')->onUpdate('cascade')->onDelete('cascade');
-            $table->bigInteger('total_price');
+            $table->integer('total_price')->unsigned();
             $table->boolean('payment_status')->default(0);
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('discount')->default(0);
             $table->string('image')->nullable();
             $table->text('materials')->nullable();
-            $table->bigInteger('price');
+            $table->integer('price')->unsigned();
             $table->string('name');
             $table->timestamps();
         });

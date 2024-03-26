@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id')->constrained('carts', 'id')->onUpdate('cascade')->onDelete('cascade');
-            $table->bigInteger("food_id");
+            $table->integer("food_id")->unsigned();
             $table->string('food_name');
-            $table->bigInteger('food_price');
-            $table->bigInteger('food_discount');
-            $table->bigInteger('food_count');
+            $table->integer('food_price')->unsigned();
+            $table->tinyInteger('food_discount')->unsigned();
+            $table->tinyInteger('food_count')->unsigned();
             $table->timestamps();
         });
     }
