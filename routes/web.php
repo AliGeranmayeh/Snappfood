@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Restaurant\OrderController;
 use App\Http\Controllers\Restaurant\CommentController;
 use App\Http\Controllers\Restaurant\ConfirmedCommentController;
-use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\RestaurantsController;
 
 
@@ -28,8 +27,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
                 Route::get('/comments', [\App\Http\Controllers\Admin\CommentController::class , 'index'])->name('get-adminside-comments');
                 Route::get('/comments/confirm_delete/{comment_id}', [\App\Http\Controllers\Admin\CommentController::class , 'confirmDelete'])->name('confirm-delete-comment');
                 Route::get('/comments/decline_delete/{comment_id}', [\App\Http\Controllers\Admin\CommentController::class , 'declineDelete'])->name('decline-delete-comment');
-                Route::get('/banners', [BannerController::class , 'index'])->name('get-banners');
-                Route::post('/banners', [BannerController::class , 'post'])->name('create-or-update-banners');
                 #phase4👆👆
                 #review-phase👇👇
                 Route::get('/restaurants', [RestaurantsController::class , 'index'])->name('show-restaurant-page');

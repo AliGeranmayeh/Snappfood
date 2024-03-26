@@ -88,31 +88,31 @@
         <nav class="sidebar">
             <header>
                 <a class="navbar-brand" href="{{ url('/admin') }}">
-                    <img src="https://img2.annthegran.com/printart/xlarge/fsl_studio/pgstd1039.webp" alt="logo" style="width:50px;height:50px">
+                    <img src="https://img2.annthegran.com/printart/xlarge/fsl_studio/pgstd1039.webp" alt="logo"
+                        style="width:50px;height:50px">
                     <span class="mx-2">Snapp Food</span>
                 </a>
             </header>
             <ul>
                 <li><a href="{{ route('users') }}"> <img src="https://www.svgrepo.com/download/3278/users.svg"
                             alt="users-logo" style="width:20px;height:20px"> <span class="mx-1">Users</span></a></li>
-                <li><a href="{{route('show-restaurant-page')}}"> <img
+                <li><a href="{{ route('show-restaurant-page') }}"> <img
                             src="https://icons.veryicon.com/png/o/miscellaneous/imperial-reservation/food-fair-western-food.png"
                             alt="restaurants-logo" style="width:20px;height:20px"> <span
                             class="mx-1">Restaurants</span></a></li>
-                <li><a href="{{route('restaurant-category')}}"> <img src="https://svgsilh.com/svg/303194.svg" alt="restaurant-categories-logo"
-                            style="width:20px;height:20px"> <span class="mx-1">Restaurant Categories</span></a></li>
-                <li><a href="{{route('food-category')}}"> <img
+                <li><a href="{{ route('restaurant-category') }}"> <img src="https://svgsilh.com/svg/303194.svg"
+                            alt="restaurant-categories-logo" style="width:20px;height:20px"> <span
+                            class="mx-1">Restaurant Categories</span></a></li>
+                <li><a href="{{ route('food-category') }}"> <img
                             src="https://cdn.iconscout.com/icon/premium/png-256-thumb/favorite-food-3144240-2616918.png"
                             alt="food-categorie-logo" style="width:20px;height:20px"> <span class="mx-1">Food
                             Categories</span></a></li>
-                <li><a href="{{route('get-discount')}}"> <img src="https://cdn-icons-png.flaticon.com/512/600/600260.png"
-                            alt="discounts-logo" style="width:20px;height:20px"> <span
-                            class="mx-1">Discounts</span></a></li>
-                <li><a href="{{route('get-adminside-comments')}}"> <img src="https://cdn.onlinewebfonts.com/svg/img_395479.png" alt="comments-logo"
+                <li><a href="{{ route('get-discount') }}"> <img
+                            src="https://cdn-icons-png.flaticon.com/512/600/600260.png" alt="discounts-logo"
+                            style="width:20px;height:20px"> <span class="mx-1">Discounts</span></a></li>
+                <li><a href="{{ route('get-adminside-comments') }}"> <img
+                            src="https://cdn.onlinewebfonts.com/svg/img_395479.png" alt="comments-logo"
                             style="width:20px;height:20px"> <span class="mx-1">Comments</span></a></li>
-                <li><a href="{{route('get-banners')}}"> <img src="https://static.thenounproject.com/png/4914083-200.png"
-                            alt="banner-logo" style="width:20px;height:20px;"> <span class="mx-1">Banners</span></a>
-                </li>
                 <li><a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
