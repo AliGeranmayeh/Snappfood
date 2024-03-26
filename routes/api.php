@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
-use App\Http\Controllers\api\NewController;
 use App\Http\Controllers\api\ShopperAddressController;
 use App\Http\Controllers\api\RestaurantController;
 use App\Http\Controllers\api\UserInfoController;
