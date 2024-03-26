@@ -6,6 +6,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Enums\UserRoleEnum;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
             return Auth::user()->restaurant  != null;
         });
         Gate::define('shopper-role' , function (){
-            return Auth::user()->role  == 'shopper';
+            return Auth::user()->role  == UserRoleEnum::SHOPPER->value;
         });
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DiscountRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use App\Enums\UserRoleEnum;
 
 class DiscountController extends Controller
 {
@@ -17,7 +18,7 @@ class DiscountController extends Controller
         if (!Gate::allows('complete-restaurant-profile')) {
             return redirect()->route('restaurant.profile');
         }
-        $admin_user_id = User::where('role','admin')->first()->id;
+        $admin_user_id = User::where('role',UserRoleEnum::ADMIN->value)->first()->id;
         
         $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
         return view('restaurant_owner.discount' , [
@@ -43,7 +44,7 @@ class DiscountController extends Controller
     public function deleteDiscount($data)
     {
         Discount::destroy($data->delete);
-        $admin_user_id = User::where('role','admin')->first()->id;
+        $admin_user_id = User::where('role',UserRoleEnum::ADMIN->value)->first()->id;
         $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
         return view('restaurant_owner.discount' , [
             'discounts' => $discounts,
@@ -62,7 +63,7 @@ class DiscountController extends Controller
             ]);
             return redirect()->route('owner.discount.get');
         }
-        $admin_user_id = User::where('role','admin')->first()->id;
+        $admin_user_id = User::where('role',UserRoleEnum::ADMIN->value)->first()->id;
         $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
         return view('restaurant_owner.discount' , [
             'discounts' => $discounts,

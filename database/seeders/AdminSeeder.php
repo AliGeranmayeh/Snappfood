@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Enums\UserRoleEnum;
 
 class UserSeeder extends Seeder
 {
@@ -22,7 +23,7 @@ class UserSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
                 'phone_number' => rand(10000000000, 99999999999),
-                'role' => 'admin',
+                'role' => UserRoleEnum::ADMIN->value,
                 'password' => Hash::make('admin'), // password
                 'remember_token' => Str::random(10),
             ]);

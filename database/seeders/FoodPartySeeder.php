@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Enums\UserRoleEnum;
 
 class FoodPartySeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class FoodPartySeeder extends Seeder
     {
         DB::table('discounts')->insert([
             'name'=> 'Food Party',
-            'user_id' => User::query()->whereRole('admin')->first()->id,
+            'user_id' => User::query()->whereRole(UserRoleEnum::ADMIN->value)->first()->id,
             'percentage' => '25'
         ]);
     }

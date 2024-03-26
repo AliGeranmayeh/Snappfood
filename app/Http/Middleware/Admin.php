@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\UserRoleEnum;
 
 class Admin
 {
@@ -16,7 +17,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() && Auth::user()->role =='admin') {
+        if (Auth::user() && Auth::user()->role == UserRoleEnum::ADMIN->value) {
             return $next($request);
         }
         return abort(403);

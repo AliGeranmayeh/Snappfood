@@ -12,6 +12,7 @@ use App\Models\Food;
 use App\Models\Restaurant;
 use App\Http\Requests\FoodRequest;
 use Illuminate\Support\Facades\Gate;
+use App\Enums\UserRoleEnum;
 
 class AddFoodController extends Controller
 {
@@ -21,7 +22,7 @@ class AddFoodController extends Controller
             return redirect()->route('restaurant.profile');
         }
         $food_categories = FoodCategory::all();
-        $admin_user_id = User::where('role','admin')->first()->id;
+        $admin_user_id = User::where('role',UserRoleEnum::ADMIN->value)->first()->id;
         $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
         return view('restaurant_owner.food',[
             'food_categories' => $food_categories,

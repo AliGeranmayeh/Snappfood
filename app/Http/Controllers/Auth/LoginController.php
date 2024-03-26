@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Enums\UserRoleEnum;
 
 class LoginController extends Controller
 {
@@ -31,7 +32,7 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     protected function authenticated(Request $request, $user) {
-        if ($user->role == 'admin') {
+        if ($user->role == UserRoleEnum::ADMIN->value) {
             return redirect('/admin');
         } else {
             if (!Gate::allows('complete-restaurant-profile')) {

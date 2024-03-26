@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Enums\UserRoleEnum;
 
 class RestaurantOwner
 {
@@ -17,7 +18,7 @@ class RestaurantOwner
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() && Auth::user()->role =='owner') {
+        if (Auth::user() && Auth::user()->role == UserRoleEnum::OWNER->value) {
                 return $next($request);   
         }
         return abort(403);

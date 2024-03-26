@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\FoodRequest;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Gate;
+use App\Enums\UserRoleEnum;
 
 class EditFoodController extends Controller
 {
@@ -22,7 +23,7 @@ class EditFoodController extends Controller
         }
         $food = Food::find($id);
         $food_categories = FoodCategory::all();
-        $admin_user_id = User::where('role','admin')->first()->id;
+        $admin_user_id = User::where('role',UserRoleEnum::ADMIN->value)->first()->id;
         $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
         return view('restaurant_owner.edit-food',[
             'food' =>$food,
