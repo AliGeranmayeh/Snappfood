@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('type_id')->constrained('restaurant_categories', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('address');
-            $table->bigInteger('phone');
-            $table->bigInteger('account');
+            $table->bigInteger('phone')->unsigned();
+            $table->bigInteger('account')->unsigned();
             $table->string('name');
             $table->timestamps();
         });
