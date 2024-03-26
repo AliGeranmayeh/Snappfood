@@ -12,6 +12,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Gate;
+use App\Enums\OrderStatusEnum;
 
 class OrderController extends Controller
 {
@@ -20,9 +21,8 @@ class OrderController extends Controller
         if (!Gate::allows('complete-restaurant-profile')) {
             return redirect()->route('restaurant.profile');
         }
-        // dd(Order::where('restaurant_id',Auth::user()->restaurant->id)->wherenot('order_status', 'deliverd')->get());
         $total_income = 0;
-        $orders =  Order::where('restaurant_id',Auth::user()->restaurant->id)->whereNot('order_status', 'delivered')->get();
+        $orders =  Order::where('restaurant_id',Auth::user()->restaurant->id)->whereNot('order_status', OrderStatusEnum::DELIVERED->value)->get();
         $all_orders =Order::where('restaurant_id',Auth::user()->restaurant->id)->get();
         // dd($all_orders[0]->cart->total_price);
         foreach ($all_orders as $order) {
@@ -95,7 +95,7 @@ class OrderController extends Controller
                 'content' => "your order status is $order_status" 
             ];
              Mail::to($ordered_email)->send(new SendMail($mail_data));
-            // Auth::user()->restaurant->orders->where('id',$order_id)->update(['order_status'=>$order_status]);   
+   
         }
         return redirect()->route('order.page');
     }

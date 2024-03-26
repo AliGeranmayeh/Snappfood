@@ -10,6 +10,7 @@ use App\Models\Food;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Order;
+use App\Enums\OrderStatusEnum;
 class CartController extends Controller
 {
     public function index()
@@ -121,7 +122,7 @@ class CartController extends Controller
         Order::create([
             'restaurant_id' => $cart->restaurant_id,
             'cart_id' => $cart_id,
-            'order_status' => 'checking'
+            'order_status' => OrderStatusEnum::CHECKING->value
         ]);
         Cart::where('id',$cart_id)->update(['payment_status'=>PaymentStatusEnum::PAID->value]);
 

@@ -16,6 +16,7 @@ use App\Models\Food;
 use App\Http\Resources\getCommentResource;
 use App\Models\Restaurant;
 use App\Enums\CommentStatusEnum;
+use App\Enums\OrderStatusEnum;
 
 class CommentController extends Controller
 {
@@ -45,7 +46,7 @@ class CommentController extends Controller
             ], 404);
         }
         $user_order = Order::find($order_id);
-        if ($user_order->order_status != 'delivered') {
+        if ($user_order->order_status != OrderStatusEnum::DELIVERED->value) {
             return response()->json([
                 'error' => "You can't comment until you receive your order"
             ], 404);
