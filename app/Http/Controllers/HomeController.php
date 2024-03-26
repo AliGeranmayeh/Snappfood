@@ -36,7 +36,7 @@ class HomeController extends Controller
         $food_categories = FoodCategory::all();
         $restaurant_id = User::find(Auth::user()->id)->restaurant->id;
         $foods = Food::where('restaurant_id', $restaurant_id)->get();
-        $food_party_id = Discount::where('name', 'Food Party')->first()->id;
+        $food_party_id = Discount::where('name', 'Food Party')->first()->id ?? [];
         return view('restaurant_owner.home', [
             'foods' => $foods,
             'food_party_id' => $food_party_id,
