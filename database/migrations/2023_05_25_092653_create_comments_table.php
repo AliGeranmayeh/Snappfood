@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->text('comment');
             $table->bigInteger('parent_id')->nullable();
-            $table->tinyInteger('status')->default(CommentStatusEnum::CONFIRM_REQUEST->value);
+            $table->enum('status',['confirm_request' , 'confirmed' , 'delete_request'])->default(CommentStatusEnum::CONFIRM_REQUEST->value);
             $table->timestamps();
             $table->softDeletes();
         });
