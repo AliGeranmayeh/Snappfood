@@ -88,7 +88,7 @@
         <nav class="sidebar">
             <header>
                 <a class="navbar-brand" href="{{ url('/admin') }}">
-                    <img src="https://svgsilh.com/svg/2085075.svg" alt="logo" style="width:50px;height:50px">
+                    <img src="https://img2.annthegran.com/printart/xlarge/fsl_studio/pgstd1039.webp" alt="logo" style="width:50px;height:50px">
                     <span class="mx-2">Snapp Food</span>
                 </a>
             </header>
