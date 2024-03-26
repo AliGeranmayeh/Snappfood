@@ -3,9 +3,9 @@
 namespace App\Enums;
 
 
-enum CommentStatusEnum: int
+enum CommentStatusEnum: string
 {
-    case CONFIRM_REQUEST = 0;
-    case CONFIRMED = 1;
-    case DELETE_REQUEST = 2;
+    case CONFIRM_REQUEST = 'confirm_request';
+    case CONFIRMED = 'confirm';
+    case DELETE_REQUEST = 'delete_request';
 }

@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-enum AddressStatusEnum:int {
-    case SET = 0;
+enum AddressStatusEnum: string {
+    case SET = 'set';
 
-    case UNSET = 1;
+    case UNSET = 'unset';
 }

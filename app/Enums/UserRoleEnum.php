@@ -3,12 +3,12 @@
 
 namespace App\Enums;
 
-enum UserRoleEnum :int
+enum UserRoleEnum :string
 {
-    case OWNER = 0;
+    case OWNER = 'owner';
 
-    case ADMIN = 1;
+    case ADMIN = 'admin';
 
-    case SHOPPER = 2;
+    case SHOPPER = 'shopper';
 
 }

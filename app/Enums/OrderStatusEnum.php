@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum OrderStatusEnum: int{
+enum OrderStatusEnum: string{
 
-    case CHECKING = 0;
-    case PREPARING = 1;
-    case SENDING = 2;
-    case DELIVERED = 3;
+    case CHECKING = 'checking';
+    case PREPARING = 'preparing';
+    case SENDING = 'sending';
+    case DELIVERED = 'delivered';
 
 }
