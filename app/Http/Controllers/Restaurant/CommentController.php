@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Gate;
+use App\Enums\CommentStatusEnum;
 
 class CommentController extends Controller
 {
@@ -42,7 +43,7 @@ class CommentController extends Controller
 
     public function confirmComment($comment_id)
     {
-        Comment::where('id',$comment_id)->update(['status' => 1]);
+        Comment::where('id',$comment_id)->update(['status' => CommentStatusEnum::CONFIRMED->value]);
         return redirect()->route('comments.not.confirmed');
     }
 }

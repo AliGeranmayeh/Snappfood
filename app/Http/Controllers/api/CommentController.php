@@ -15,6 +15,7 @@ use Illuminate\Foundation\Auth\User;
 use App\Models\Food;
 use App\Http\Resources\getCommentResource;
 use App\Models\Restaurant;
+use App\Enums\CommentStatusEnum;
 
 class CommentController extends Controller
 {
@@ -55,7 +56,7 @@ class CommentController extends Controller
             'order_id' => $order_id,
             'cart_id' => $cart_id,
             'comment' => $request->comment,
-            'status' => 0 //waitimg confirmation
+            'status' => CommentStatusEnum::CONFIRM_REQUEST->value
         ]);
 
 

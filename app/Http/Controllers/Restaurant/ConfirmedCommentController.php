@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\CartItem;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Gate;
+use App\Enums\CommentStatusEnum;
 
 class ConfirmedCommentController extends Controller
 {
@@ -26,7 +27,7 @@ class ConfirmedCommentController extends Controller
         $db_comments = Auth::user()->restaurant->comments;
 
         foreach ($db_comments as $db_comment) {
-            if ($db_comment->status == 1 && $db_comment->parent_id == null) {
+            if ($db_comment->status == CommentStatusEnum::CONFIRMED->value && $db_comment->parent_id == null) {
                 $confirmed_comments[] = [
                     'id' => $db_comment->id,
                     'user' => User::find($db_comment->user_id)->name,
@@ -34,7 +35,7 @@ class ConfirmedCommentController extends Controller
                     'reply' => Comment::where('restaurant_id', Auth::user()->restaurant->id)->where('parent_id', $db_comment->id)->first()
                 ];
             }
-            elseif ($db_comment->status == 2) {
+            elseif ($db_comment->status == CommentStatusEnum::DELETE_REQUEST->value) {
                 $delete_request_comments[] = [
                     'id' => $db_comment->id,
                     'user' => User::find($db_comment->user_id)->name,
@@ -53,7 +54,7 @@ class ConfirmedCommentController extends Controller
 
     public function deleteRequest($comment_id)
     {
-        Comment::where('id', $comment_id)->update(['status' => 2]);
+        Comment::where('id', $comment_id)->update(['status' => CommentStatusEnum::DELETE_REQUEST->value]);
         return redirect()->route('comments.confirmed.page');
     }
 
@@ -66,7 +67,7 @@ class ConfirmedCommentController extends Controller
         $db_comments = Auth::user()->restaurant->comments;
 
         foreach ($db_comments as $db_comment) {
-            if ($db_comment->status == 1 && $db_comment->parent_id == null) {
+            if ($db_comment->status == CommentStatusEnum::CONFIRMED->value && $db_comment->parent_id == null) {
                 $confirmed_comments[] = [
                     'id' => $db_comment->id,
                     'user' => User::find($db_comment->user_id)->name,
@@ -74,7 +75,7 @@ class ConfirmedCommentController extends Controller
                     'reply' => Comment::where('restaurant_id', Auth::user()->restaurant->id)->where('parent_id', $db_comment->id)->first()
                 ];
             }
-            elseif ($db_comment->status == 2) {
+            elseif ($db_comment->status == CommentStatusEnum::DELETE_REQUEST->value) {
                 $delete_request_comments[] = [
                     'id' => $db_comment->id,
                     'user' => User::find($db_comment->user_id)->name,
@@ -103,7 +104,7 @@ class ConfirmedCommentController extends Controller
                 'cart_id' => $replied_comment->cart_id,
                 'comment' => $request->reply,
                 'parent_id' => $replied_comment->id,
-                'status' => 1 //confirmed
+                'status' => CommentStatusEnum::CONFIRMED->value //confirmed
             ]);
         }
         return redirect()->route('comments.confirmed.page');
@@ -124,7 +125,7 @@ class ConfirmedCommentController extends Controller
             $cart = Cart::find($cart_item->cart_id);
             $carts[] = $cart;
             foreach ($cart->comments as $comment) {
-                if ($comment->status == 1 && $comment->parent_id == null) {
+                if ($comment->status == CommentStatusEnum::CONFIRMED->value && $comment->parent_id == null) {
                     $confirmed_comments[] = [
                         'id' => $comment->id,
                         'user' => User::find($comment->user_id)->name,
@@ -132,7 +133,7 @@ class ConfirmedCommentController extends Controller
                         'reply' => Comment::where('restaurant_id', Auth::user()->restaurant->id)->where('parent_id', $comment->id)->first()
                     ];
                 }
-                elseif ($comment->status == 2) {
+                elseif ($comment->status == CommentStatusEnum::DELETE_REQUEST->value) {
                     $delete_request_comments[] = [
                         'id' => $comment->id,
                         'user' => User::find($comment->user_id)->name,
