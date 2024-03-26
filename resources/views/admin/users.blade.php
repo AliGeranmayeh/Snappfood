@@ -25,7 +25,7 @@
 @endsection
 
 @section('content')
-@if (count($users) == 0)
+@if (count($users) == 1)
             <h2 class="text-center my-5">No user is available...</h2>
         @endif
     <div class="container grid">
