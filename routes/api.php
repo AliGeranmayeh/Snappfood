@@ -12,7 +12,6 @@ use App\Http\Controllers\api\CommentController;
 
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider and all of them will | be assigned to the "api" middleware group. Make something great! | */
 
-#phase2
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class , 'logout'])->name('logout');
     Route::post('/addresses', [ShopperAddressController::class , 'add'])->name('user.address.add');
@@ -35,4 +34,5 @@ Route::post('/register', [AuthController::class , 'register'])->name('shopper.re
 Route::post('/login', [AuthController::class , 'login'])->name('shopper.login');
 Route::get('/restaurants/{restaurant_id}', [RestaurantController::class , 'index'])->name('shoper.resturants.list');
 Route::get('/restaurants', [RestaurantController::class , 'search'])->name('shoper.resturants.search');
-Route::get('/restaurants/{restaurant_id}/foods', [RestaurantController::class , 'foods'])->name('shoper.resturant.foods');;
+Route::get('/restaurants/{restaurant_id}/foods', [RestaurantController::class , 'foods'])->name('shoper.resturant.foods');
+;
