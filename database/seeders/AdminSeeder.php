@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Enums\UserRoleEnum;
 
-class UserSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
