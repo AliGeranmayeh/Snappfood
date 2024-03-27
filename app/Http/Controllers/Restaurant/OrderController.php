@@ -18,9 +18,6 @@ class OrderController extends Controller
 {
     public function index()
     { 
-        if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant.profile');
-        }
         $total_income = 0;
         $orders =  Order::where('restaurant_id',Auth::user()->restaurant->id)->whereNot('order_status', OrderStatusEnum::DELIVERED->value)->get();
         $all_orders =Order::where('restaurant_id',Auth::user()->restaurant->id)->get();

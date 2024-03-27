@@ -16,9 +16,6 @@ class ConfirmedCommentController extends Controller
 {
     public function index(Request $request)
     {
-        if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant-.rofile');
-        }
         if ($request->has('foods_filter')) {
             return $this->filterComments($request['foods_filter']);
         }

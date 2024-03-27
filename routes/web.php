@@ -40,36 +40,43 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 //restaurant owner related routes
 Route::middleware(['auth', 'owner'])->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class , 'index'])->name('owner.home');
-    Route::post('/', [App\Http\Controllers\HomeController::class , 'post'])->name('owner.home.post');
+    Route::middleware('check.profile')->group(function () {
 
-    //restaurant information related routes
-    Route::get('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class , 'index'])->name('restaurant.profile');
-    Route::post('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class , 'create'])->name('restaurant.profile.post');
-    Route::get('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestaurantProfileController::class , 'index'])->name('restaurant.profile.edit.get');
-    Route::post('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestaurantProfileController::class , 'update'])->name('restaurant.profile.edit');
+            //home page of restaurants routes
+            Route::get('/', [App\Http\Controllers\HomeController::class , 'index'])->name('owner.home');
+            Route::post('/', [App\Http\Controllers\HomeController::class , 'post'])->name('owner.home.post');
 
-    Route::get('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'index'])->name('owner.discount.get');
-    Route::post('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'post'])->name('owner.discount.post');
+            //update restaurant profile routes
+            Route::get('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestaurantProfileController::class , 'index'])->name('restaurant.profile.edit.get');
+            Route::post('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestaurantProfileController::class , 'update'])->name('restaurant.profile.edit');
 
-    //food related routes
-    Route::get('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'index'])->name('food.add.page');
-    Route::post('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'create'])->name('food.add');
-    Route::get('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'index'])->name('food.edit.page');
-    Route::post('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'update'])->name('food.edit');
+            Route::get('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'index'])->name('owner.discount.get');
+            Route::post('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'post'])->name('owner.discount.post');
 
-    Route::get('/orders', [OrderController::class , 'index'])->name('order.page');
-    Route::post('/orders', [OrderController::class , 'post'])->name('order.filter');
+            //food related routes
+            Route::get('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'index'])->name('food.add.page');
+            Route::post('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'create'])->name('food.add');
+            Route::get('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'index'])->name('food.edit.page');
+            Route::post('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'update'])->name('food.edit');
 
-    //comment related routes
-    Route::get('/check_comments', [CommentController::class , 'index'])->name('comments.not.confirmed');
-    Route::get('/check_comments/delete/{comment_id}', [CommentController::class , 'deleteComment'])->name('comments.not.confirmed.delete');
-    Route::get('/check_comments/confirm/{comment_id}', [CommentController::class , 'confirmComment'])->name('owner.comments.confirm');
-    Route::get('/comments', [ConfirmedCommentController::class , 'index'])->name('comments.confirmed.page');
-    Route::post('/comments/reply/{comment_id}', [ConfirmedCommentController::class , 'replyComment'])->name('comments.confirmed.reply');
-    Route::get('/comments/reply/{comment_id}', [ConfirmedCommentController::class , 'selectComment'])->name('comments.confirmed.reply.select');
-    Route::get('/comments/delete_request/{comment_id}', [ConfirmedCommentController::class , 'deleteRequest'])->name('comments.delete.request');
-    Route::get('/comments/filter/filter={filter_id}', [ConfirmedCommentController::class , 'filterComments'])->name('comments.filter');
+            Route::get('/orders', [OrderController::class , 'index'])->name('order.page');
+            Route::post('/orders', [OrderController::class , 'post'])->name('order.filter');
+
+            //comment related routes
+            Route::get('/check_comments', [CommentController::class , 'index'])->name('comments.not.confirmed');
+            Route::get('/check_comments/delete/{comment_id}', [CommentController::class , 'deleteComment'])->name('comments.not.confirmed.delete');
+            Route::get('/check_comments/confirm/{comment_id}', [CommentController::class , 'confirmComment'])->name('owner.comments.confirm');
+            Route::get('/comments', [ConfirmedCommentController::class , 'index'])->name('comments.confirmed.page');
+            Route::post('/comments/reply/{comment_id}', [ConfirmedCommentController::class , 'replyComment'])->name('comments.confirmed.reply');
+            Route::get('/comments/reply/{comment_id}', [ConfirmedCommentController::class , 'selectComment'])->name('comments.confirmed.reply.select');
+            Route::get('/comments/delete_request/{comment_id}', [ConfirmedCommentController::class , 'deleteRequest'])->name('comments.delete.request');
+            Route::get('/comments/filter/filter={filter_id}', [ConfirmedCommentController::class , 'filterComments'])->name('comments.filter');
+        }
+        );
+        //create restaurant profile 
+        Route::get('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class , 'index'])->name('restaurant.profile');
+        Route::post('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class , 'create'])->name('restaurant.profile.post');
+
 });
 
 //authentication related routes

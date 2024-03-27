@@ -15,9 +15,6 @@ class CommentController extends Controller
 {
     public function index()
     {
-        if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant.profile');
-        }
         $comments = [];
         $db_comments = Auth::user()->restaurant->comments;
 
