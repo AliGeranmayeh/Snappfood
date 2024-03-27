@@ -13,18 +13,17 @@ use App\Models\Restaurant;
 use App\Http\Requests\FoodRequest;
 use Illuminate\Support\Facades\Gate;
 use App\Enums\UserRoleEnum;
+use App\Helper\Restaurant\FoodHelper;
+use App\Helper\Restaurant\DiscountHelper;
 
 
 class FoodController extends Controller
 {
     public function showCreatePage()
     {
-        $food_categories = FoodCategory::all();
-        $admin_user_id = User::where('role',UserRoleEnum::ADMIN->value)->first()->id;
-        $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
         return view('restaurant_owner.food',[
-            'food_categories' => $food_categories,
-            'discounts' =>$discounts,
+            'food_categories' => FoodHelper::getAllFoodCategories(),
+            'discounts' =>DiscountHelper::getAvailableDiscounts(),
         ]);
     }
 

@@ -14,4 +14,8 @@ class DiscountHelper
         return Discount::getFoodParty()->first();
     }
 
+    public static function getAvailableDiscounts()
+    {
+        return Discount::availableDiscounts()->get();
+    }
 }
