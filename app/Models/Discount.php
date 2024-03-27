@@ -31,4 +31,13 @@ class Discount extends Model
     {
         return $query->where('name', 'Food Party');
     }
+
+    //this scope only works with single admin
+    public function scopeAvailableDiscounts($query)
+    {
+        $current_user = Auth::user()->id;
+        $admin_user = User::where('role',UserRoleEnum::ADMIN->value)->first()->id;
+        return $query->whereIn('user_id' , [$current_user, $admin_user]);
+    }
+
 }
