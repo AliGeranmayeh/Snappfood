@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Restaurant;
 
-use Illuminate\Routing\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Helper\Restaurant\RestaurantHelper;
 use App\Http\Requests\RestaurantProfileRequest;
 
 
@@ -14,16 +15,10 @@ class ProfileController extends Controller
 {
     public function showProfileInfoPage()
     {
-        $restaurant_category = '';
-        $restaurant_categories = RestaurantCategory::all();
-        $restaurant = User::find(Auth::user()->id)->restaurant;
-        if ($restaurant != null) {
-            $restaurant_category = RestaurantCategory::find($restaurant->type_id)->name;
-        }
         return view('restaurant_owner.profile', [
-            'restaurant' => $restaurant,
-            'category' => $restaurant_category,
-            'restaurant_categories' => $restaurant_categories,
+            'restaurant' => RestaurantHelper::getThisRestaurant(),
+            'category' => RestaurantHelper::getThisRestaurantCategory(),
+            'restaurant_categories' => RestaurantHelper::getAllRestaurantCategories(),
             'error' => null
         ]);
     }
@@ -83,11 +78,11 @@ class ProfileController extends Controller
     {
         Restaurant::where('user_id', Auth::user()->id)->update([
             'name' => $request->name,
-                'phone' => $request->phone,
-                'account' => $request->account,
-                'user_id' => Auth::user()->id,
-                'type_id' => $request->type,
-                'address'=> $request->address,
+            'phone' => $request->phone,
+            'account' => $request->account,
+            'user_id' => Auth::user()->id,
+            'type_id' => $request->type,
+            'address' => $request->address,
         ]);
 
         return redirect()->route('restaurant.profile');
