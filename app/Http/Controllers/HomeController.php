@@ -30,9 +30,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('complete-restaurant-profile')) {
-            return redirect()->route('restaurant.profile');
-        }
         $food_categories = FoodCategory::all();
         $restaurant_id = User::find(Auth::user()->id)->restaurant->id;
         $foods = Food::where('restaurant_id', $restaurant_id)->get();

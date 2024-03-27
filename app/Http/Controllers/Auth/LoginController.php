@@ -34,12 +34,9 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user) {
         if ($user->role == UserRoleEnum::ADMIN->value) {
             return redirect('/admin');
-        } else {
-            if (!Gate::allows('complete-restaurant-profile')) {
-                return redirect()->route('restaurant.profile');
-            }
+        } 
             return redirect('/');
-        }
+        
    }
     /**
      * Create a new controller instance.
@@ -49,5 +46,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('check.profile')->only('authenticated');
     }
+
 }
