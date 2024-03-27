@@ -97,8 +97,8 @@
             <ul>
                 @can('complete-restaurant-profile')
                     <li><a href="{{ route('owner.home') }}"> <img
-                                src="https://icons-for-free.com/iconfiles/png/512/default+home+house+main+page+icon-1320186211000235547.png"
-                                alt="home-logo" style="width:20px;height:20px"> <span class="mx-1">Home</span></a></li>
+                                src="https://www.freeiconspng.com/thumbs/homepage-icon-png/house-icon-png-white-32.png"
+                                alt="home-logo" style="width:28px;height:28px"> <span class="mx-1">Home</span></a></li>
                     <li><a href="{{ route('order.page') }}"> <img
                                 src="https://static.thenounproject.com/png/832921-200.png" alt="orders-logo"
                                 style="width:20px;height:20px"> <span class="mx-1">Orders</span></a></li>
