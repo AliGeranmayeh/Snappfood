@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\UserRoleEnum;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Discount extends Model
 {
@@ -35,7 +36,7 @@ class Discount extends Model
     //this scope only works with single admin
     public function scopeAvailableDiscounts($query)
     {
-        $current_user = Auth::user()->id;
+        $current_user = auth()->user()->id;
         $admin_user = User::where('role',UserRoleEnum::ADMIN->value)->first()->id;
         return $query->whereIn('user_id' , [$current_user, $admin_user]);
     }
