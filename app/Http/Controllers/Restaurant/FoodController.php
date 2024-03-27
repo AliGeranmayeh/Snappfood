@@ -48,13 +48,10 @@ class FoodController extends Controller
 
     public function showUpdatePage(Food $food)
     {
-        $food_categories = FoodCategory::all();
-        $admin_user_id = User::where('role',UserRoleEnum::ADMIN->value)->first()->id;
-        $discounts = Discount::where('user_id',Auth::user()->id)->orwhere('user_id',$admin_user_id)->get();
         return view('restaurant_owner.edit-food',[
             'food' =>$food,
-            'food_categories' => $food_categories,
-            'discounts' =>$discounts,
+            'food_categories' => FoodHelper::getAllFoodCategories(),
+            'discounts' =>DiscountHelper::getAvailableDiscounts(),
         ]);
     }
 
