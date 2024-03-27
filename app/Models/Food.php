@@ -19,6 +19,7 @@ class Food extends Model
         'price',
         'materials',
         'discount_id',
+        'discount',
         'type_id',
         'restaurant_id'
     ];
