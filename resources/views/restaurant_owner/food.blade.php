@@ -42,7 +42,7 @@
                     </select>
 
                     <select class="form-select " name="discount" style="margin-top: 3%" required>
-                        <option value="null" selected>Select Discount</option>
+                        <option value=0 selected>Select Discount</option>
                         @foreach ($discounts as $discount)
                             <option value="{{ $discount->id }}">
                                 {{$discount->name}}&nbsp;with&nbsp;{{ $discount->percentage }}%&nbsp;off
