@@ -25,4 +25,10 @@ class Discount extends Model
     {
         return $this->hasMany(Food::class);
     }
+
+
+    public function scopeGetFoodParty($query)
+    {
+        return $query->where('name', 'Food Party');
+    }
 }
