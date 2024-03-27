@@ -27,8 +27,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('complete-restaurant-profile' , function (){
             return Auth::user()->restaurant  != null;
         });
-        Gate::define('shopper-role' , function (){
-            return Auth::user()->role  == UserRoleEnum::SHOPPER->value;
-        });
     }
 }
