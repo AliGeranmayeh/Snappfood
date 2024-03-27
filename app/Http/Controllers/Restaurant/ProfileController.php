@@ -17,7 +17,7 @@ class ProfileController extends Controller
     {
         return view('restaurant_owner.profile', [
             'restaurant' => RestaurantHelper::getThisRestaurant(),
-            'category' => RestaurantHelper::getThisRestaurantCategory(),
+            'category' => RestaurantHelper::getThisRestaurantCategory()->name ?? null,
             'restaurant_categories' => RestaurantHelper::getAllRestaurantCategories(),
             'error' => null
         ]);
@@ -39,13 +39,10 @@ class ProfileController extends Controller
 
     public function showUpdateProfilePage()
     {
-        $restaurant_categories = RestaurantCategory::all();
-        $restaurant = User::find(Auth::user()->id)->restaurant;
-        $restaurant_category_id = RestaurantCategory::find($restaurant->type_id)->id;
         return view('restaurant_owner.edit-profile', [
-            'restaurant' => $restaurant,
-            'restaurant_category_id' => $restaurant_category_id,
-            'restaurant_categories' => $restaurant_categories,
+            'restaurant' => RestaurantHelper::getThisRestaurant(),
+            'restaurant_category_id' => RestaurantHelper::getThisRestaurantCategory()->id ?? null,
+            'restaurant_categories' => RestaurantHelper::getAllRestaurantCategories(),
             'error' => null
         ]);
     }
