@@ -6,6 +6,7 @@ use App\Http\Controllers\Restaurant\OrderController;
 use App\Http\Controllers\Restaurant\CommentController;
 use App\Http\Controllers\Restaurant\ConfirmedCommentController;
 use App\Http\Controllers\Admin\RestaurantsController;
+use App\Http\Controllers\Restaurant\FoodController;
 
 
 /* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider and all of them will | be assigned to the "web" middleware group. Make something great! | */
@@ -54,10 +55,12 @@ Route::middleware(['auth', 'owner'])->group(function () {
             Route::post('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'post'])->name('owner.discount.post');
 
             //food related routes
-            Route::get('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'index'])->name('food.add.page');
-            Route::post('/food', [App\Http\Controllers\Restaurant\AddFoodController::class , 'create'])->name('food.add');
-            Route::get('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'index'])->name('food.edit.page');
-            Route::post('/edit_food/{id}', [App\Http\Controllers\Restaurant\EditFoodController::class , 'update'])->name('food.edit');
+            Route::get('/food', [FoodController::class , 'showCreatePage'])->name('food.add.page');
+            Route::post('/food', [FoodController::class , 'create'])->name('food.add');
+            Route::post('/delete_food/{food}', [FoodController::class , 'delete'])->name('food.delete');
+            Route::get('/edit_food/{food}', [FoodController::class , 'showUpdatePage'])->name('food.edit.page');
+            Route::post('/edit_food/{food}', [FoodController::class , 'update'])->name('food.edit');
+
 
             Route::get('/orders', [OrderController::class , 'index'])->name('order.page');
             Route::post('/orders', [OrderController::class , 'post'])->name('order.filter');

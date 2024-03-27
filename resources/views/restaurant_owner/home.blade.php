@@ -51,8 +51,7 @@
                         <article class="rounded p-0" style="background-color: white">
                 @endif
 
-                <img class="rounded-top" src="{{ asset($food->image) }}" alt="user-photo"
-                    style="width:100%">
+                <img class="rounded-top" src="{{ asset($food->image) }}" alt="user-photo" style="width:100%">
                 <div class="p-3">
                     <h3 style="margin:10% 0"><b>Food: {{ $food->name }}</b></h3>
                     <div>
@@ -74,11 +73,12 @@
                             <p style="font-size: 18px">Price: {{ $food->price }} T</p>
                         @endif
 
-                        <form action="" method="post" style="display: flex;justify-content:center">
+                        <form action="{{ route('food.delete', ['food' => $food->id]) }}" method="post"
+                            style="display: flex;justify-content:center">
                             @csrf
                             <button name="delete" class="btn btn-danger w-50" type="submit" style="font-size: 16px"
                                 value="{{ $food->id }}">Delete</button>
-                            <a href="{{ route('food.edit.page', ['id' => $food->id]) }}"
+                            <a href="{{ route('food.edit.page', ['food' => $food->id]) }}"
                                 class="btn btn-warning mx-2 w-50 text-white" style="font-size: 16px">Edit</a>
                         </form>
                     </div>
