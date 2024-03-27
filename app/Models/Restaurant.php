@@ -18,7 +18,8 @@ class Restaurant extends Model
         'name',
         'account',
         'user_id',
-        'type_id'
+        'type_id',
+        'address'
     ];
 
     protected $hidden = [
