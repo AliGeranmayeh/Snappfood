@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Enums\UserRoleEnum;
 use App\Helper\Restaurant\FoodHelper;
 use App\Helper\Restaurant\DiscountHelper;
+use App\Helper\Restaurant\RestaurantHelper;
 
 
 class FoodController extends Controller
@@ -29,32 +30,19 @@ class FoodController extends Controller
 
     public function create(FoodRequest $request)
     {
-        $request->validated();
-        $image_path = 'images/default.png';
-        $discount_id =null;
-        $discount_percent = 0;
-        if($request->has('image')){
-            $new_image_name = time().'-'.$request->name.'.'.$request->image->extension();
-            $request->image->move(public_path('images'),$new_image_name);
-            $image_path = 'images/'.$new_image_name;
-        }
-        if ($request->discount != 'null') {
-            $discount_id = $request->discount;
-            $discount_percent = ((Discount::find($discount_id)->percentage)/100);
-        }
-        
-        $food = new Food;
-        $food->name = $request->name;
-        $food->image  = $image_path;
-        $food->price = $request->price;
-        $food->materials = $request->materials;
-        $food->discount_id = $discount_id;
-        // dd($discount_percent);
-        $food->discount = $discount_percent;
-        $food->type_id = $request->type;
-        $food->restaurant_id =  Restaurant::where('user_id',Auth::user()->id)->first()->id;
-        $food->save();
-        
+    
+        $foodDiscount = ((int)$request->discount >0)? $request->discount :null;
+
+        FoodHelper::createFood([
+            'name' =>$request->name,
+            'image'=>$this->imagePath($request->image,$request->name),
+            'price' => $request->price,
+            'materials' => $request->materials,
+            'discount_id' => $foodDiscount,
+            'discount' => $this->calculateDiscountPercentage($request->discount),
+            'type_id' => $request->type,
+            'restaurant_id' => RestaurantHelper::getThisRestaurant()->id
+        ]);
         return redirect()->route('owner.home');   
     }
 
@@ -85,6 +73,7 @@ class FoodController extends Controller
         }
         if ($request->discount != 'null') {
             $discount_id = $request->discount;
+            // dd($discount_id,Discount::find($discount_id)->percentage,Discount::find($discount_id));
             $discount = ((Discount::find($discount_id)->percentage)/100);
         }
         $request->validated();
@@ -112,5 +101,24 @@ class FoodController extends Controller
         $food->delete();
 
         return redirect()->route('owner.home');
+    }
+
+    private function imagePath($image , string $name)
+    {
+        $image_path = 'images/default.png';
+        if(!empty($image)){
+            $new_image_name = time().'-'.$name.'.'.$image->extension();
+            $image->move(public_path('images'),$new_image_name);
+            $image_path = 'images/'.$new_image_name;
+        }
+        return $image_path;
+    }
+
+    private function calculateDiscountPercentage(int $dicountId){
+        try {
+            return (Discount::find($dicountId)->percentage)/100;
+        } catch (\Throwable $th) {
+            return 0;
+        }
     }
 }
