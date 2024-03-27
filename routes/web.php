@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Restaurant\FoodController;
 use App\Http\Controllers\Restaurant\OrderController;
+use App\Http\Controllers\Admin\RestaurantsController;
 use App\Http\Controllers\Restaurant\CommentController;
 use App\Http\Controllers\Restaurant\ConfirmedCommentController;
-use App\Http\Controllers\Admin\RestaurantsController;
-use App\Http\Controllers\Restaurant\FoodController;
 
 
 /* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider and all of them will | be assigned to the "web" middleware group. Make something great! | */
@@ -44,8 +45,8 @@ Route::middleware(['auth', 'owner'])->group(function () {
     Route::middleware('check.profile')->group(function () {
 
             //home page of restaurants routes
-            Route::get('/', [App\Http\Controllers\HomeController::class , 'index'])->name('owner.home');
-            Route::post('/', [App\Http\Controllers\HomeController::class , 'post'])->name('owner.home.post');
+            Route::get('/', [HomeController::class , 'index'])->name('owner.home');
+            Route::post('/', [HomeController::class , 'search'])->name('owner.home.post');
 
             //update restaurant profile routes
             Route::get('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestaurantProfileController::class , 'index'])->name('restaurant.profile.edit.get');

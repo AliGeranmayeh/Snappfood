@@ -54,6 +54,7 @@
                 <img class="rounded-top" src="{{ asset($food->image) }}" alt="user-photo" style="width:100%">
                 <div class="p-3">
                     <h3 style="margin:10% 0"><b>Food: {{ $food->name }}</b></h3>
+                    <p style="font-size: 18px"><b> Category: {{ $food->type->name }}</b></p>
                     <div>
                         @if ($food->materials)
                             <p style="font-size: 18px">Materials: {{ $food->materials }}</p>
