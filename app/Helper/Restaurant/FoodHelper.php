@@ -36,4 +36,8 @@ class FoodHelper
                 $query->where('type_id', $food_category_filter))
         ->get();
     }
+
+    public static function createFood(array $data){
+        Food::create($data);
+    }
 }
