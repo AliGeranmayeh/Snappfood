@@ -47,26 +47,8 @@ class HomeController extends Controller
             return redirect()->route('owner.home');
         }
 
-        //search wanted food
-        $foods = Food::query()->forCurrentRestaurant()->when(
-            $request->search_field != null &&
-            $request->food_category_filter != 0,
-            fn($query) =>
-                $query->where('name', 'like', "%$request->search_field%")
-                ->where('type_id', $request->food_category_filter)
-        )->when(
-            $request->search_field != null,
-            fn($query) =>
-                $query->where('name', 'like', "%$request->search_field%")
-        )->when(
-            $request->food_category_filter != 0,
-            fn($query) =>
-                $query->where('type_id', $request->food_category_filter))
-        ->get();
-
-
         return view('restaurant_owner.home', [
-            'foods' => $foods,
+            'foods' => FoodHelper::getSearchedFood($request->search_field,$request->food_category_filter),
             'food_party_id' => DiscountHelper::getFoodParty()->id ?? null,
             'food_categories' => FoodHelper::getAllFoodCategories()
         ]);
