@@ -42,11 +42,7 @@ class HomeController extends Controller
     public function post(Request $request)
     {
 
-        if ($request->has('delete')) {
-
-            return $this->deleteFood($request);
-        }
-        elseif ($request->has('search')) {
+        if ($request->has('search')) {
 
             return $this->searchFood($request);
         }
@@ -59,18 +55,6 @@ class HomeController extends Controller
             'food_party_id' => $food_party_id,
             'food_categories' => $food_categories
         ]);
-    }
-
-    public function deleteFood($data)
-    {
-        $food = Food::find($data->delete);
-        $image_path = $food->image;
-        if ($image_path != 'images/default.png') {
-            unlink("$image_path");
-        }
-        Food::destroy($data->delete);
-
-        return redirect()->route('owner.home');
     }
 
     public function searchFood($data)
