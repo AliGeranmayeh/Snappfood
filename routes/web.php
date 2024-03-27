@@ -51,7 +51,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
 
             //update restaurant profile routes
             Route::get('/editRestaurantProfile', [ProfileController::class , 'showUpdateProfilePage'])->name('restaurant.profile.edit.get');
-            Route::post('/editRestaurantProfile', [ProfileController::class , 'update'])->name('restaurant.profile.edit');
+            Route::post('/editRestaurantProfile/{restaurant}', [ProfileController::class , 'update'])->name('restaurant.profile.edit');
 
             Route::get('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'index'])->name('owner.discount.get');
             Route::post('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'post'])->name('owner.discount.post');

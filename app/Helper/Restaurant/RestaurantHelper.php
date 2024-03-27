@@ -26,4 +26,9 @@ class RestaurantHelper
     {
         Restaurant::create($data);
     }
+
+    public static function updateRestaurant(Restaurant $restaurant, array $data)
+    {
+        $restaurant->update($data);
+    }
 }

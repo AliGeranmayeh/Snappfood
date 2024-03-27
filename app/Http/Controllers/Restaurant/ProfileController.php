@@ -48,9 +48,9 @@ class ProfileController extends Controller
     }
 
 
-    public function update(RestaurantProfileRequest $request)
+    public function update(RestaurantProfileRequest $request, Restaurant $restaurant)
     {
-        Restaurant::where('user_id', Auth::user()->id)->update([
+        RestaurantHelper::updateRestaurant($restaurant, [
             'name' => $request->name,
             'phone' => $request->phone,
             'account' => $request->account,
