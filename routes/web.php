@@ -7,6 +7,7 @@ use App\Http\Controllers\Restaurant\FoodController;
 use App\Http\Controllers\Restaurant\OrderController;
 use App\Http\Controllers\Admin\RestaurantsController;
 use App\Http\Controllers\Restaurant\CommentController;
+use App\Http\Controllers\Restaurant\ProfileController;
 use App\Http\Controllers\Restaurant\ConfirmedCommentController;
 
 
@@ -49,8 +50,8 @@ Route::middleware(['auth', 'owner'])->group(function () {
             Route::post('/', [HomeController::class , 'search'])->name('owner.home.post');
 
             //update restaurant profile routes
-            Route::get('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestaurantProfileController::class , 'index'])->name('restaurant.profile.edit.get');
-            Route::post('/editRestaurantProfile', [App\Http\Controllers\Restaurant\EditRestaurantProfileController::class , 'update'])->name('restaurant.profile.edit');
+            Route::get('/editRestaurantProfile', [ProfileController::class , 'showUpdateProfilePage'])->name('restaurant.profile.edit.get');
+            Route::post('/editRestaurantProfile', [ProfileController::class , 'update'])->name('restaurant.profile.edit');
 
             Route::get('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'index'])->name('owner.discount.get');
             Route::post('/discount', [App\Http\Controllers\Restaurant\DiscountController::class , 'post'])->name('owner.discount.post');
@@ -78,8 +79,8 @@ Route::middleware(['auth', 'owner'])->group(function () {
         }
         );
         //create restaurant profile 
-        Route::get('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class , 'index'])->name('restaurant.profile');
-        Route::post('/restaurantProfile', [App\Http\Controllers\Restaurant\ProfileController::class , 'create'])->name('restaurant.profile.post');
+        Route::get('/restaurantProfile', [ProfileController::class , 'showProfileInfoPage'])->name('restaurant.profile');
+        Route::post('/restaurantProfile', [ProfileController::class , 'create'])->name('restaurant.profile.post');
 
 });
 
