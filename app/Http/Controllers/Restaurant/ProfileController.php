@@ -25,24 +25,14 @@ class ProfileController extends Controller
 
     public function create(RestaurantProfileRequest $request)
     {
-        try {
-            RestaurantHelper::createRestaurant([
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'account' => $request->account,
-                'user_id' => Auth::user()->id,
-                'type_id' => $request->type,
-                'address' => $request->address,
-            ]);
-        }
-        catch (\Throwable $th) {
-            return view('restaurant_owner.profile', [
-                'restaurant' => RestaurantHelper::getThisRestaurant(),
-                'category' => RestaurantHelper::getThisRestaurantCategory(),
-                'restaurant_categories' => RestaurantHelper::getAllRestaurantCategories(),
-                'error' => 'What happend??'
-            ]);
-        }
+        RestaurantHelper::createRestaurant([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'account' => $request->account,
+            'user_id' => Auth::user()->id,
+            'type_id' => $request->type,
+            'address' => $request->address,
+        ]);
 
         return redirect()->route('restaurant.profile');
     }
