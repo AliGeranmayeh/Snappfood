@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Restaurant extends Model
 {
@@ -47,6 +48,12 @@ class Restaurant extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+
+    public function scopeThisRestaurant($query)
+    {
+        return $query->where('user_id',Auth::user()->id);
     }
 }
 
