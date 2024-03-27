@@ -19,6 +19,11 @@ class RestaurantHelper
 
     public static function getThisRestaurantCategory()
     {
-        return  static::getThisRestaurant()->type->name;
+        return  static::getThisRestaurant()->type->name ?? null;
+    }
+
+    public static function createRestaurant(array $data)
+    {
+        Restaurant::create($data);
     }
 }
