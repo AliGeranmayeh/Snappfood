@@ -10,6 +10,8 @@ use App\Models\Discount;
 use App\Http\Requests\FoodRequest;
 use App\Models\FoodCategory;
 use Illuminate\Support\Facades\Gate;
+use App\Helper\Restaurant\FoodHelper;
+use App\Helper\Restaurant\DiscountHelper;
 
 class HomeController extends Controller
 {
@@ -30,26 +32,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $food_categories = FoodCategory::all();
-        $restaurant_id = User::find(Auth::user()->id)->restaurant->id;
-        $foods = Food::where('restaurant_id', $restaurant_id)->get();
-        $food_party_id = Discount::where('name', 'Food Party')->first()->id ?? [];
         return view('restaurant_owner.home', [
-            'foods' => $foods,
-            'food_party_id' => $food_party_id,
-            'food_categories' => $food_categories
+            'foods' => FoodHelper::getRestaurantFoods(),
+            'food_party_id' => DiscountHelper::getFoodParty()->id ?? null,
+            'food_categories' => FoodHelper::getAllFoodCategories()
         ]);
     }
 
     public function post(Request $request)
     {
-        
+
         if ($request->has('delete')) {
-           
+
             return $this->deleteFood($request);
         }
         elseif ($request->has('search')) {
-            
+
             return $this->searchFood($request);
         }
         $food_categories = FoodCategory::all();
@@ -77,12 +75,12 @@ class HomeController extends Controller
 
     public function searchFood($data)
     {
-        
+
         $food_categories = FoodCategory::all();
         $restaurant_id = User::find(Auth::user()->id)->restaurant->id;
         $food_party_id = Discount::where('name', 'Food Party')->first()->id;
-        if ($data->search_field != null && $data->food_category_filter !=0) {
-            $foods = Food::where('restaurant_id', $restaurant_id)->where('name','like',"%$data->search_field%")->where('type_id',$data->food_category_filter)->get();
+        if ($data->search_field != null && $data->food_category_filter != 0) {
+            $foods = Food::where('restaurant_id', $restaurant_id)->where('name', 'like', "%$data->search_field%")->where('type_id', $data->food_category_filter)->get();
             return view('restaurant_owner.home', [
                 'foods' => $foods,
                 'food_party_id' => $food_party_id,
@@ -90,7 +88,7 @@ class HomeController extends Controller
             ]);
         }
         elseif ($data->search_field != null) {
-            $foods = Food::where('restaurant_id', $restaurant_id)->where('name','like',"%$data->search_field%")->get();
+            $foods = Food::where('restaurant_id', $restaurant_id)->where('name', 'like', "%$data->search_field%")->get();
             // dd($foods);
             return view('restaurant_owner.home', [
                 'foods' => $foods,
@@ -98,17 +96,17 @@ class HomeController extends Controller
                 'food_categories' => $food_categories
             ]);
         }
-        elseif ($data->food_category_filter !=0) {
-            $foods = Food::where('restaurant_id', $restaurant_id)->where('type_id',$data->food_category_filter)->get();
+        elseif ($data->food_category_filter != 0) {
+            $foods = Food::where('restaurant_id', $restaurant_id)->where('type_id', $data->food_category_filter)->get();
             return view('restaurant_owner.home', [
                 'foods' => $foods,
                 'food_party_id' => $food_party_id,
                 'food_categories' => $food_categories
             ]);
         }
-        else{
+        else {
             return redirect()->route('owner.home');
         }
-        
+
     }
 }
