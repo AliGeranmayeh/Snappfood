@@ -51,7 +51,7 @@ class ProfileController extends Controller
             //     'address'=> $request->address,
             // ]);
     
-            return redirect()->route('restaurant-profile');   
+            return redirect()->route('restaurant.profile');   
         }
         
         $restaurant_categories = RestaurantCategory::all();
