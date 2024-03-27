@@ -40,4 +40,8 @@ class FoodHelper
     public static function createFood(array $data){
         Food::create($data);
     }
+
+    public static function updateFood(Food $food, array $data){
+        $food->update($data);
+    }
 }

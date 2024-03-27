@@ -22,20 +22,20 @@ class FoodController extends Controller
 {
     public function showCreatePage()
     {
-        return view('restaurant_owner.food',[
+        return view('restaurant_owner.food', [
             'food_categories' => FoodHelper::getAllFoodCategories(),
-            'discounts' =>DiscountHelper::getAvailableDiscounts(),
+            'discounts' => DiscountHelper::getAvailableDiscounts(),
         ]);
     }
 
     public function create(FoodRequest $request)
     {
-    
-        $foodDiscount = ((int)$request->discount >0)? $request->discount :null;
+
+        $foodDiscount = ((int)$request->discount > 0) ? $request->discount : null;
 
         FoodHelper::createFood([
-            'name' =>$request->name,
-            'image'=>$this->imagePath($request->image,$request->name),
+            'name' => $request->name,
+            'image' => $this->createImagePath($request->image, $request->name),
             'price' => $request->price,
             'materials' => $request->materials,
             'discount_id' => $foodDiscount,
@@ -43,46 +43,32 @@ class FoodController extends Controller
             'type_id' => $request->type,
             'restaurant_id' => RestaurantHelper::getThisRestaurant()->id
         ]);
-        return redirect()->route('owner.home');   
+        return redirect()->route('owner.home');
     }
 
     public function showUpdatePage(Food $food)
     {
-        return view('restaurant_owner.edit-food',[
-            'food' =>$food,
+        return view('restaurant_owner.edit-food', [
+            'food' => $food,
             'food_categories' => FoodHelper::getAllFoodCategories(),
-            'discounts' =>DiscountHelper::getAvailableDiscounts(),
+            'discounts' => DiscountHelper::getAvailableDiscounts(),
         ]);
     }
 
     public function update(FoodRequest $request, Food $food)
     {
-        $image_path = $food->image;
-        $discount_id =null;
-        $discount = 0;
-        if($request->has('image')){
-            if ($image_path != 'images/default.png'){
-                unlink("$image_path");
-            }
-            $new_image_name = time().'-'.$request->name.'.'.$request->image->extension();
-            $request->image->move(public_path('images'),$new_image_name);
-            $image_path = 'images/'.$new_image_name;
-        }
-        if ($request->discount != 'null') {
-            $discount_id = $request->discount;
-            // dd($discount_id,Discount::find($discount_id)->percentage,Discount::find($discount_id));
-            $discount = ((Discount::find($discount_id)->percentage)/100);
-        }
-        $request->validated();
-        $food->update([
+
+        $foodDiscount = ((int)$request->discount > 0) ? $request->discount : null;
+
+        FoodHelper::updateFood($food, [
             'name' => $request->name,
-            'image' => $image_path,
+            'image' => $this->updateImagePath($request->image, $request->name),
             'price' => $request->price,
             'materials' => $request->materials,
-            'discount_id' => $discount_id,
-            'discount' => $discount,
+            'discount_id' => $foodDiscount,
+            'discount' => $this->calculateDiscountPercentage($request->discount),
             'type_id' => $request->type,
-            'restaurant_id' => Restaurant::where('user_id',Auth::user()->id)->first()->id
+            'restaurant_id' => RestaurantHelper::getThisRestaurant()->id
         ]);
 
         return redirect()->route('owner.home');
@@ -100,21 +86,40 @@ class FoodController extends Controller
         return redirect()->route('owner.home');
     }
 
-    private function imagePath($image , string $name)
+    private function createImagePath($image, string $name)
     {
         $image_path = 'images/default.png';
-        if(!empty($image)){
-            $new_image_name = time().'-'.$name.'.'.$image->extension();
-            $image->move(public_path('images'),$new_image_name);
-            $image_path = 'images/'.$new_image_name;
+        if (!empty($image)) {
+            $image_path = $this->stroreImage($image, $name);
         }
         return $image_path;
     }
 
-    private function calculateDiscountPercentage(int $dicountId){
+    private function updateImagePath($image, string $name)
+    {
+        $image_path = $image;
+        if (!empty($image)) {
+            if ($image_path != 'images/default.png') {
+                unlink("$image_path");
+            }
+            $image_path = $this->stroreImage($image, $name);
+        }
+        return $image_path;
+    }
+
+    private function storeImage($image, string $name, $path = 'image/')
+    {
+        $new_image_name = time() . '-' . $name . '.' . $image->extension();
+        $image->move(public_path('images'), $new_image_name);
+        return $path . $new_image_name; //where image is stored
+    }
+
+    private function calculateDiscountPercentage(int $dicountId)
+    {
         try {
-            return (Discount::find($dicountId)->percentage)/100;
-        } catch (\Throwable $th) {
+            return (Discount::find($dicountId)->percentage) / 100;
+        }
+        catch (\Throwable $th) {
             return 0;
         }
     }
