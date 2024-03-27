@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Http\Requests\DiscountRequest;
+use Illuminate\Support\Facades\Auth;
 
 class Food extends Model
 {
@@ -37,13 +38,15 @@ class Food extends Model
         return $this->belongsTo(FoodCategory::class);
     }
 
-    // public function comments()
-    // {
-    //     return $this->belongsToMany(Comment::class, 'comment_food');
-    // }
-
     public function discount(): BelongsTo
     {
         return $this->belongsTo(Discount::class);
+    }
+
+
+    public function scopeForCurrentRestaurant($query)
+    {
+        $restaurantId = Auth::user()->restaurant->id;
+        return $query->where('restaurant_id', $restaurantId);
     }
 }
