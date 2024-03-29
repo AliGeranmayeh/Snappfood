@@ -76,7 +76,7 @@ After running the above commands, the project is running at the local address gi
 `name`  
 `email: ` unique  
 `phone_number: ` 11 digits starting with 09, unique  
-`password:` minimum 8 character   
+`password:` minimum 8 characters   
 `role: shopper`  
 
 #### `Login route`
@@ -85,6 +85,12 @@ After running the above commands, the project is running at the local address gi
 - **Required fields**  
 `email`  
 `password`
+
+#### `Logout route`
+- **URL:** `host-address/api/logout`
+- **Method: POST**
+- **Required field**  
+`bearer token`
 
 #### Restaurant-related routes
 
@@ -122,7 +128,7 @@ After running the above commands, the project is running at the local address gi
 
 #### `Update a address route`
 - **URL:** `host-address/api/addresses{address_id}`
-- **Method: POST**
+- **Method: PATCH**
 - **Required field**  
 `bearer token`
 - **Optional fields**   
@@ -132,3 +138,83 @@ After running the above commands, the project is running at the local address gi
 `longitude:` numeric    
 `status:` `set`or `unset`  
 
+#### Profile-related routes
+
+#### `Show user profile route`
+- **URL:** `host-address/api/user_info`
+- **Method: Get**
+- **Required field**  
+`bearer token`
+
+#### `Update user profile route`
+- **URL:** `host-address/api/user_info`
+- **Method: PATCH**
+- **Required field**  
+`bearer token`
+- **Optional fields**   
+`name`  
+`email:` unique   
+`phone_number: ` 11 digits starting with 09, unique  
+
+#### Cart-related routes
+
+#### `Shopping carts list route`
+- **URL:** `host-address/api/carts`
+- **Method: GET**
+- **Required field**  
+`bearer token`
+
+#### `Add new shopping cart route`
+- **URL:** `host-address/api/cart/add`
+- **Method: POST**
+- **Required field**  
+`bearer token`
+`food_id`
+`count`
+
+#### `Update existing food in the shopping cart route`
+- **URL:** `host-address/api/cart/add`
+- **Method: PATCH**
+- **Required field**  
+`bearer token`
+`food_id`
+`count`
+
+#### `Show existing shopping cart information route`
+- **URL:** `host-address/api/cart/carts/{cart_id}`
+- **Method: GET**
+- **Required field**  
+`bearer token`
+
+#### `Update existing food in the shopping cart route`
+- **URL:** `host-address/api/carts/{cart_id}/pay`
+- **Method: POST**
+- **Required field**  
+`bearer token`
+
+#### Comment-related routes
+
+#### `Show user's comments list route`
+- **URL:** `host-address/api/comments`
+- **Method: GET**
+- **Required field**  
+`bearer token`
+
+#### `Show food's comments list route`
+- **URL:** `host-address/api/comments/food/{food_id}`
+- **Method: GET**
+- **Required field**  
+`bearer token`
+
+#### `Show restaurant's comments list route`
+- **URL:** `host-address/api/restaurant/{restaurant_id}`
+- **Method: GET**
+- **Required field**  
+`bearer token`
+
+#### `Show restaurant's comments list route`
+- **URL:** `host-address/api/{order_id}/comment`
+- **Method: POST**
+- **Required field**  
+`bearer token`
+`comment:`  minimum 2 characters
