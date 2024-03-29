@@ -1,3 +1,19 @@
+- [Overview](#overview)
+- [User Capabilities](#user-capabilities)
+   * [Admin](#admin)
+   * [Restaurant Owner](#restaurant-owner)
+   * [Customer ](#customer)
+- [How to Use](#how-to-use)
+   * [Project Installation](#project-installation)
+   * [How to Use the APIs](#how-to-use-the-apis)
+      + [Authentication-related routes](#authentication-related-routes)
+      + [Restaurant-related routes](#restaurant-related-routes)
+      + [Address-related routes](#address-related-routes)
+      + [Profile-related routes](#profile-related-routes)
+      + [Cart-related routes](#cart-related-routes)
+      + [Comment-related routes](#comment-related-routes)
+
+
 ## Overview
 This project is a simple implementation of the SnappFood, a food ordering service in which our users can have three main roles:
 
@@ -65,7 +81,7 @@ After running the above commands, the project is running at the local address gi
 **Password:**
 **admin**
 
-### How to Use the APIs
+### How to Use the Customer APIs
 
 #### Authentication-related routes
 
