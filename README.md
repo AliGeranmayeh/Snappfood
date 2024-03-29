@@ -212,9 +212,9 @@ After running the above commands, the project is running at the local address gi
 - **Required field**  
 `bearer token`
 
-#### `Show restaurant's comments list route`
+#### `Add a comment to the order route`
 - **URL:** `host-address/api/{order_id}/comment`
 - **Method: POST**
 - **Required field**  
-`bearer token`
-`comment:`  minimum 2 characters
+`bearer token`  
+`comment:` minimum 2 characters
