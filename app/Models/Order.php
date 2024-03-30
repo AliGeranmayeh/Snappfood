@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\OrderStatusEnum;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -35,6 +37,14 @@ class Order extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(Cart::class);
+    }
+
+    public function scopeNotDelivered($query){
+        $currentRestaturant = Auth::user()->restaurant;
+
+        return $query->
+            where('restaurant_id',$currentRestaturant->id)->
+            whereNot('order_status', OrderStatusEnum::DELIVERED->value);
     }
 
 }
